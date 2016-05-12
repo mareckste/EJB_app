@@ -1,0 +1,18 @@
+package test;
+
+import javax.ejb.Stateless;
+
+/**
+ * Session Bean implementation class TestBean
+ */
+@Stateless
+public class TestBean implements TestBeanRemote {
+
+    /**
+     * Default constructor. 
+     */
+    public TestBean() {
+        // TODO Auto-generated constructor stub
+    }
+
+}

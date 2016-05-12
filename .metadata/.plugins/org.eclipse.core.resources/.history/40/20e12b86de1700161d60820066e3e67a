@@ -1,0 +1,15 @@
+package test;
+
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+
+/**
+ * Session Bean implementation class TestBean
+ */
+@Stateless
+@LocalBean
+public class TestBean {
+	public String tstPlus(String s1, String s2) {
+		return s2 + s1;
+	}
+}

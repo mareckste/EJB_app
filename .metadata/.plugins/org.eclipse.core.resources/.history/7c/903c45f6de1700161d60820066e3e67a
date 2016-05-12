@@ -1,0 +1,16 @@
+package test;
+
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+
+/**
+ * Session Bean implementation class TestBean
+ */
+@Stateless
+@LocalBean
+public class TestBean implements TestBeanRemote {
+	public int test(int i) {
+		return i + 5;
+	}
+
+}
