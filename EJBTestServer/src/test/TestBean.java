@@ -1,5 +1,6 @@
 package test;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 /**
@@ -7,9 +8,11 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class TestBean implements TestBeanRemote {
+	@EJB
+	private EJB2Bean bean2; 
 
-    public int add(int i1, int i2) {
-    	return i1 + i2;
+    public String add(int i1, int i2) {
+    	return bean2.getStr(i1 + i2);
     }
 
 }

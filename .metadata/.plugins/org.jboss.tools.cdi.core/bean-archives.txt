@@ -1,0 +1,3 @@
+path=C:\Users\MareCK\jboss-as-7.1.1.Final\bin\client\jboss-client.jar
+size=3332989
+archive=0
