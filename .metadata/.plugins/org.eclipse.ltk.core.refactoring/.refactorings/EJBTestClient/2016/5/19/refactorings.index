@@ -1,1 +1,7 @@
 1463065142344	Rename package 'test'
+1463161160597	Rename field 'btnNewButton'
+1463161177511	Rename field 'btnRegister'
+1463163072881	Move compilation unit
+1463163133686	Rename type 'LoginPW'
+1463163149521	Rename type 'Register'
+1463165597869	Rename type 'FlightWindow'

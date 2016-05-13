@@ -1,0 +1,13 @@
+package remote;
+
+import java.util.List;
+
+import javax.ejb.Remote;
+
+import entity.User;
+
+@Remote
+public interface TestBeanRemote {
+	public String add(int i1, int i2);
+	public List<User> getAllUsers();
+}

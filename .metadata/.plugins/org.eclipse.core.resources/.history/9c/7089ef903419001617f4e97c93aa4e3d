@@ -1,0 +1,33 @@
+package view;
+
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+@SuppressWarnings("serial")
+public class Register extends JFrame{
+	private JLabel lbl_name, lbl_surname, lbl_birth, lbl_phone, lbl_socialMedia;
+	public Register() {
+		getContentPane().setLayout(null);
+		
+		lbl_name = new JLabel("Meno");
+		lbl_name.setBounds(24, 33, 46, 14);
+		getContentPane().add(lbl_name);
+		
+		lbl_surname = new JLabel("Meno");
+		lbl_surname.setBounds(24, 58, 46, 14);
+		getContentPane().add(lbl_surname);
+		
+		lbl_birth = new JLabel("Meno");
+		lbl_birth.setBounds(24, 83, 46, 14);
+		getContentPane().add(lbl_birth);
+		
+		lbl_phone = new JLabel("Meno");
+		lbl_phone.setBounds(24, 108, 46, 14);
+		getContentPane().add(lbl_phone);
+		
+		lbl_socialMedia = new JLabel("Skype/Fb");
+		lbl_socialMedia.setBounds(24, 133, 46, 14);
+		getContentPane().add(lbl_socialMedia);
+	}
+}

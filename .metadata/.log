@@ -696,3 +696,484 @@ org.eclipse.core.internal.resources.ResourceException: Resource '/EJBTestServer/
 	at org.eclipse.equinox.launcher.Main.main(Main.java:1488)
 !SUBENTRY 1 org.eclipse.core.resources 4 368 2016-05-12 14:23:27.749
 !MESSAGE Resource '/EJBTestServer/src/test/TestBeanRemote.java' does not exist.
+
+!ENTRY org.jboss.ide.eclipse.as.core 4 0 2016-05-12 21:16:21.412
+!MESSAGE Unable to retrieve a list of remote deployment scanners
+!STACK 0
+org.jboss.ide.eclipse.as.management.core.JBoss7ManangerException: java.io.IOException: java.net.ConnectException: WFLYPRT0023: Could not connect to remote://localhost:9999. The connection timed out
+	at org.jboss.ide.eclipse.as.internal.management.wildfly9.Wildfly9Manager.execute(Wildfly9Manager.java:361)
+	at org.jboss.ide.eclipse.as.internal.management.wildfly9.Wildfly9ManagerService.execute(Wildfly9ManagerService.java:171)
+	at org.jboss.ide.eclipse.as.management.core.JBoss7ManagerServiceProxy.execute(JBoss7ManagerServiceProxy.java:87)
+	at org.jboss.ide.eclipse.as.management.core.service.DelegatingManagerService.execute(DelegatingManagerService.java:132)
+	at org.jboss.ide.eclipse.as.management.core.JBoss7ManagerServiceProxy.execute(JBoss7ManagerServiceProxy.java:87)
+	at org.jboss.ide.eclipse.as.core.server.internal.v7.AS7DeploymentScannerUtility$1.execute(AS7DeploymentScannerUtility.java:291)
+	at org.jboss.ide.eclipse.as.core.server.internal.v7.AS7DeploymentScannerUtility$1.execute(AS7DeploymentScannerUtility.java:1)
+	at org.jboss.ide.eclipse.as.management.core.JBoss7ManagerUtil.executeWithService(JBoss7ManagerUtil.java:136)
+	at org.jboss.ide.eclipse.as.core.server.internal.v7.AS7DeploymentScannerUtility.executeWithResult(AS7DeploymentScannerUtility.java:289)
+	at org.jboss.ide.eclipse.as.core.server.internal.v7.AS7DeploymentScannerUtility.getDeploymentScanners(AS7DeploymentScannerUtility.java:161)
+	at org.jboss.ide.eclipse.as.core.server.internal.v7.AS7DeploymentScannerUtility.getDeploymentScannersFromServer(AS7DeploymentScannerUtility.java:249)
+	at org.jboss.ide.eclipse.as.core.server.internal.v7.LocalJBoss7DeploymentScannerAdditions.loadScannersFromServer(LocalJBoss7DeploymentScannerAdditions.java:173)
+	at org.jboss.ide.eclipse.as.core.server.internal.v7.LocalJBoss7DeploymentScannerAdditions.loadScannersFromServerSafely(LocalJBoss7DeploymentScannerAdditions.java:135)
+	at org.jboss.ide.eclipse.as.core.server.internal.v7.LocalJBoss7DeploymentScannerAdditions.ensureScannersRemoved(LocalJBoss7DeploymentScannerAdditions.java:150)
+	at org.jboss.ide.eclipse.as.core.server.internal.AbstractDeploymentScannerAdditions.removeAddedDeploymentScanners(AbstractDeploymentScannerAdditions.java:83)
+	at org.jboss.tools.as.core.server.controllable.subsystems.internal.LocalLegacyShutdownController.removeScanners(LocalLegacyShutdownController.java:75)
+	at org.jboss.tools.as.core.server.controllable.subsystems.internal.LocalLegacyShutdownController.stop(LocalLegacyShutdownController.java:58)
+	at org.jboss.tools.as.core.server.controllable.subsystems.internal.LocalLegacyShutdownController.stop(LocalLegacyShutdownController.java:53)
+	at org.jboss.ide.eclipse.as.wtp.core.server.behavior.ControllableServerBehavior.stop(ControllableServerBehavior.java:252)
+	at org.eclipse.wst.server.core.internal.Server.stopImpl2(Server.java:3688)
+	at org.eclipse.wst.server.core.internal.Server.stopImpl(Server.java:3645)
+	at org.eclipse.wst.server.core.internal.Server$StopJob.run(Server.java:403)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: java.io.IOException: java.net.ConnectException: WFLYPRT0023: Could not connect to remote://localhost:9999. The connection timed out
+	at org.jboss.as.controller.client.impl.AbstractModelControllerClient.executeForResult(AbstractModelControllerClient.java:149)
+	at org.jboss.as.controller.client.impl.AbstractModelControllerClient.execute(AbstractModelControllerClient.java:75)
+	at org.jboss.ide.eclipse.as.internal.management.wildfly9.Wildfly9Manager.execute(Wildfly9Manager.java:350)
+	... 22 more
+Caused by: java.net.ConnectException: WFLYPRT0023: Could not connect to remote://localhost:9999. The connection timed out
+	at org.jboss.as.protocol.ProtocolConnectionUtils.connectSync(ProtocolConnectionUtils.java:124)
+	at org.jboss.as.protocol.ProtocolConnectionManager$EstablishingConnection.connect(ProtocolConnectionManager.java:257)
+	at org.jboss.as.protocol.ProtocolConnectionManager.connect(ProtocolConnectionManager.java:71)
+	at org.jboss.as.protocol.mgmt.FutureManagementChannel$Establishing.getChannel(FutureManagementChannel.java:212)
+	at org.jboss.as.controller.client.impl.RemotingModelControllerClient.getOrCreateChannel(RemotingModelControllerClient.java:146)
+	at org.jboss.as.controller.client.impl.RemotingModelControllerClient$1.getChannel(RemotingModelControllerClient.java:65)
+	at org.jboss.as.protocol.mgmt.ManagementChannelHandler.executeRequest(ManagementChannelHandler.java:147)
+	at org.jboss.as.protocol.mgmt.ManagementChannelHandler.executeRequest(ManagementChannelHandler.java:122)
+	at org.jboss.as.controller.client.impl.AbstractModelControllerClient.executeRequest(AbstractModelControllerClient.java:263)
+	at org.jboss.as.controller.client.impl.AbstractModelControllerClient.execute(AbstractModelControllerClient.java:168)
+	at org.jboss.as.controller.client.impl.AbstractModelControllerClient.executeForResult(AbstractModelControllerClient.java:147)
+	... 24 more
+
+!ENTRY org.eclipse.wst.server.core 4 0 2016-05-12 21:16:28.087
+!MESSAGE Server JBoss AS 7.1 failed to stop.
+
+!ENTRY org.jboss.ide.eclipse.as.core 4 0 2016-05-12 21:16:32.809
+!MESSAGE Unable to retrieve a list of remote deployment scanners
+!STACK 0
+org.jboss.ide.eclipse.as.management.core.JBoss7ManangerException: java.io.IOException: java.net.ConnectException: WFLYPRT0023: Could not connect to remote://localhost:9999. The connection timed out
+	at org.jboss.ide.eclipse.as.internal.management.wildfly9.Wildfly9Manager.execute(Wildfly9Manager.java:361)
+	at org.jboss.ide.eclipse.as.internal.management.wildfly9.Wildfly9ManagerService.execute(Wildfly9ManagerService.java:171)
+	at org.jboss.ide.eclipse.as.management.core.JBoss7ManagerServiceProxy.execute(JBoss7ManagerServiceProxy.java:87)
+	at org.jboss.ide.eclipse.as.management.core.service.DelegatingManagerService.execute(DelegatingManagerService.java:132)
+	at org.jboss.ide.eclipse.as.management.core.JBoss7ManagerServiceProxy.execute(JBoss7ManagerServiceProxy.java:87)
+	at org.jboss.ide.eclipse.as.core.server.internal.v7.AS7DeploymentScannerUtility$1.execute(AS7DeploymentScannerUtility.java:291)
+	at org.jboss.ide.eclipse.as.core.server.internal.v7.AS7DeploymentScannerUtility$1.execute(AS7DeploymentScannerUtility.java:1)
+	at org.jboss.ide.eclipse.as.management.core.JBoss7ManagerUtil.executeWithService(JBoss7ManagerUtil.java:136)
+	at org.jboss.ide.eclipse.as.core.server.internal.v7.AS7DeploymentScannerUtility.executeWithResult(AS7DeploymentScannerUtility.java:289)
+	at org.jboss.ide.eclipse.as.core.server.internal.v7.AS7DeploymentScannerUtility.getDeploymentScanners(AS7DeploymentScannerUtility.java:161)
+	at org.jboss.ide.eclipse.as.core.server.internal.v7.AS7DeploymentScannerUtility.getDeploymentScannersFromServer(AS7DeploymentScannerUtility.java:249)
+	at org.jboss.ide.eclipse.as.core.server.internal.v7.LocalJBoss7DeploymentScannerAdditions.loadScannersFromServer(LocalJBoss7DeploymentScannerAdditions.java:173)
+	at org.jboss.ide.eclipse.as.core.server.internal.v7.LocalJBoss7DeploymentScannerAdditions.loadScannersFromServerSafely(LocalJBoss7DeploymentScannerAdditions.java:135)
+	at org.jboss.ide.eclipse.as.core.server.internal.v7.LocalJBoss7DeploymentScannerAdditions.ensureScannersRemoved(LocalJBoss7DeploymentScannerAdditions.java:150)
+	at org.jboss.ide.eclipse.as.core.server.internal.AbstractDeploymentScannerAdditions.removeAddedDeploymentScanners(AbstractDeploymentScannerAdditions.java:83)
+	at org.jboss.tools.as.core.server.controllable.subsystems.internal.LocalLegacyShutdownController.removeScanners(LocalLegacyShutdownController.java:75)
+	at org.jboss.tools.as.core.server.controllable.subsystems.internal.LocalLegacyShutdownController.stop(LocalLegacyShutdownController.java:58)
+	at org.jboss.tools.as.core.server.controllable.subsystems.internal.LocalLegacyShutdownController.stop(LocalLegacyShutdownController.java:53)
+	at org.jboss.ide.eclipse.as.wtp.core.server.behavior.ControllableServerBehavior.stop(ControllableServerBehavior.java:252)
+	at org.eclipse.wst.server.core.internal.Server.stopImpl2(Server.java:3688)
+	at org.eclipse.wst.server.core.internal.Server.stopImpl(Server.java:3645)
+	at org.eclipse.wst.server.core.internal.Server$StopJob.run(Server.java:403)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: java.io.IOException: java.net.ConnectException: WFLYPRT0023: Could not connect to remote://localhost:9999. The connection timed out
+	at org.jboss.as.controller.client.impl.AbstractModelControllerClient.executeForResult(AbstractModelControllerClient.java:149)
+	at org.jboss.as.controller.client.impl.AbstractModelControllerClient.execute(AbstractModelControllerClient.java:75)
+	at org.jboss.ide.eclipse.as.internal.management.wildfly9.Wildfly9Manager.execute(Wildfly9Manager.java:350)
+	... 22 more
+Caused by: java.net.ConnectException: WFLYPRT0023: Could not connect to remote://localhost:9999. The connection timed out
+	at org.jboss.as.protocol.ProtocolConnectionUtils.connectSync(ProtocolConnectionUtils.java:124)
+	at org.jboss.as.protocol.ProtocolConnectionManager$EstablishingConnection.connect(ProtocolConnectionManager.java:257)
+	at org.jboss.as.protocol.ProtocolConnectionManager.connect(ProtocolConnectionManager.java:71)
+	at org.jboss.as.protocol.mgmt.FutureManagementChannel$Establishing.getChannel(FutureManagementChannel.java:212)
+	at org.jboss.as.controller.client.impl.RemotingModelControllerClient.getOrCreateChannel(RemotingModelControllerClient.java:146)
+	at org.jboss.as.controller.client.impl.RemotingModelControllerClient$1.getChannel(RemotingModelControllerClient.java:65)
+	at org.jboss.as.protocol.mgmt.ManagementChannelHandler.executeRequest(ManagementChannelHandler.java:147)
+	at org.jboss.as.protocol.mgmt.ManagementChannelHandler.executeRequest(ManagementChannelHandler.java:122)
+	at org.jboss.as.controller.client.impl.AbstractModelControllerClient.executeRequest(AbstractModelControllerClient.java:263)
+	at org.jboss.as.controller.client.impl.AbstractModelControllerClient.execute(AbstractModelControllerClient.java:168)
+	at org.jboss.as.controller.client.impl.AbstractModelControllerClient.executeForResult(AbstractModelControllerClient.java:147)
+	... 24 more
+
+!ENTRY org.jboss.ide.eclipse.as.core 4 0 2016-05-12 21:16:38.232
+!MESSAGE Unable to retrieve a list of remote deployment scanners
+!STACK 0
+org.jboss.ide.eclipse.as.management.core.JBoss7ManangerException: java.io.IOException: java.net.ConnectException: WFLYPRT0023: Could not connect to remote://localhost:9999. The connection timed out
+	at org.jboss.ide.eclipse.as.internal.management.wildfly9.Wildfly9Manager.execute(Wildfly9Manager.java:361)
+	at org.jboss.ide.eclipse.as.internal.management.wildfly9.Wildfly9ManagerService.execute(Wildfly9ManagerService.java:171)
+	at org.jboss.ide.eclipse.as.management.core.JBoss7ManagerServiceProxy.execute(JBoss7ManagerServiceProxy.java:87)
+	at org.jboss.ide.eclipse.as.management.core.service.DelegatingManagerService.execute(DelegatingManagerService.java:132)
+	at org.jboss.ide.eclipse.as.management.core.JBoss7ManagerServiceProxy.execute(JBoss7ManagerServiceProxy.java:87)
+	at org.jboss.ide.eclipse.as.core.server.internal.v7.AS7DeploymentScannerUtility$1.execute(AS7DeploymentScannerUtility.java:291)
+	at org.jboss.ide.eclipse.as.core.server.internal.v7.AS7DeploymentScannerUtility$1.execute(AS7DeploymentScannerUtility.java:1)
+	at org.jboss.ide.eclipse.as.management.core.JBoss7ManagerUtil.executeWithService(JBoss7ManagerUtil.java:136)
+	at org.jboss.ide.eclipse.as.core.server.internal.v7.AS7DeploymentScannerUtility.executeWithResult(AS7DeploymentScannerUtility.java:289)
+	at org.jboss.ide.eclipse.as.core.server.internal.v7.AS7DeploymentScannerUtility.getDeploymentScanners(AS7DeploymentScannerUtility.java:161)
+	at org.jboss.ide.eclipse.as.core.server.internal.v7.AS7DeploymentScannerUtility.getDeploymentScannersFromServer(AS7DeploymentScannerUtility.java:249)
+	at org.jboss.ide.eclipse.as.core.server.internal.v7.LocalJBoss7DeploymentScannerAdditions.loadScannersFromServer(LocalJBoss7DeploymentScannerAdditions.java:173)
+	at org.jboss.ide.eclipse.as.core.server.internal.v7.LocalJBoss7DeploymentScannerAdditions.loadScannersFromServerSafely(LocalJBoss7DeploymentScannerAdditions.java:135)
+	at org.jboss.ide.eclipse.as.core.server.internal.v7.LocalJBoss7DeploymentScannerAdditions.ensureScannersRemoved(LocalJBoss7DeploymentScannerAdditions.java:150)
+	at org.jboss.ide.eclipse.as.core.server.internal.AbstractDeploymentScannerAdditions.removeAddedDeploymentScanners(AbstractDeploymentScannerAdditions.java:83)
+	at org.jboss.tools.as.core.server.controllable.subsystems.internal.LocalLegacyShutdownController.removeScanners(LocalLegacyShutdownController.java:75)
+	at org.jboss.tools.as.core.server.controllable.subsystems.internal.LocalLegacyShutdownController.stop(LocalLegacyShutdownController.java:58)
+	at org.jboss.tools.as.core.server.controllable.subsystems.internal.LocalLegacyShutdownController.stop(LocalLegacyShutdownController.java:53)
+	at org.jboss.tools.as.core.server.controllable.subsystems.internal.ManagementShutdownController.forceStop(ManagementShutdownController.java:63)
+	at org.jboss.tools.as.core.server.controllable.subsystems.internal.LocalLegacyShutdownController.stopImpl(LocalLegacyShutdownController.java:120)
+	at org.jboss.tools.as.core.server.controllable.subsystems.internal.LocalLegacyShutdownController.stop(LocalLegacyShutdownController.java:66)
+	at org.jboss.tools.as.core.server.controllable.subsystems.internal.LocalLegacyShutdownController.stop(LocalLegacyShutdownController.java:53)
+	at org.jboss.ide.eclipse.as.wtp.core.server.behavior.ControllableServerBehavior.stop(ControllableServerBehavior.java:252)
+	at org.eclipse.wst.server.core.internal.Server.stopImpl2(Server.java:3688)
+	at org.eclipse.wst.server.core.internal.Server.stopImpl(Server.java:3645)
+	at org.eclipse.wst.server.core.internal.Server$StopJob.run(Server.java:403)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: java.io.IOException: java.net.ConnectException: WFLYPRT0023: Could not connect to remote://localhost:9999. The connection timed out
+	at org.jboss.as.controller.client.impl.AbstractModelControllerClient.executeForResult(AbstractModelControllerClient.java:149)
+	at org.jboss.as.controller.client.impl.AbstractModelControllerClient.execute(AbstractModelControllerClient.java:75)
+	at org.jboss.ide.eclipse.as.internal.management.wildfly9.Wildfly9Manager.execute(Wildfly9Manager.java:350)
+	... 26 more
+Caused by: java.net.ConnectException: WFLYPRT0023: Could not connect to remote://localhost:9999. The connection timed out
+	at org.jboss.as.protocol.ProtocolConnectionUtils.connectSync(ProtocolConnectionUtils.java:124)
+	at org.jboss.as.protocol.ProtocolConnectionManager$EstablishingConnection.connect(ProtocolConnectionManager.java:257)
+	at org.jboss.as.protocol.ProtocolConnectionManager.connect(ProtocolConnectionManager.java:71)
+	at org.jboss.as.protocol.mgmt.FutureManagementChannel$Establishing.getChannel(FutureManagementChannel.java:212)
+	at org.jboss.as.controller.client.impl.RemotingModelControllerClient.getOrCreateChannel(RemotingModelControllerClient.java:146)
+	at org.jboss.as.controller.client.impl.RemotingModelControllerClient$1.getChannel(RemotingModelControllerClient.java:65)
+	at org.jboss.as.protocol.mgmt.ManagementChannelHandler.executeRequest(ManagementChannelHandler.java:147)
+	at org.jboss.as.protocol.mgmt.ManagementChannelHandler.executeRequest(ManagementChannelHandler.java:122)
+	at org.jboss.as.controller.client.impl.AbstractModelControllerClient.executeRequest(AbstractModelControllerClient.java:263)
+	at org.jboss.as.controller.client.impl.AbstractModelControllerClient.execute(AbstractModelControllerClient.java:168)
+	at org.jboss.as.controller.client.impl.AbstractModelControllerClient.executeForResult(AbstractModelControllerClient.java:147)
+	... 28 more
+
+!ENTRY org.jboss.ide.eclipse.as.core 4 16973826 2016-05-12 21:16:40.136
+!MESSAGE The server was shutdown forcefully. All processes were terminated.
+
+!ENTRY org.jboss.ide.eclipse.as.core 4 0 2016-05-12 21:16:48.907
+!MESSAGE Unable to retrieve a list of remote deployment scanners
+
+!ENTRY org.jboss.ide.eclipse.as.core 4 0 2016-05-12 21:16:48.959
+!MESSAGE Unable to retrieve a list of remote deployment scanners
+
+!ENTRY org.eclipse.recommenders.rcp 4 18 2016-05-13 03:02:04.120
+!MESSAGE Failed to resolve selection in ‘=EJBTestAPI/src<entity{User.java’ at offset 373.
+!STACK 0
+org.eclipse.recommenders.utils.Logs$LogTraceException
+	at org.eclipse.recommenders.utils.Logs$LogTraceException.newTrace(Logs.java:381)
+	at org.eclipse.recommenders.utils.Logs.log(Logs.java:134)
+	at org.eclipse.recommenders.internal.rcp.JavaElementSelections.resolveJavaElementFromTypeRootInEditor(JavaElementSelections.java:164)
+	at org.eclipse.recommenders.internal.rcp.JavaElementSelections.resolveJavaElementFromEditor(JavaElementSelections.java:119)
+	at org.eclipse.recommenders.internal.rcp.JavaElementSelections.resolveJavaElementFromEditor(JavaElementSelections.java:102)
+	at org.eclipse.recommenders.internal.rcp.JavaElementSelectionService.handleSelectionInEditor(JavaElementSelectionService.java:108)
+	at org.eclipse.recommenders.internal.rcp.JavaElementSelectionService.access$1(JavaElementSelectionService.java:105)
+	at org.eclipse.recommenders.internal.rcp.JavaElementSelectionService$1.run(JavaElementSelectionService.java:82)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(Unknown Source)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+!SESSION 2016-05-13 13:38:53.616 -----------------------------------------------
+eclipse.buildId=4.5.2.M20160212-1500
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=sk_SK
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.egit.mylyn.ui 4 0 2016-05-13 13:39:16.486
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.egit.mylyn.ui [980]
+  Unresolved requirement: Import-Package: org.eclipse.egit.ui.internal.synchronize.model; version="[4.2.0,4.3.0)"
+    -> Export-Package: org.eclipse.egit.ui.internal.synchronize.model; bundle-symbolic-name="org.eclipse.egit.ui"; bundle-version="4.2.0.201601211800-r"; version="4.2.0"; x-friends:="org.eclipse.egit.mylyn.ui"
+       org.eclipse.egit.ui [981]
+         No resolution report for the bundle.  Unresolved requirement: Import-Package: org.eclipse.egit.ui; version="[4.2.0,4.3.0)"
+    -> Export-Package: org.eclipse.egit.ui; bundle-symbolic-name="org.eclipse.egit.ui"; bundle-version="4.2.0.201601211800-r"; version="4.2.0"; x-friends:="org.eclipse.egit.mylyn.ui,org.eclipse.egit.gitflow.ui"
+  Unresolved requirement: Import-Package: org.eclipse.egit.ui.internal.commit; version="[4.2.0,4.3.0)"
+    -> Export-Package: org.eclipse.egit.ui.internal.commit; bundle-symbolic-name="org.eclipse.egit.ui"; bundle-version="4.2.0.201601211800-r"; version="4.2.0"; x-friends:="org.eclipse.egit.mylyn.ui,org.eclipse.egit.gitflow.ui"
+  Bundle was not resolved because of a uses contraint violation.
+  org.osgi.service.resolver.ResolutionException: Uses constraint violation. Unable to resolve resource org.eclipse.egit.ui [osgi.identity; osgi.identity="org.eclipse.egit.ui"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"; singleton:="true"] because it is exposed to package 'org.eclipse.jgit.transport' from resources org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"] and org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.1.1.201511131810-r"] via two dependency chains.
+
+Chain 1:
+  org.eclipse.egit.ui [osgi.identity; osgi.identity="org.eclipse.egit.ui"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"; singleton:="true"]
+    import: (&(osgi.wiring.package=org.eclipse.jgit.transport)(&(version>=4.2.0)(!(version>=4.3.0))))
+     |
+    export: osgi.wiring.package: org.eclipse.jgit.transport
+  org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"]
+
+Chain 2:
+  org.eclipse.egit.ui [osgi.identity; osgi.identity="org.eclipse.egit.ui"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=org.eclipse.jgit)(&(bundle-version>=4.1.0)(!(bundle-version>=4.2.0))))
+     |
+    provide: osgi.wiring.bundle: org.eclipse.jgit
+  org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.1.1.201511131810-r"]
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.egit.ui 4 0 2016-05-13 13:39:16.782
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.egit.ui [981]
+  Bundle was not resolved because of a uses contraint violation.
+  org.osgi.service.resolver.ResolutionException: Uses constraint violation. Unable to resolve resource org.eclipse.egit.ui [osgi.identity; osgi.identity="org.eclipse.egit.ui"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"; singleton:="true"] because it is exposed to package 'org.eclipse.jgit.transport' from resources org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"] and org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.1.1.201511131810-r"] via two dependency chains.
+
+Chain 1:
+  org.eclipse.egit.ui [osgi.identity; osgi.identity="org.eclipse.egit.ui"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"; singleton:="true"]
+    import: (&(osgi.wiring.package=org.eclipse.jgit.transport)(&(version>=4.2.0)(!(version>=4.3.0))))
+     |
+    export: osgi.wiring.package: org.eclipse.jgit.transport
+  org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"]
+
+Chain 2:
+  org.eclipse.egit.ui [osgi.identity; osgi.identity="org.eclipse.egit.ui"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=org.eclipse.jgit)(&(bundle-version>=4.1.0)(!(bundle-version>=4.2.0))))
+     |
+    provide: osgi.wiring.bundle: org.eclipse.jgit
+  org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.1.1.201511131810-r"]
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.jboss.tools.openshift.common.ui 4 0 2016-05-13 13:39:16.829
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.jboss.tools.openshift.common.ui [1045]
+  Unresolved requirement: Require-Bundle: org.jboss.tools.openshift.egit.ui; bundle-version="[3.0.0,4.0.0)"
+    -> Bundle-SymbolicName: org.jboss.tools.openshift.egit.ui; bundle-version="3.1.0.Final-v20160414-0041-B272"; singleton:="true"
+       org.jboss.tools.openshift.egit.ui [1048]
+         Unresolved requirement: Require-Bundle: org.eclipse.egit.ui; bundle-version="2.0.0"
+           -> Bundle-SymbolicName: org.eclipse.egit.ui; bundle-version="4.2.0.201601211800-r"; singleton:="true"
+              org.eclipse.egit.ui [981]
+                No resolution report for the bundle.  Bundle was not resolved because of a uses contraint violation.
+  org.osgi.service.resolver.ResolutionException: Uses constraint violation. Unable to resolve resource org.eclipse.egit.ui [osgi.identity; osgi.identity="org.eclipse.egit.ui"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"; singleton:="true"] because it is exposed to package 'org.eclipse.jgit.transport' from resources org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"] and org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.1.1.201511131810-r"] via two dependency chains.
+
+Chain 1:
+  org.eclipse.egit.ui [osgi.identity; osgi.identity="org.eclipse.egit.ui"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"; singleton:="true"]
+    import: (&(osgi.wiring.package=org.eclipse.jgit.transport)(&(version>=4.2.0)(!(version>=4.3.0))))
+     |
+    export: osgi.wiring.package: org.eclipse.jgit.transport
+  org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"]
+
+Chain 2:
+  org.eclipse.egit.ui [osgi.identity; osgi.identity="org.eclipse.egit.ui"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=org.eclipse.jgit)(&(bundle-version>=4.1.0)(!(bundle-version>=4.2.0))))
+     |
+    provide: osgi.wiring.bundle: org.eclipse.jgit
+  org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.1.1.201511131810-r"]
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.jboss.tools.openshift.egit.ui 4 0 2016-05-13 13:39:16.907
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.jboss.tools.openshift.egit.ui [1048]
+  Unresolved requirement: Require-Bundle: org.eclipse.egit.ui; bundle-version="2.0.0"
+    -> Bundle-SymbolicName: org.eclipse.egit.ui; bundle-version="4.2.0.201601211800-r"; singleton:="true"
+       org.eclipse.egit.ui [981]
+         No resolution report for the bundle.  Bundle was not resolved because of a uses contraint violation.
+  org.osgi.service.resolver.ResolutionException: Uses constraint violation. Unable to resolve resource org.eclipse.egit.ui [osgi.identity; osgi.identity="org.eclipse.egit.ui"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"; singleton:="true"] because it is exposed to package 'org.eclipse.jgit.transport' from resources org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"] and org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.1.1.201511131810-r"] via two dependency chains.
+
+Chain 1:
+  org.eclipse.egit.ui [osgi.identity; osgi.identity="org.eclipse.egit.ui"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"; singleton:="true"]
+    import: (&(osgi.wiring.package=org.eclipse.jgit.transport)(&(version>=4.2.0)(!(version>=4.3.0))))
+     |
+    export: osgi.wiring.package: org.eclipse.jgit.transport
+  org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"]
+
+Chain 2:
+  org.eclipse.egit.ui [osgi.identity; osgi.identity="org.eclipse.egit.ui"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=org.eclipse.jgit)(&(bundle-version>=4.1.0)(!(bundle-version>=4.2.0))))
+     |
+    provide: osgi.wiring.bundle: org.eclipse.jgit
+  org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.1.1.201511131810-r"]
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.jboss.tools.openshift.ui 4 0 2016-05-13 13:39:17.125
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.jboss.tools.openshift.ui [1049]
+  Unresolved requirement: Require-Bundle: org.jboss.tools.openshift.egit.ui; bundle-version="3.0.0"
+    -> Bundle-SymbolicName: org.jboss.tools.openshift.egit.ui; bundle-version="3.1.0.Final-v20160414-0041-B272"; singleton:="true"
+       org.jboss.tools.openshift.egit.ui [1048]
+         Unresolved requirement: Require-Bundle: org.eclipse.egit.ui; bundle-version="2.0.0"
+           -> Bundle-SymbolicName: org.eclipse.egit.ui; bundle-version="4.2.0.201601211800-r"; singleton:="true"
+              org.eclipse.egit.ui [981]
+                No resolution report for the bundle.  Unresolved requirement: Require-Bundle: org.jboss.tools.openshift.common.ui; bundle-version="[3.0.0,4.0.0)"
+    -> Bundle-SymbolicName: org.jboss.tools.openshift.common.ui; bundle-version="3.1.0.Final-v20160414-0041-B272"; singleton:="true"
+       org.jboss.tools.openshift.common.ui [1045]
+         Unresolved requirement: Require-Bundle: org.jboss.tools.openshift.egit.ui; bundle-version="[3.0.0,4.0.0)"
+           -> Bundle-SymbolicName: org.jboss.tools.openshift.egit.ui; bundle-version="3.1.0.Final-v20160414-0041-B272"; singleton:="true"
+  Bundle was not resolved because of a uses contraint violation.
+  org.osgi.service.resolver.ResolutionException: Uses constraint violation. Unable to resolve resource org.eclipse.egit.ui [osgi.identity; osgi.identity="org.eclipse.egit.ui"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"; singleton:="true"] because it is exposed to package 'org.eclipse.jgit.transport' from resources org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"] and org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.1.1.201511131810-r"] via two dependency chains.
+
+Chain 1:
+  org.eclipse.egit.ui [osgi.identity; osgi.identity="org.eclipse.egit.ui"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"; singleton:="true"]
+    import: (&(osgi.wiring.package=org.eclipse.jgit.transport)(&(version>=4.2.0)(!(version>=4.3.0))))
+     |
+    export: osgi.wiring.package: org.eclipse.jgit.transport
+  org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"]
+
+Chain 2:
+  org.eclipse.egit.ui [osgi.identity; osgi.identity="org.eclipse.egit.ui"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=org.eclipse.jgit)(&(bundle-version>=4.1.0)(!(bundle-version>=4.2.0))))
+     |
+    provide: osgi.wiring.bundle: org.eclipse.jgit
+  org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.1.1.201511131810-r"]
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.jboss.tools.openshift.cdk.server 4 0 2016-05-13 13:39:17.297
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.jboss.tools.openshift.cdk.server [1209]
+  Unresolved requirement: Require-Bundle: org.jboss.tools.openshift.common.ui; bundle-version="3.1.0"
+    -> Bundle-SymbolicName: org.jboss.tools.openshift.common.ui; bundle-version="3.1.0.Final-v20160414-0041-B272"; singleton:="true"
+       org.jboss.tools.openshift.common.ui [1045]
+         Unresolved requirement: Require-Bundle: org.jboss.tools.openshift.egit.ui; bundle-version="[3.0.0,4.0.0)"
+           -> Bundle-SymbolicName: org.jboss.tools.openshift.egit.ui; bundle-version="3.1.0.Final-v20160414-0041-B272"; singleton:="true"
+              org.jboss.tools.openshift.egit.ui [1048]
+                Unresolved requirement: Require-Bundle: org.eclipse.egit.ui; bundle-version="2.0.0"
+                  -> Bundle-SymbolicName: org.eclipse.egit.ui; bundle-version="4.2.0.201601211800-r"; singleton:="true"
+                     org.eclipse.egit.ui [981]
+                       No resolution report for the bundle.  Unresolved requirement: Require-Bundle: org.jboss.tools.openshift.ui; bundle-version="3.1.0"
+    -> Bundle-SymbolicName: org.jboss.tools.openshift.ui; bundle-version="3.1.0.Final-v20160414-0041-B272"; singleton:="true"
+       org.jboss.tools.openshift.ui [1049]
+         Unresolved requirement: Require-Bundle: org.jboss.tools.openshift.egit.ui; bundle-version="3.0.0"
+           -> Bundle-SymbolicName: org.jboss.tools.openshift.egit.ui; bundle-version="3.1.0.Final-v20160414-0041-B272"; singleton:="true"
+         Unresolved requirement: Require-Bundle: org.jboss.tools.openshift.common.ui; bundle-version="[3.0.0,4.0.0)"
+           -> Bundle-SymbolicName: org.jboss.tools.openshift.common.ui; bundle-version="3.1.0.Final-v20160414-0041-B272"; singleton:="true"
+  Bundle was not resolved because of a uses contraint violation.
+  org.osgi.service.resolver.ResolutionException: Uses constraint violation. Unable to resolve resource org.eclipse.egit.ui [osgi.identity; osgi.identity="org.eclipse.egit.ui"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"; singleton:="true"] because it is exposed to package 'org.eclipse.jgit.transport' from resources org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"] and org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.1.1.201511131810-r"] via two dependency chains.
+
+Chain 1:
+  org.eclipse.egit.ui [osgi.identity; osgi.identity="org.eclipse.egit.ui"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"; singleton:="true"]
+    import: (&(osgi.wiring.package=org.eclipse.jgit.transport)(&(version>=4.2.0)(!(version>=4.3.0))))
+     |
+    export: osgi.wiring.package: org.eclipse.jgit.transport
+  org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"]
+
+Chain 2:
+  org.eclipse.egit.ui [osgi.identity; osgi.identity="org.eclipse.egit.ui"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=org.eclipse.jgit)(&(bundle-version>=4.1.0)(!(bundle-version>=4.2.0))))
+     |
+    provide: osgi.wiring.bundle: org.eclipse.jgit
+  org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.1.1.201511131810-r"]
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.jboss.tools.openshift.express.ui 4 0 2016-05-13 13:39:17.624
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.jboss.tools.openshift.express.ui [1212]
+  Unresolved requirement: Require-Bundle: org.jboss.tools.openshift.egit.ui; bundle-version="[3.0.0,4.0.0)"
+    -> Bundle-SymbolicName: org.jboss.tools.openshift.egit.ui; bundle-version="3.1.0.Final-v20160414-0041-B272"; singleton:="true"
+       org.jboss.tools.openshift.egit.ui [1048]
+         Unresolved requirement: Require-Bundle: org.eclipse.egit.ui; bundle-version="2.0.0"
+           -> Bundle-SymbolicName: org.eclipse.egit.ui; bundle-version="4.2.0.201601211800-r"; singleton:="true"
+              org.eclipse.egit.ui [981]
+                No resolution report for the bundle.  Unresolved requirement: Require-Bundle: org.jboss.tools.openshift.common.ui; bundle-version="[3.0.0,4.0.0)"
+    -> Bundle-SymbolicName: org.jboss.tools.openshift.common.ui; bundle-version="3.1.0.Final-v20160414-0041-B272"; singleton:="true"
+       org.jboss.tools.openshift.common.ui [1045]
+         Unresolved requirement: Require-Bundle: org.jboss.tools.openshift.egit.ui; bundle-version="[3.0.0,4.0.0)"
+           -> Bundle-SymbolicName: org.jboss.tools.openshift.egit.ui; bundle-version="3.1.0.Final-v20160414-0041-B272"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.egit.ui; bundle-version="3.0.0"
+    -> Bundle-SymbolicName: org.eclipse.egit.ui; bundle-version="4.2.0.201601211800-r"; singleton:="true"
+  Bundle was not resolved because of a uses contraint violation.
+  org.osgi.service.resolver.ResolutionException: Uses constraint violation. Unable to resolve resource org.eclipse.egit.ui [osgi.identity; osgi.identity="org.eclipse.egit.ui"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"; singleton:="true"] because it is exposed to package 'org.eclipse.jgit.transport' from resources org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"] and org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.1.1.201511131810-r"] via two dependency chains.
+
+Chain 1:
+  org.eclipse.egit.ui [osgi.identity; osgi.identity="org.eclipse.egit.ui"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"; singleton:="true"]
+    import: (&(osgi.wiring.package=org.eclipse.jgit.transport)(&(version>=4.2.0)(!(version>=4.3.0))))
+     |
+    export: osgi.wiring.package: org.eclipse.jgit.transport
+  org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"]
+
+Chain 2:
+  org.eclipse.egit.ui [osgi.identity; osgi.identity="org.eclipse.egit.ui"; type="osgi.bundle"; version:Version="4.2.0.201601211800-r"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=org.eclipse.jgit)(&(bundle-version>=4.1.0)(!(bundle-version>=4.2.0))))
+     |
+    provide: osgi.wiring.bundle: org.eclipse.jgit
+  org.eclipse.jgit [osgi.identity; osgi.identity="org.eclipse.jgit"; type="osgi.bundle"; version:Version="4.1.1.201511131810-r"]
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1561)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-05-13 13:39:24.894
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jst.jsp.core 4 4 2016-05-13 13:40:30.542
+!MESSAGE A workspace crash was detected. The previous session did not exit normally. Not using saved taglib indexes.
+
+!ENTRY org.eclipse.epp.logging.aeri.ide 2 10 2016-05-13 13:46:32.521
+!MESSAGE Updating the index from remote failed. ; version: 1.100.0.v20160303-1450
+!STACK 0
+java.net.SocketTimeoutException: Read timed out
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(Unknown Source)
+	at java.net.SocketInputStream.read(Unknown Source)
+	at java.net.SocketInputStream.read(Unknown Source)
+	at sun.security.ssl.InputRecord.readFully(Unknown Source)
+	at sun.security.ssl.InputRecord.read(Unknown Source)
+	at sun.security.ssl.SSLSocketImpl.readRecord(Unknown Source)
+	at sun.security.ssl.SSLSocketImpl.readDataRecord(Unknown Source)
+	at sun.security.ssl.AppInputStream.read(Unknown Source)
+	at org.apache.http.impl.io.SessionInputBufferImpl.streamRead(SessionInputBufferImpl.java:136)
+	at org.apache.http.impl.io.SessionInputBufferImpl.fillBuffer(SessionInputBufferImpl.java:152)
+	at org.apache.http.impl.io.SessionInputBufferImpl.readLine(SessionInputBufferImpl.java:270)
+	at org.apache.http.impl.conn.DefaultHttpResponseParser.parseHead(DefaultHttpResponseParser.java:140)
+	at org.apache.http.impl.conn.DefaultHttpResponseParser.parseHead(DefaultHttpResponseParser.java:57)
+	at org.apache.http.impl.io.AbstractMessageParser.parse(AbstractMessageParser.java:260)
+	at org.apache.http.impl.DefaultBHttpClientConnection.receiveResponseHeader(DefaultBHttpClientConnection.java:161)
+	at org.apache.http.impl.conn.CPoolProxy.receiveResponseHeader(CPoolProxy.java:153)
+	at org.apache.http.protocol.HttpRequestExecutor.doReceiveResponse(HttpRequestExecutor.java:271)
+	at org.apache.http.protocol.HttpRequestExecutor.execute(HttpRequestExecutor.java:123)
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:254)
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:195)
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:86)
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:108)
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:184)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:57)
+	at org.apache.http.client.fluent.Executor.execute(Executor.java:206)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.IO.downloadDatabase(IO.java:171)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.ServerProblemsHistory$UpdateIndexJob.run(ServerProblemsHistory.java:279)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)

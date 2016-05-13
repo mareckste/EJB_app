@@ -1,0 +1,90 @@
+package view;
+
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+import java.util.ResourceBundle;
+
+import javax.swing.JButton;
+
+@SuppressWarnings("serial")
+public class RegisterWindow extends JFrame{
+	private JLabel lbl_name, lbl_surname, lbl_birth, lbl_phone, lbl_socialMedia;
+	private JButton btn_next;
+	private JTextField text_name;
+	private JTextField text_surname;
+	private JTextField text_birth;
+	private JTextField text_phone;
+	private JTextField text_socialMedia;
+	private JButton btn_cancel;
+	
+	public RegisterWindow() {
+		getContentPane().setLayout(null);
+		
+		lbl_name = new JLabel("");
+		lbl_name.setBounds(39, 42, 46, 14);
+		getContentPane().add(lbl_name);
+		
+		lbl_surname = new JLabel("");
+		lbl_surname.setBounds(39, 73, 46, 14);
+		getContentPane().add(lbl_surname);
+		
+		lbl_birth = new JLabel("");
+		lbl_birth.setBounds(39, 104, 46, 14);
+		getContentPane().add(lbl_birth);
+		
+		lbl_phone = new JLabel("");
+		lbl_phone.setBounds(39, 135, 46, 14);
+		getContentPane().add(lbl_phone);
+		
+		lbl_socialMedia = new JLabel("");
+		lbl_socialMedia.setBounds(39, 166, 46, 14);
+		getContentPane().add(lbl_socialMedia);
+		
+		text_name = new JTextField();
+		text_name.setBounds(142, 42, 139, 20);
+		getContentPane().add(text_name);
+		text_name.setColumns(10);
+		
+		text_surname = new JTextField();
+		text_surname.setColumns(10);
+		text_surname.setBounds(142, 73, 139, 20);
+		getContentPane().add(text_surname);
+		
+		text_birth = new JTextField();
+		text_birth.setColumns(10);
+		text_birth.setBounds(142, 104, 139, 20);
+		getContentPane().add(text_birth);
+		
+		text_phone = new JTextField();
+		text_phone.setColumns(10);
+		text_phone.setBounds(142, 135, 139, 20);
+		getContentPane().add(text_phone);
+		
+		text_socialMedia = new JTextField();
+		text_socialMedia.setColumns(10);
+		text_socialMedia.setBounds(142, 166, 139, 20);
+		getContentPane().add(text_socialMedia);
+		
+		btn_next = new JButton("");
+		btn_next.setBounds(257, 228, 89, 23);
+		getContentPane().add(btn_next);
+		
+		btn_cancel = new JButton("");
+		btn_cancel.setBounds(122, 228, 89, 23);
+		getContentPane().add(btn_cancel);
+	}
+	
+	public void setLanguage(ResourceBundle rb) {
+		lbl_birth.setText(rb.getString("lbl_birth"));
+		lbl_name.setText(rb.getString("lbl_name"));
+		lbl_phone.setText(rb.getString("lbl_phone"));
+		lbl_socialMedia.setText(rb.getString("lbl_socialMedia"));
+		lbl_surname.setText(rb.getString("lbl_surname"));
+		
+		btn_cancel.setText(rb.getString("btn_cancel"));
+		btn_next.setText(rb.getString("btn_next"));
+	}
+}

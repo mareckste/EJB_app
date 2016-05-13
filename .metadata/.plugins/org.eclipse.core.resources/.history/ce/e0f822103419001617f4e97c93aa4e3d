@@ -1,0 +1,21 @@
+package view;
+
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+@SuppressWarnings("serial")
+public class Register extends JFrame{
+	private JLabel lbl_name, lbl_surname;
+	public Register() {
+		getContentPane().setLayout(null);
+		
+		lbl_name = new JLabel("Meno");
+		lbl_name.setBounds(24, 33, 46, 14);
+		getContentPane().add(lbl_name);
+		
+		lbl_surname = new JLabel("Meno");
+		lbl_surname.setBounds(24, 58, 46, 14);
+		getContentPane().add(lbl_surname);
+	}
+}

@@ -1,0 +1,13 @@
+package dao;
+
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+
+import entity.User;
+
+public class UserDAO {
+	public List<User> getUsers(EntityManager em) {
+		TypedQuery<User> q = em.createNamedQuery("User.findAll", User.class);
+		return q.getResultList();
+	}
+}

@@ -14,5 +14,6 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/EJBTestAPI"/>
+	<classpathentry kind="lib" path="C:/Users/MareCK/Downloads/postgresql-9.4.1208.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

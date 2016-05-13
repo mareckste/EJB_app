@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence">
+  <persistence-unit name="05" transaction-type="JTA">
+    <jta-data-source>java:jboss/OracleDS</jta-data-source>
+    <properties>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <!-- <property name="hibernate.hbm2ddl.auto" value="update"/>  -->      
+    </properties>
+    
+    <class>entity.Student</class>
+    <class>entity.GeneratedOrder</class>
+    <class>entity.GenerationRecord</class>
+
+  </persistence-unit>
+</persistence>
