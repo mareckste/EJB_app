@@ -81,6 +81,11 @@ public class AddFlightWindow extends JFrame{
 		getContentPane().add(btn_cancel);
 	}
 	
+	public void setListeners(ActionListener next, ActionListener cancel) {
+		btn_cancel.addActionListener(cancel);
+		btn_next.addActionListener(next);
+	}
+	
 	public String getFrom() {
 		return text_from.getText();
 	}
@@ -99,11 +104,6 @@ public class AddFlightWindow extends JFrame{
 	
 	public String getMessageMoti() {
 		return text_motivate.getText();
-	}
-	
-	public void setListeners(ActionListener next, ActionListener cancel) {
-		btn_cancel.addActionListener(cancel);
-		btn_next.addActionListener(next);
 	}
 	
 	
