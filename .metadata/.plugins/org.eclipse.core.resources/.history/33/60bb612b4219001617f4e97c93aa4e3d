@@ -70,11 +70,11 @@ public class RegisterWindow extends JFrame{
 		getContentPane().add(text_socialMedia);
 		
 		btn_next = new JButton("");
-		btn_next.setBounds(244, 212, 89, 23);
+		btn_next.setBounds(257, 228, 89, 23);
 		getContentPane().add(btn_next);
 		
 		btn_cancel = new JButton("");
-		btn_cancel.setBounds(94, 212, 89, 23);
+		btn_cancel.setBounds(122, 228, 89, 23);
 		getContentPane().add(btn_cancel);
 	}
 	

@@ -61,10 +61,6 @@ public class LoginWindow extends JFrame{
 	public void setLanguage(ResourceBundle rb) {
 		lbl_login.setText(rb.getString("lbl_login"));
 		lbl_password.setText(rb.getString("lbl_password"));
-		
-		btn_close.setText(rb.getString("btn_close"));
-		btn_login.setText(rb.getString("btn_login"));
-		btn_register.setText(rb.getString("btn_register"));
 	}
 	
 	public void setListeners(ActionListener login, ActionListener register, ActionListener close) {

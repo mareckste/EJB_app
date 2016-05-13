@@ -16,7 +16,6 @@ public class LoginWindow extends JFrame{
 	private JPasswordField text_password;
 	private JLabel lbl_login, lbl_password;
 	private JButton btn_login, btn_register;
-	private JButton btn_close;
 	public LoginWindow() {
 		setSize(322, 248);
 		getContentPane().setBackground(new Color(245, 222, 179));
@@ -52,24 +51,15 @@ public class LoginWindow extends JFrame{
 		btn_register = new JButton("");
 		btn_register.setBounds(205, 173, 91, 23);
 		getContentPane().add(btn_register);
-		
-		btn_close = new JButton("New button");
-		btn_close.setBounds(10, 173, 89, 23);
-		getContentPane().add(btn_close);
 	}
 	
 	public void setLanguage(ResourceBundle rb) {
 		lbl_login.setText(rb.getString("lbl_login"));
 		lbl_password.setText(rb.getString("lbl_password"));
-		
-		btn_close.setText(rb.getString("btn_close"));
-		btn_login.setText(rb.getString("btn_login"));
-		btn_register.setText(rb.getString("btn_register"));
 	}
 	
-	public void setListeners(ActionListener login, ActionListener register, ActionListener close) {
+	public void setListeners(ActionListener login, ActionListener register) {
 		btn_login.addActionListener(login);
 		btn_register.addActionListener(register);
-		btn_close.addActionListener(close);
 	}
 }
