@@ -7,8 +7,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.util.ResourceBundle;
 
 @SuppressWarnings("serial")
 public class LoginWindow extends JFrame{
@@ -53,13 +51,4 @@ public class LoginWindow extends JFrame{
 		getContentPane().add(btn_register);
 	}
 	
-	public void setLanguage(ResourceBundle rb) {
-		lbl_login.setText(rb.getString("lbl_login"));
-		lbl_password.setText(rb.getString("lbl_password"));
-	}
-	
-	public void setListeners(ActionListener login, ActionListener register) {
-		btn_login.addActionListener(login);
-		btn_register.addActionListener(register);
-	}
 }

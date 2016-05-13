@@ -5,7 +5,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
@@ -87,10 +86,5 @@ public class RegisterWindow extends JFrame{
 		
 		btn_cancel.setText(rb.getString("btn_cancel"));
 		btn_next.setText(rb.getString("btn_next"));
-	}
-	
-	public void setListeners(ActionListener next, ActionListener cancel) {
-		btn_next.addActionListener(next);
-		btn_cancel.addActionListener(cancel);
 	}
 }
