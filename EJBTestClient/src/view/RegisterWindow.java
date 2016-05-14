@@ -78,6 +78,22 @@ public class RegisterWindow extends JFrame{
 		getContentPane().add(btn_cancel);
 	}
 	
+	public String getTextName() {
+		return text_name.getText();
+	}
+	
+	public String getTextSurname() {
+		return text_surname.getText();
+	}
+	
+	public String getTextPhone() {
+		return text_phone.getText();
+	}
+	
+	public String getTextSocial() {
+		return text_socialMedia.getText();
+	}
+	
 	public void setLanguage(ResourceBundle rb) {
 		lbl_birth.setText(rb.getString("lbl_birth"));
 		lbl_name.setText(rb.getString("lbl_name"));

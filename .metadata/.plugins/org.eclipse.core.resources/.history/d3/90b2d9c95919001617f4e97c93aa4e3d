@@ -1,0 +1,15 @@
+package controll;
+
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import view.LoginWindow;
+
+public class testGUI {
+
+	public static void main(String[] args) {
+		LoginWindow l = new LoginWindow();
+		ResourceBundle rb = ResourceBundle.getBundle("Location", new Locale("sk"));
+	}
+
+}

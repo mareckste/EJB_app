@@ -1,13 +1,16 @@
 package entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -23,17 +26,44 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer u_id;
 	private String name;
 	private String surname;
-	private Date date;
+	private String fly_date;
 	private String phone;
 	private String facebook;
-	@ManyToMany
+	private String login_name;
+	private String login_pass;
+
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(name="pouzivatel_let",
+			joinColumns={@JoinColumn(name="u_id")},
+			inverseJoinColumns={@JoinColumn(name="f_id")})
 	private List<Flight> flights;
 	
 	
+	
+	public User() {
+		this.flights = new ArrayList<Flight>();
+	}
+	
+	
+	public String getLogin_name() {
+		return login_name;
+	}
+
+	public void setLogin_name(String login_name) {
+		this.login_name = login_name;
+	}
+
+	public String getLogin_pass() {
+		return login_pass;
+	}
+
+	public void setLogin_pass(String login_pass) {
+		this.login_pass = login_pass;
+	}
 	
 	public String getSurname() {
 		return surname;
@@ -43,12 +73,12 @@ public class User implements Serializable {
 		this.surname = surname;
 	}
 	
-	public Date getDate() {
-		return date;
+	public String getBirthDate() {
+		return fly_date;
 	}
 	
-	public void setDate(Date date) {
-		this.date = date;
+	public void setBirthDate(String date) {
+		this.fly_date = date;
 	}
 	
 	public String getPhone() {
@@ -76,11 +106,11 @@ public class User implements Serializable {
 	}
 	
 	public Integer getId() {
-		return id;
+		return u_id;
 	}
 	
 	public void setId(Integer id) {
-		this.id = id;
+		this.u_id = id;
 	}
 	
 	public String getName() {

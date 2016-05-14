@@ -81,23 +81,23 @@ public class AddFlightWindow extends JFrame{
 		getContentPane().add(btn_cancel);
 	}
 	
-	public String getFrom() {
+	public String getTextFrom() {
 		return text_from.getText();
 	}
 	
-	public String getTo() {
+	public String getTextTo() {
 		return text_to.getText();
 	}
 	
-	public String getFlightNO() {
+	public String getTextFlightNO() {
 		return text_flightNO.getText();
 	}
 	
-	public String getDate() {
+	public String getTextDate() {
 		return text_date.getText();
 	}
 	
-	public String getMessageMoti() {
+	public String getTextMessageMoti() {
 		return text_motivate.getText();
 	}
 	

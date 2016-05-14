@@ -1,0 +1,15 @@
+package facade;
+
+import javax.ejb.Stateless;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
+
+/**
+ * Session Bean implementation class TransactionFacadeBean
+ */
+@Stateless
+@TransactionManagement(TransactionManagementType.BEAN)
+public class TransactionFacadeBean implements TransactionFacadeBeanRemote {
+
+    
+}

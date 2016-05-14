@@ -1,0 +1,10 @@
+package remote;
+
+import javax.ejb.Remote;
+
+import entity.User;
+
+@Remote
+public interface TransactionFacadeBeanRemote {
+	public boolean createOrUpdateUser(User u)ô
+}

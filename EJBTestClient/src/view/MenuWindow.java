@@ -3,7 +3,11 @@ package view;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
+
+import java.util.ResourceBundle;
+
 import javax.swing.JButton;
 
 @SuppressWarnings("serial")
@@ -35,5 +39,18 @@ public class MenuWindow extends JFrame {
 		getContentPane().add(btn_logoff);
 	}
 	
+	public void setLanguage(ResourceBundle rb) {
+		lbl_myflights.setText(rb.getString("lbl_myflights"));
+		
+		btn_logoff.setText(rb.getString("btn_logoff"));
+		btn_showFlight.setText(rb.getString("btn_showFlight"));
+	}
 	
+	public void setTable(DefaultTableModel tm) {
+		table.setModel(tm);
+	}
+	
+	public int getSelectedRow() {
+		return table.getSelectedRow();
+	}
 }
