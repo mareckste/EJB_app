@@ -11,6 +11,7 @@
     
     <class>entity.User</class>
     <class>entity.Flight</class>
+    <class>entity.UserFlight</class>
 
   </persistence-unit>
 </persistence>

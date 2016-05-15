@@ -15,6 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @SuppressWarnings("serial")
@@ -39,16 +40,10 @@ public class Flight implements Serializable{
 	private String flight_to;
 	private String flight_number;
 
+	@OneToMany(cascade=CascadeType.ALL, mappedBy = "flight")
+	private List<UserFlight> users;
 	
-	@ManyToMany(cascade={CascadeType.ALL}, mappedBy="flights")
-	/*@JoinTable(name="pouzivatel_let",
-	joinColumns={@JoinColumn(name="f_id")},
-	inverseJoinColumns={@JoinColumn(name="u_id")})*/
-	private List<User> users;
 	
-	public Flight() {
-		this.users = new ArrayList<User>();
-	}
 	
 	public Integer getId() {
 		return f_id;
@@ -90,11 +85,11 @@ public class Flight implements Serializable{
 		this.flight_number = flightNumber;
 	}
 	
-	public List<User> getUsers() {
+	public List<UserFlight> getUsers() {
 		return users;
 	}
 	
-	public void setUsers(List<User> users) {
+	public void setUsers(List<UserFlight> users) {
 		this.users = users;
 	}
 	

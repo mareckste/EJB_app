@@ -1,20 +1,16 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -35,22 +31,15 @@ public class User implements Serializable {
 	private Integer u_id;
 	private String name;
 	private String surname;
-	private String fly_date;
+	private String fly_date; /* birth date*/
 	private String phone;
 	private String facebook;
 	private String login_name;
 	private String login_pass;
 
-	@ManyToMany(cascade=CascadeType.ALL)
-	@JoinTable(name="pouzivatel_let",
-			joinColumns={@JoinColumn(name="u_id")},
-			inverseJoinColumns={@JoinColumn(name="f_id")})
-	private List<Flight> flights;
+	@OneToMany(cascade=CascadeType.ALL, mappedBy = "userko")
+	private List<UserFlight> flights;
 		
-	
-	public User() {
-		this.flights = new ArrayList<Flight>();
-	}
 	
 	
 	public String getLogin_name() {
@@ -101,11 +90,11 @@ public class User implements Serializable {
 		this.facebook = facebook;
 	}
 	
-	public List<Flight> getFlights() {
+	public List<UserFlight> getFlights() {
 		return flights;
 	}
 	
-	public void setFlights(List<Flight> flights) {
+	public void setFlights(List<UserFlight> flights) {
 		this.flights = flights;
 	}
 	

@@ -17,7 +17,7 @@ public class UserDAO {
 	}
 	
 	public User isRegistered(EntityManager em, String login, String pass) {
-		ArrayList<Flight> tmp=null;
+	/*	ArrayList<Flight> tmp=null;
 		
 		TypedQuery<User> q = em.createNamedQuery("User.checkLogin", User.class);
 		q.setParameter("in_login", login);
@@ -38,7 +38,7 @@ public class UserDAO {
 				em.detach(u);
 				return u;
 			}
-		
+		*/
 		return null;
 	}
 }

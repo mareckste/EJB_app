@@ -11,6 +11,7 @@ import javax.transaction.UserTransaction;
 
 import entity.Flight;
 import entity.User;
+import entity.UserFlight;
 import remote.MyTransactionFacadeBeanRemote;
 
 /**
@@ -46,14 +47,11 @@ public class MyTransactionFacadeBean implements MyTransactionFacadeBeanRemote {
     	return false;
     }
     
-    public void addFlight(Flight f, User u) {
+    public void addFlight(UserFlight u) {
     	UserTransaction ut = context.getUserTransaction();
     	
     	try {
     		ut.begin();
-    		f.getUsers().add(u);
-    		u.getFlights().add(f);
-    		em.persist(f);
     		em.persist(u);
     		ut.commit();
     	} catch(Exception e) {

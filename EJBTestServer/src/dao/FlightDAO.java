@@ -13,7 +13,7 @@ public class FlightDAO {
 	
 	
 	public Flight isFlight(EntityManager em, String date, String from, String to, String fnum) {
-		ArrayList<User> tmp=null;
+	/*	ArrayList<User> tmp=null;
 		Flight f = null;
 		TypedQuery<Flight> q = em.createNamedQuery("Flight.isFlight", Flight.class);
 		
@@ -39,6 +39,7 @@ public class FlightDAO {
 			return null;
 		}
 		
-		return f;
+		return f;*/
+		return new Flight();
 	}
 }

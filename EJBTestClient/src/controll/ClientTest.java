@@ -10,8 +10,10 @@ import com.sun.org.apache.bcel.internal.generic.GETFIELD;
 
 import entity.Flight;
 import entity.User;
+import entity.UserFlight;
 import remote.MyFacadeBeanRemote;
 import remote.MyTransactionFacadeBeanRemote;
+import view.AddFlightWindow;
 
 public class ClientTest {
 	public static void main(String[] args) throws Exception {
@@ -23,7 +25,7 @@ public class ClientTest {
 		MyTransactionFacadeBeanRemote remote2 = (MyTransactionFacadeBeanRemote)
 				ctx.lookup("ejb:EJBTestEAR/EJBTestServer//MyTransactionFacadeBean!remote.MyTransactionFacadeBeanRemote");
 		
-		/*Flight f = new Flight();
+		Flight f = new Flight();
 		
 		f.setAirportFrom("Bratislava [BA]");
 		f.setAirportTo("Washington [IAD]");
@@ -48,14 +50,10 @@ public class ClientTest {
 			System.out.println(u.getName() + " " + u.getSurname() + " " + u.getId());
 		}
 		}*/
+		UserFlight uf = new UserFlight();
+		uf.setFlight(f);
+		uf.setUser(u);
+		remote2.addFlight(uf);
 		
-		
-		//remote2.addFlight(f,u);
-		User us = remote.isRegistered("eme", "1234");
-		System.out.println(us.getLogin_name());
-		System.out.println("num of flights: " + us.getFlights().size());
-		for (Flight fl : us.getFlights()) {
-			System.out.println(fl.getAirportFrom());
-		}
 	}
 }
