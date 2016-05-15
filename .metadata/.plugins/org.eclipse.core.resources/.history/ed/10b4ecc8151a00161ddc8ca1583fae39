@@ -1,0 +1,47 @@
+package facade;
+
+import java.util.List;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import dao.UserDAO;
+import entity.User;
+import executive.EJB2Bean;
+import remote.TestBeanRemote;
+
+/**
+ * Session Bean implementation class TestBean
+ */
+@Stateless
+public class TestBean implements TestBeanRemote {
+	@EJB
+	private EJB2Bean bean2; 
+	@PersistenceContext
+	private EntityManager em;
+	
+    public String add(int i1, int i2) {
+    	return bean2.getStr(i1 + i2);
+    }
+    
+    public List<User> getAllUsers() {
+    	UserDAO user = new UserDAO();
+    	List<User> users = user.getAllUsers(em);
+    	
+    	for (User curr : users) {
+    		em.detach(curr);
+    	}
+    	
+    	
+    	return users;
+    }
+    
+    public int isRegistered() {
+    	UserDAO user = new UserDAO();
+    	List<User>users = user.isRegistered(em, "eme", "1234");
+    	return users.size();
+    }
+
+}

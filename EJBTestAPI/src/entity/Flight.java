@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,7 +22,13 @@ import javax.persistence.Table;
 @Table(name = "let")
 @NamedQueries(
 		{@NamedQuery(name = "Flight.findAll", 
-				query = "select f from Flight f")})
+				query = "select f from Flight f"),
+		 @NamedQuery(name = "Flight.isFlight",
+				 query = "select f from Flight f "
+				 		+ " where f.flight_date=:in_date and "
+				 		+ "f.flight_from=:in_from"
+				 		+ " and f.flight_to=:in_to"
+				 		+ " and f.flight_number=:in_number")})
 
 public class Flight implements Serializable{
 	@Id
@@ -31,13 +38,12 @@ public class Flight implements Serializable{
 	private String flight_from;
 	private String flight_to;
 	private String flight_number;
-	private String message;
 
 	
-	@ManyToMany(cascade=CascadeType.ALL)
-	@JoinTable(name="pouzivatel_let",
+	@ManyToMany(cascade={CascadeType.ALL}, mappedBy="flights")
+	/*@JoinTable(name="pouzivatel_let",
 	joinColumns={@JoinColumn(name="f_id")},
-	inverseJoinColumns={@JoinColumn(name="u_id")})
+	inverseJoinColumns={@JoinColumn(name="u_id")})*/
 	private List<User> users;
 	
 	public Flight() {
@@ -82,14 +88,6 @@ public class Flight implements Serializable{
 	
 	public void setFlightNumber(String flightNumber) {
 		this.flight_number = flightNumber;
-	}
-	
-	public String getMessage() {
-		return message;
-	}
-	
-	public void setMessage(String message) {
-		this.message = message;
 	}
 	
 	public List<User> getUsers() {

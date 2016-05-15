@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +21,11 @@ import javax.persistence.Table;
 @Table(name = "pouzivatel")
 @NamedQueries(
 		{@NamedQuery(name = "User.findAll", 
-				query = "select u from User u")})
+				query = "select u from User u"),
+			
+		@NamedQuery(name = "User.checkLogin",
+				query = "select u from User u where u.login_name=:in_login and u.login_pass=:in_pass")}
+		)
 
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -41,8 +46,7 @@ public class User implements Serializable {
 			joinColumns={@JoinColumn(name="u_id")},
 			inverseJoinColumns={@JoinColumn(name="f_id")})
 	private List<Flight> flights;
-	
-	
+		
 	
 	public User() {
 		this.flights = new ArrayList<Flight>();

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <persistence xmlns="http://java.sun.com/xml/ns/persistence">
   <persistence-unit name="05" transaction-type="JTA">
     <jta-data-source>java:jboss/datasources/PostgresDS</jta-data-source>

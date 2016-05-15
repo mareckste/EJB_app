@@ -1,0 +1,47 @@
+package controll;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+
+import entity.Flight;
+import entity.User;
+import remote.TestBeanRemote;
+import remote.MyTransactionFacadeBeanRemote;
+
+public class ClientTest {
+	public static void main(String[] args) throws Exception {
+		Context ctx = new InitialContext();
+		TestBeanRemote remote =  (TestBeanRemote)ctx.lookup("ejb:EJBTestEAR/EJBTestServer//TestBean!remote.TestBeanRemote");
+		System.out.println(remote.add(5, 6));
+		
+		
+		MyTransactionFacadeBeanRemote remote2 = (MyTransactionFacadeBeanRemote)
+				ctx.lookup("ejb:EJBTestEAR/EJBTestServer//MyTransactionFacadeBean!remote.MyTransactionFacadeBeanRemote");
+		
+		/*Flight f = new Flight();
+		
+		f.setAirportFrom("Bratislava [BA]");
+		f.setAirportTo("Washington [IAD]");
+		f.setDate("14.1.2000");
+		f.setFlightNumber("UA 107");
+		f.setMessage("Som spozdene");
+		
+		User u = new User();
+		
+		u.setName("Mareck");
+		u.setSurname("Stevuliak");
+		u.setFacebook("MareckSte");
+		u.setBirthDate("9.1.1995");
+		u.setPhone("+421");
+		u.setLogin_name("eme");
+		u.setLogin_pass("1234");
+		u.getFlights().add(f);
+		f.getUsers().add(u);
+		
+		remote2.addFlight(f);*/
+		System.out.println(remote.isRegistered("eme", "1234"));
+	}
+}

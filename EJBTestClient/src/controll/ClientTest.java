@@ -6,40 +6,56 @@ import java.util.List;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
+import com.sun.org.apache.bcel.internal.generic.GETFIELD;
+
 import entity.Flight;
 import entity.User;
-import remote.TestBeanRemote;
+import remote.MyFacadeBeanRemote;
 import remote.MyTransactionFacadeBeanRemote;
 
 public class ClientTest {
 	public static void main(String[] args) throws Exception {
 		Context ctx = new InitialContext();
-		TestBeanRemote remote =  (TestBeanRemote)ctx.lookup("ejb:EJBTestEAR/EJBTestServer//TestBean!remote.TestBeanRemote");
+		MyFacadeBeanRemote remote =  (MyFacadeBeanRemote)ctx.lookup("ejb:EJBTestEAR/EJBTestServer//MyFacadeBean!remote.MyFacadeBeanRemote");
 		System.out.println(remote.add(5, 6));
 		
 		
 		MyTransactionFacadeBeanRemote remote2 = (MyTransactionFacadeBeanRemote)
 				ctx.lookup("ejb:EJBTestEAR/EJBTestServer//MyTransactionFacadeBean!remote.MyTransactionFacadeBeanRemote");
 		
-		Flight f = new Flight();
+		/*Flight f = new Flight();
 		
-		f.setAirportFrom("Budapest [BUD]");
+		f.setAirportFrom("Bratislava [BA]");
 		f.setAirportTo("Washington [IAD]");
-		f.setDate("14.1.1888");
+		f.setDate("14.1.2000");
 		f.setFlightNumber("UA 107");
-		f.setMessage("Som spozdene");
 		
 		User u = new User();
-		u.setName("Lubko");
+		
+		u.setName("Mareck");
 		u.setSurname("Stevuliak");
 		u.setFacebook("MareckSte");
 		u.setBirthDate("9.1.1995");
 		u.setPhone("+421");
 		u.setLogin_name("eme");
 		u.setLogin_pass("1234");
-		u.getFlights().add(f);
-		f.getUsers().add(u);
+		//u.getFlights().add(f);
+		//f.getUsers().add(u);
+		/*Flight f = remote.isFlight("14.1.2000", "Bratislava [BA]", "Washington [IAD]", "UA 107");
+		if (f == null) System.out.println("NO");
+		else { System.out.println("YES");
+		for (User u : f.getUsers()) {
+			System.out.println(u.getName() + " " + u.getSurname() + " " + u.getId());
+		}
+		}*/
 		
-		remote2.createOrUpdateUser(u);
+		
+		//remote2.addFlight(f,u);
+		User us = remote.isRegistered("eme", "1234");
+		System.out.println(us.getLogin_name());
+		System.out.println("num of flights: " + us.getFlights().size());
+		for (Flight fl : us.getFlights()) {
+			System.out.println(fl.getAirportFrom());
+		}
 	}
 }

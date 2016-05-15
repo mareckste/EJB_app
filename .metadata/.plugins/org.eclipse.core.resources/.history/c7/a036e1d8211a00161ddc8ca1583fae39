@@ -1,0 +1,33 @@
+package dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+
+import entity.Flight;
+import entity.User;
+
+public class FlightDAO {
+	
+	
+	public Flight isRegistered(EntityManager em, String date, String from, String to, String fnum) {
+		ArrayList<User> tmp=null;
+		Flight f = null;
+		TypedQuery<Flight> q = em.createNamedQuery("Flight.isFlight", Flight.class);
+		
+		q.setParameter("in_from", from);
+		q.setParameter("in_to", from);
+		q.setParameter("in_date", date);
+		q.setParameter("in_number", fnum);
+		
+		try {
+			 f = q.getSingleResult();
+		}catch (Exception e) {
+			return null;
+		}
+		
+		return f;
+	}
+}
