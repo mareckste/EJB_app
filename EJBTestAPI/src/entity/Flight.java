@@ -43,7 +43,9 @@ public class Flight implements Serializable{
 	@OneToMany(cascade=CascadeType.ALL, mappedBy = "flight")
 	private List<UserFlight> users;
 	
-	
+	public Flight() {
+		users = new ArrayList<UserFlight>();
+	}
 	
 	public Integer getId() {
 		return f_id;

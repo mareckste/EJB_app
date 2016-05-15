@@ -1,6 +1,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -40,7 +41,9 @@ public class User implements Serializable {
 	@OneToMany(cascade=CascadeType.ALL, mappedBy = "userko")
 	private List<UserFlight> flights;
 		
-	
+	public User() {
+		flights = new ArrayList<UserFlight>();
+	}
 	
 	public String getLogin_name() {
 		return login_name;

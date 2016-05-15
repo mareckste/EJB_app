@@ -27,13 +27,13 @@ public class ClientTest {
 		
 		Flight f = new Flight();
 		
-		f.setAirportFrom("Bratislava [BA]");
+		f.setAirportFrom("Budapest [BUD]");
 		f.setAirportTo("Washington [IAD]");
-		f.setDate("14.1.2000");
-		f.setFlightNumber("UA 107");
+		f.setDate("14.1.2016");
+		f.setFlightNumber("UA 109");
 		
 		User u = new User();
-		
+		//u.setId(27);
 		u.setName("Mareck");
 		u.setSurname("Stevuliak");
 		u.setFacebook("MareckSte");
@@ -50,10 +50,13 @@ public class ClientTest {
 			System.out.println(u.getName() + " " + u.getSurname() + " " + u.getId());
 		}
 		}*/
-		UserFlight uf = new UserFlight();
+		/*UserFlight uf = new UserFlight();
 		uf.setFlight(f);
+		f.getUsers().add(uf);
 		uf.setUser(u);
-		remote2.addFlight(uf);
+		u.getFlights().add(uf);
+		remote2.addFlight(uf,f,u);*/
+		remote2.addRec(31, f);
 		
 	}
 }

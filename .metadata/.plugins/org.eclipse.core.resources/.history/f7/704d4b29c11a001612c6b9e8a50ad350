@@ -1,0 +1,114 @@
+package facade;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import javax.annotation.Resource;
+import javax.ejb.EJBContext;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.UserTransaction;
+
+import entity.Flight;
+import entity.User;
+import entity.UserFlight;
+import remote.MyTransactionFacadeBeanRemote;
+
+/**
+ * Session Bean implementation class TransactionFacadeBean
+ */
+@Stateless
+@TransactionManagement(TransactionManagementType.BEAN)
+public class MyTransactionFacadeBean implements MyTransactionFacadeBeanRemote {
+
+	@PersistenceContext
+	private EntityManager em;
+	
+	@Resource
+	private EJBContext context;
+	
+	private static final String connectionClass = "org.postgresql.Driver";
+	private static final String connectionDriverUrl = "jdbc:postgresql://localhost:5432/vava";
+	private static final String connectionLogin = "postgres";
+	private static final String connectionPW = "Pg123456";
+	
+    public boolean createOrUpdateUser(User u) {
+    	UserTransaction ut = context.getUserTransaction();
+    	
+    	try {
+    		ut.begin();
+    		em.persist(u);
+    		
+    		ut.commit();
+    	} catch(Exception e) {
+    		try {
+				ut.rollback();
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+    		
+    	}
+    	
+    	return false;
+    }
+    
+    public void addFlight(UserFlight uf, Flight f, User u) {
+    	UserTransaction ut = context.getUserTransaction();
+    	try {
+    		ut.begin();
+    		em.persist(u);
+    		ut.commit();
+    	} catch(Exception e) {
+    		try {
+				ut.rollback();
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+    		
+    	}
+    }
+    
+    public void addRec(int userID, Flight f) throws ClassNotFoundException {
+    	
+		try {
+			Class.forName(connectionClass);
+	        Connection con;
+			con = DriverManager.getConnection(connectionDriverUrl,connectionLogin,connectionPW);
+			PreparedStatement p1 = con.prepareStatement
+					("insert into let(flight_from, flight_to, flight_number, flight_date) "
+							+ "values(?,?,?,?)");
+			
+			p1.setString(1, f.getAirportFrom());
+			p1.setString(2, f.getAirportTo());
+			p1.setString(3, f.getFlightNumber());
+			p1.setString(4, f.getDate());
+			p1.executeUpdate();
+			
+			PreparedStatement select = con.prepareStatement("select f_id from let where flight_from = ?"
+					+ "	and flight_to=? and flight_date=? and flight_number=?");
+			ResultSet rs = select.executeQuery();
+			
+			if (rs.next()) {
+				rs.getString("f_id");
+			}
+			
+			PreparedStatement  ps = con.prepareStatement
+			        ("insert into pouzivatel_let(userko_u_id,flight_f_id) values(?,?)");
+			
+			ps.setInt(1, userID);
+			        
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+    }
+    
+    
+}
