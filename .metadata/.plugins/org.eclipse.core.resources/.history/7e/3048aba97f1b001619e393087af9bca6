@@ -18,7 +18,7 @@ import java.awt.Color;
 @SuppressWarnings("serial")
 public class MenuWindow extends JFrame {
 	
-	private JButton btn_showFlight, btn_logoff, btn_add_flight;
+	private JButton btn_showFlight, btn_logoff;
 	private JLabel lbl_myflights;
 	private JTable table;
 	public MenuWindow() {
@@ -57,14 +57,6 @@ public class MenuWindow extends JFrame {
 		label_1.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\plane (1).png"));
 		label_1.setBounds(10, 11, 160, 80);
 		getContentPane().add(label_1);
-		
-		btn_add_flight = new JButton("Add new trip");
-		btn_add_flight.setFont(new Font("Microsoft Tai Le", Font.ITALIC, 14));
-		btn_add_flight.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463432542_Paper-Plane.png"));
-		btn_add_flight.setBounds(10, 118, 192, 73);
-		btn_add_flight.setBorder(BorderFactory.createEmptyBorder());
-		btn_add_flight.setContentAreaFilled(false);
-		getContentPane().add(btn_add_flight);
 	}
 	
 	public void setLanguage(ResourceBundle rb) {

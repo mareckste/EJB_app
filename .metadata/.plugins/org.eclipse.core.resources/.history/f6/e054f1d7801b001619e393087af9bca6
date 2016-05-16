@@ -28,7 +28,7 @@ public class RegisterWindow extends JFrame{
 	private JTextField text_socialMedia;
 	private JButton btn_cancel;
 	private JLabel label;
-	private JLabel lbl_contact_and_social;
+	private JLabel lblRegistration;
 	private JLabel label_1;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -118,10 +118,10 @@ public class RegisterWindow extends JFrame{
 		label.setBounds(20, 27, 128, 134);
 		getContentPane().add(label);
 		
-		lbl_contact_and_social = new JLabel("Contact and social media:");
-		lbl_contact_and_social.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 13));
-		lbl_contact_and_social.setBounds(158, 122, 181, 14);
-		getContentPane().add(lbl_contact_and_social);
+		lblRegistration = new JLabel("Contact and social media:");
+		lblRegistration.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 13));
+		lblRegistration.setBounds(158, 122, 181, 14);
+		getContentPane().add(lblRegistration);
 		
 		JLabel lblYourLogin = new JLabel("Your login:");
 		lblYourLogin.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 12));
