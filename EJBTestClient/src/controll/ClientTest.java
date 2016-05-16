@@ -25,38 +25,42 @@ public class ClientTest {
 		MyTransactionFacadeBeanRemote remote2 = (MyTransactionFacadeBeanRemote)
 				ctx.lookup("ejb:EJBTestEAR/EJBTestServer//MyTransactionFacadeBean!remote.MyTransactionFacadeBeanRemote");
 		
-		Flight f = new Flight();
+//	    Flight f = new Flight();
+//		
+//		f.setAirportFrom("Budapest [BUD]");
+//		f.setAirportTo("Washington [IAD]");
+//		f.setDate("14.1.2016");
+//		f.setFlightNumber("UA 109");
+//		
+//		User u = new User();
+//	    u.setId(27);
+//		u.setName("Mareck");
+//		u.setSurname("Stevuliak");
+//		u.setFacebook("MareckSte");
+//		u.setBirthDate("9.1.1995");
+//		u.setPhone("+421");
+//		u.setLogin_name("eme");
+//		u.setLogin_pass("1234");
+//		u.getFlights().add(f);
+//		f.getUsers().add(u);
+//		Flight f = remote.isFlight("14.1.2000", "Bratislava [BA]", "Washington [IAD]", "UA 107");
+//		if (f == null) System.out.println("NO");
+//		else { System.out.println("YES");
+//		for (User u : f.getUsers()) {
+//			System.out.println(u.getName() + " " + u.getSurname() + " " + u.getId());
+//		}
+//		}
+//		UserFlight uf = new UserFlight();
+//		uf.setFlight(f);
+//		f.getUsers().add(uf);
+//		uf.setUser(u);
+//		u.getFlights().add(uf);
+//		remote2.addFlight(uf,f,u);
+//		remote2.addRec(31, f);
 		
-		f.setAirportFrom("Budapest [BUD]");
-		f.setAirportTo("Washington [IAD]");
-		f.setDate("14.1.2016");
-		f.setFlightNumber("UA 109");
-		
-		User u = new User();
-		//u.setId(27);
-		u.setName("Mareck");
-		u.setSurname("Stevuliak");
-		u.setFacebook("MareckSte");
-		u.setBirthDate("9.1.1995");
-		u.setPhone("+421");
-		u.setLogin_name("eme");
-		u.setLogin_pass("1234");
-		//u.getFlights().add(f);
-		//f.getUsers().add(u);
-		/*Flight f = remote.isFlight("14.1.2000", "Bratislava [BA]", "Washington [IAD]", "UA 107");
-		if (f == null) System.out.println("NO");
-		else { System.out.println("YES");
-		for (User u : f.getUsers()) {
-			System.out.println(u.getName() + " " + u.getSurname() + " " + u.getId());
+		List<UserFlight> ul = remote.getAllUserFlight();
+		for (UserFlight uf : ul) {
+			System.out.println(uf.getUser().getId() + " " + uf.getFlight().getId());
 		}
-		}*/
-		/*UserFlight uf = new UserFlight();
-		uf.setFlight(f);
-		f.getUsers().add(uf);
-		uf.setUser(u);
-		u.getFlights().add(uf);
-		remote2.addFlight(uf,f,u);*/
-		remote2.addRec(31, f);
-		
 	}
 }

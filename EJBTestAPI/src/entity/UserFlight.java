@@ -9,11 +9,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "pouzivatel_let")
+
+@NamedQueries(
+		{@NamedQuery(name = "UserFlight.findAll", 
+				query = "select u from UserFlight u"),
+			
+		@NamedQuery(name = "UserFlight.findFlights",
+				query = "select u from UserFlight u inner join u.userko")}
+		)
 public class UserFlight implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,11 +31,11 @@ public class UserFlight implements Serializable {
 	private String message;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(nullable = false)
+	@JoinColumn(name = "userko_u_id")
 	private User userko;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(nullable = false)
+	@JoinColumn(name = "flight_f_id")
 	private Flight flight;
 
 	

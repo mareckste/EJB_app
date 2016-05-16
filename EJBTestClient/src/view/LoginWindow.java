@@ -10,6 +10,10 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import java.awt.SystemColor;
+
 @SuppressWarnings("serial")
 public class LoginWindow extends JFrame{
 	private JTextField text_login;
@@ -18,44 +22,69 @@ public class LoginWindow extends JFrame{
 	private JButton btn_login, btn_register;
 	private JButton btn_close;
 	public LoginWindow() {
-		setSize(322, 248);
-		getContentPane().setBackground(new Color(245, 222, 179));
+		setTitle("Meet and Fly version 1.0.1");
+		setSize(412, 248);
+		getContentPane().setBackground(new Color(248, 248, 255));
 		getContentPane().setLayout(null);
 		
-		lbl_login = new JLabel("");
+		lbl_login = new JLabel("Your login:");
 		lbl_login.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lbl_login.setBounds(10, 25, 46, 33);
+		lbl_login.setBounds(183, 27, 82, 23);
 		getContentPane().add(lbl_login);
 		
-		lbl_password = new JLabel("");
+		lbl_password = new JLabel("Your password:");
+		lbl_password.setToolTipText("");
 		lbl_password.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lbl_password.setBounds(10, 69, 60, 14);
+		lbl_password.setBounds(183, 78, 89, 14);
 		getContentPane().add(lbl_password);
 		
 		text_login = new JTextField();
 		text_login.setBackground(Color.WHITE);
-		text_login.setBounds(89, 31, 142, 20);
+		text_login.setBounds(183, 47, 195, 20);
 		getContentPane().add(text_login);
 		text_login.setColumns(10);
 		
 		text_password = new JPasswordField();
-		text_password.setBounds(89, 65, 142, 22);
+		text_password.setBounds(183, 94, 195, 22);
 		getContentPane().add(text_password);
 		
-		btn_login = new JButton("");
+		btn_login = new JButton("Login");
+		btn_login.setFont(new Font("Microsoft New Tai Lue", Font.ITALIC, 14));
+		btn_login.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\right-arrow.png"));
+		btn_login.setBorder(BorderFactory.createEmptyBorder());
 		btn_login.setBackground(Color.WHITE);
+		btn_login.setContentAreaFilled(false);
 		
 		
-		btn_login.setBounds(205, 140, 91, 22);
+		btn_login.setBounds(284, 127, 94, 41);
 		getContentPane().add(btn_login);
 		
-		btn_register = new JButton("");
-		btn_register.setBounds(205, 173, 91, 23);
+		btn_register = new JButton("Register");
+		btn_register.setFont(new Font("Microsoft New Tai Lue", Font.ITALIC, 14));
+		btn_register.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\tasks (1).png"));
+		btn_register.setBounds(169, 127, 109, 41);
+		btn_register.setBorder(BorderFactory.createEmptyBorder());
+		btn_register.setContentAreaFilled(false);
 		getContentPane().add(btn_register);
 		
-		btn_close = new JButton("New button");
-		btn_close.setBounds(10, 173, 89, 23);
+		btn_close = new JButton("Exit");
+		btn_close.setFont(new Font("Microsoft Tai Le", Font.ITALIC, 14));
+		btn_close.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463380659_sound-13.png"));
+		btn_close.setBounds(0, 158, 89, 41);
+		btn_close.setBorder(BorderFactory.createEmptyBorder());
+		btn_close.setContentAreaFilled(false);
 		getContentPane().add(btn_close);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\plane (1).png"));
+		lblNewLabel.setBounds(20, 15, 128, 101);
+		getContentPane().add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Meet & Fly");
+		lblNewLabel_1.setBackground(SystemColor.inactiveCaptionBorder);
+		lblNewLabel_1.setFont(new Font("Agency FB", Font.BOLD | Font.ITALIC, 23));
+		lblNewLabel_1.setBounds(81, 54, 89, 62);
+		getContentPane().add(lblNewLabel_1);
 	}
 	
 	public void setLanguage(ResourceBundle rb) {

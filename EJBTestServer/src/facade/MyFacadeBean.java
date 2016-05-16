@@ -1,5 +1,6 @@
 package facade;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -9,8 +10,10 @@ import javax.persistence.PersistenceContext;
 
 import dao.FlightDAO;
 import dao.UserDAO;
+import dao.UserFlightDAO;
 import entity.Flight;
 import entity.User;
+import entity.UserFlight;
 import executive.EJB2Bean;
 import remote.MyFacadeBeanRemote;
 
@@ -36,6 +39,23 @@ public class MyFacadeBean implements MyFacadeBeanRemote {
     		em.detach(curr);
     	}
     	
+    	
+    	return users;
+    }
+    
+    public List<UserFlight> getAllUserFlight() {
+    	UserFlightDAO user = new UserFlightDAO();
+    	List<UserFlight> users = user.getAllUserF(em);
+    	
+    	System.out.println("DetaCH");
+    	
+    	users=user.getFlights(em);
+    	
+    	for (UserFlight uf : users) {
+    		uf.getUser().setFlights(null);
+    		uf.getFlight().setUsers(null);
+    		em.detach(uf);
+    	}
     	
     	return users;
     }

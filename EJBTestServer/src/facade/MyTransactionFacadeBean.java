@@ -125,7 +125,7 @@ public class MyTransactionFacadeBean implements MyTransactionFacadeBeanRemote {
 			
 			ps.setInt(1, userID);
 			ps.setInt(2, id);
-			int ifg = ps.executeUpdate();
+			ps.executeUpdate();
 			con.commit();
 			        
 		} catch (Exception e) {

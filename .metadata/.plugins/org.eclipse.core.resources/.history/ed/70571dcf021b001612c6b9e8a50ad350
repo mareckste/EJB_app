@@ -1,0 +1,94 @@
+package view;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JPasswordField;
+import javax.swing.JButton;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import java.awt.SystemColor;
+
+@SuppressWarnings("serial")
+public class LoginWindow extends JFrame{
+	private JTextField text_login;
+	private JPasswordField text_password;
+	private JLabel lbl_login, lbl_password;
+	private JButton btn_login, btn_register;
+	private JButton btn_close;
+	public LoginWindow() {
+		setTitle("Meet and Fly version 1.0.1");
+		setSize(404, 248);
+		getContentPane().setBackground(new Color(176, 224, 230));
+		getContentPane().setLayout(null);
+		
+		lbl_login = new JLabel("Your login:");
+		lbl_login.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lbl_login.setBounds(183, 27, 82, 23);
+		getContentPane().add(lbl_login);
+		
+		lbl_password = new JLabel("Your password:");
+		lbl_password.setToolTipText("");
+		lbl_password.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lbl_password.setBounds(183, 78, 89, 14);
+		getContentPane().add(lbl_password);
+		
+		text_login = new JTextField();
+		text_login.setBackground(Color.WHITE);
+		text_login.setBounds(183, 47, 195, 20);
+		getContentPane().add(text_login);
+		text_login.setColumns(10);
+		
+		text_password = new JPasswordField();
+		text_password.setBounds(183, 94, 195, 22);
+		getContentPane().add(text_password);
+		
+		btn_login = new JButton("Login");
+		btn_login.setBorder(BorderFactory.createEmptyBorder());
+		btn_login.setBackground(Color.WHITE);
+		
+		
+		btn_login.setBounds(284, 127, 91, 22);
+		getContentPane().add(btn_login);
+		
+		btn_register = new JButton("Register");
+		btn_register.setIcon(null);
+		btn_register.setBounds(183, 127, 91, 23);
+		getContentPane().add(btn_register);
+		
+		btn_close = new JButton("Exit");
+		btn_close.setBounds(10, 173, 89, 23);
+		getContentPane().add(btn_close);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\plane (1).png"));
+		lblNewLabel.setBounds(20, 15, 128, 101);
+		getContentPane().add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Meet & Fly");
+		lblNewLabel_1.setBackground(SystemColor.inactiveCaptionBorder);
+		lblNewLabel_1.setFont(new Font("Agency FB", Font.BOLD | Font.ITALIC, 23));
+		lblNewLabel_1.setBounds(81, 54, 89, 62);
+		getContentPane().add(lblNewLabel_1);
+	}
+	
+	public void setLanguage(ResourceBundle rb) {
+		lbl_login.setText(rb.getString("lbl_login"));
+		lbl_password.setText(rb.getString("lbl_password"));
+		
+		btn_close.setText(rb.getString("btn_close"));
+		btn_login.setText(rb.getString("btn_login"));
+		btn_register.setText(rb.getString("btn_register"));
+	}
+	
+	public void setListeners(ActionListener login, ActionListener register, ActionListener close) {
+		btn_login.addActionListener(login);
+		btn_register.addActionListener(register);
+		btn_close.addActionListener(close);
+	}
+}

@@ -1,0 +1,15 @@
+package dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+
+import entity.UserFlight;
+
+public class UserFlightDAO {
+	public List<UserFlight> getAllUsers(EntityManager em) {
+		TypedQuery<UserFlight> q = em.createNamedQuery("UserFlight.findAll", UserFlight.class);
+		return q.getResultList();
+	}
+}
