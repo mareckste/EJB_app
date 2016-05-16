@@ -1,0 +1,22 @@
+package controll;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+
+public class JsTest {
+
+	public static void main(String[] args) throws IOException {
+		
+		String cityName = "Hladovka";
+		URL url = new URL("http://api.apixu.com/v1/current.json?key=01c0481181b54ae49c6211840161605&q=" + cityName);
+		URLConnection connection = url.openConnection();
+        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        String input=in.readLine();
+        
+	}
+
+}

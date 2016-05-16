@@ -1,0 +1,31 @@
+package controll;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
+
+import org.hornetq.utils.json.JSONException;
+import org.hornetq.utils.json.JSONObject;
+
+public class JsTest {
+
+	public static void main(String[] args) throws IOException, JSONException {
+		
+		String cityName = "Hladovka";
+		URL url = new URL("https://api.apixu.com/v1/current.json?key=01c0481181b54ae49c6211840161605&q=Paris");
+		URLConnection connection = url.openConnection();
+        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        String input=in.readLine();
+        
+       // System.out.println(input);
+        
+        JSONObject jsonResult = new JSONObject(input);
+        JSONObject jsO2 = new JSONObject(jsonResult.get("location"));
+        System.out.println(jsonResult.get("location.name"));
+        
+        
+	}
+
+}
