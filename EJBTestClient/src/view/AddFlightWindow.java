@@ -10,6 +10,12 @@ import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
+import java.awt.Color;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class AddFlightWindow extends JFrame{
@@ -20,28 +26,36 @@ public class AddFlightWindow extends JFrame{
 	private JButton btn_next, btn_cancel;
 	private JLabel lbl_from, lbl_to, lbl_flightNO, lbl_date, lbl_motivate;
 	private JTextArea text_motivate;
+	private JLabel label;
+	private JLabel lbl_addFlight;
 	
 	public AddFlightWindow() {
+		setTitle("New flight");
+		getContentPane().setBackground(new Color(240, 248, 255));
 		getContentPane().setLayout(null);
 		
-		lbl_from = new JLabel("");
-		lbl_from.setBounds(23, 23, 46, 14);
+		lbl_from = new JLabel("From (City, Airport):");
+		lbl_from.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 12));
+		lbl_from.setBounds(23, 47, 145, 14);
 		getContentPane().add(lbl_from);
 		
-		lbl_to = new JLabel("");
-		lbl_to.setBounds(23, 63, 46, 14);
+		lbl_to = new JLabel("To (City, Airport):");
+		lbl_to.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 12));
+		lbl_to.setBounds(251, 47, 145, 14);
 		getContentPane().add(lbl_to);
 		
-		lbl_flightNO = new JLabel("");
-		lbl_flightNO.setBounds(23, 104, 46, 14);
+		lbl_flightNO = new JLabel("Flight number:");
+		lbl_flightNO.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 12));
+		lbl_flightNO.setBounds(23, 104, 145, 14);
 		getContentPane().add(lbl_flightNO);
 		
-		lbl_date = new JLabel("");
-		lbl_date.setBounds(23, 138, 46, 14);
+		lbl_date = new JLabel("Date of flight:");
+		lbl_date.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 12));
+		lbl_date.setBounds(251, 105, 145, 14);
 		getContentPane().add(lbl_date);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(23, 245, 290, 62);
+		scrollPane.setBounds(23, 178, 435, 45);
 		getContentPane().add(scrollPane);
 		
 		text_motivate = new JTextArea();
@@ -49,36 +63,59 @@ public class AddFlightWindow extends JFrame{
 		text_motivate.setWrapStyleWord(true);
 		
 		text_from = new JTextField();
-		text_from.setBounds(90, 20, 207, 20);
+		text_from.setBounds(23, 61, 207, 20);
 		getContentPane().add(text_from);
 		text_from.setColumns(10);
 		
 		text_to = new JTextField();
 		text_to.setColumns(10);
-		text_to.setBounds(90, 60, 207, 20);
+		text_to.setBounds(251, 61, 207, 20);
 		getContentPane().add(text_to);
 		
 		text_flightNO = new JTextField();
 		text_flightNO.setColumns(10);
-		text_flightNO.setBounds(90, 98, 207, 20);
+		text_flightNO.setBounds(23, 118, 207, 20);
 		getContentPane().add(text_flightNO);
 		
 		text_date = new JTextField();
 		text_date.setColumns(10);
-		text_date.setBounds(90, 135, 207, 20);
+		text_date.setBounds(251, 118, 207, 20);
 		getContentPane().add(text_date);
 		
-		lbl_motivate = new JLabel("");
-		lbl_motivate.setBounds(23, 220, 46, 14);
+		lbl_motivate = new JLabel("Partner requirements:");
+		lbl_motivate.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 12));
+		lbl_motivate.setBounds(23, 164, 145, 14);
 		getContentPane().add(lbl_motivate);
 		
-		btn_next = new JButton("");
-		btn_next.setBounds(297, 323, 89, 23);
+		btn_next = new JButton("Add flight");
+		btn_next.setHorizontalAlignment(SwingConstants.LEFT);
+		btn_next.setFont(new Font("Microsoft New Tai Lue", Font.ITALIC, 14));
+		btn_next.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463424816_check.png"));
+		btn_next.setBounds(338, 234, 120, 58);
+		btn_next.setBorder(BorderFactory.createEmptyBorder());
+		btn_next.setContentAreaFilled(false);
+		
 		getContentPane().add(btn_next);
 		
-		btn_cancel = new JButton("");
-		btn_cancel.setBounds(198, 323, 89, 23);
+		btn_cancel = new JButton("Cancel");
+		btn_cancel.setHorizontalAlignment(SwingConstants.LEFT);
+		
+		btn_cancel.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463425324_Cancel.png"));
+		btn_cancel.setFont(new Font("Microsoft New Tai Lue", Font.ITALIC, 14));
+		btn_cancel.setBounds(23, 234, 140, 58);
+		btn_cancel.setBorder(BorderFactory.createEmptyBorder());
+		btn_cancel.setContentAreaFilled(false);
 		getContentPane().add(btn_cancel);
+		
+		label = new JLabel("");
+		label.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\plane.png"));
+		label.setBounds(155, 11, 146, 36);
+		getContentPane().add(label);
+		
+		lbl_addFlight = new JLabel("Add new trip:");
+		lbl_addFlight.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 13));
+		lbl_addFlight.setBounds(23, 22, 145, 14);
+		getContentPane().add(lbl_addFlight);
 	}
 	
 	public String getTextFrom() {

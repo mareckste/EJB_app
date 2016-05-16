@@ -3,6 +3,7 @@ package view;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 
@@ -10,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.Color;
@@ -31,30 +33,30 @@ public class UserDetailWindow extends JFrame {
 		setTitle("User detail");
 		getContentPane().setBackground(new Color(240, 248, 255));
 		getContentPane().setLayout(null);
-		
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		lbl_name = new JLabel("Name:");
-		lbl_name.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 11));
+		lbl_name.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 12));
 		lbl_name.setBounds(29, 22, 118, 14);
 		getContentPane().add(lbl_name);
-		
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		lbl_surname = new JLabel("Surname:");
-		lbl_surname.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 11));
+		lbl_surname.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 12));
 		lbl_surname.setBounds(191, 22, 118, 14);
 		getContentPane().add(lbl_surname);
 		
 		lbl_phone = new JLabel("Phone:");
-		lbl_phone.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 11));
-		lbl_phone.setBounds(29, 67, 96, 14);
+		lbl_phone.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 12));
+		lbl_phone.setBounds(191, 67, 96, 14);
 		getContentPane().add(lbl_phone);
 		
 		lbl_birth = new JLabel("Date of birth:");
-		lbl_birth.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 11));
-		lbl_birth.setBounds(191, 67, 118, 14);
+		lbl_birth.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 12));
+		lbl_birth.setBounds(29, 67, 118, 14);
 		getContentPane().add(lbl_birth);
 		
 		lbl_socialMedia = new JLabel("Social media:");
-		lbl_socialMedia.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 11));
-		lbl_socialMedia.setBounds(29, 110, 118, 14);
+		lbl_socialMedia.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 12));
+		lbl_socialMedia.setBounds(29, 123, 118, 14);
 		getContentPane().add(lbl_socialMedia);
 		
 		lbl_motivate = new JLabel("");
@@ -77,19 +79,19 @@ public class UserDetailWindow extends JFrame {
 		text_phone = new JTextField();
 		text_phone.setEditable(false);
 		text_phone.setColumns(10);
-		text_phone.setBounds(29, 79, 140, 20);
+		text_phone.setBounds(191, 80, 140, 20);
 		getContentPane().add(text_phone);
 		
 		text_birth = new JTextField();
 		text_birth.setEditable(false);
 		text_birth.setColumns(10);
-		text_birth.setBounds(191, 79, 140, 20);
+		text_birth.setBounds(29, 80, 140, 20);
 		getContentPane().add(text_birth);
 		
 		text_socialMedia = new JTextField();
 		text_socialMedia.setEditable(false);
 		text_socialMedia.setColumns(10);
-		text_socialMedia.setBounds(29, 123, 140, 20);
+		text_socialMedia.setBounds(29, 136, 140, 20);
 		getContentPane().add(text_socialMedia);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -100,8 +102,11 @@ public class UserDetailWindow extends JFrame {
 		scrollPane.setViewportView(text_motivation);
 		
 		btn_close = new JButton("Close");
-		btn_close.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463380659_sound-13.png"));
-		btn_close.setBounds(340, 188, 106, 41);
+		btn_close.setFont(new Font("Microsoft New Tai Lue", Font.ITALIC, 14));
+		btn_close.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463425324_Cancel.png"));
+		btn_close.setBounds(334, 179, 131, 50);
+		btn_close.setBorder(BorderFactory.createEmptyBorder());
+		btn_close.setContentAreaFilled(false);
 		getContentPane().add(btn_close);
 		
 		label = new JLabel("");

@@ -13,6 +13,8 @@ import java.util.ResourceBundle;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
+import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 @SuppressWarnings("serial")
 public class LoginWindow extends JFrame{
@@ -24,9 +26,9 @@ public class LoginWindow extends JFrame{
 	public LoginWindow() {
 		setTitle("Meet and Fly version 1.0.1");
 		setSize(412, 248);
-		getContentPane().setBackground(new Color(248, 248, 255));
+		getContentPane().setBackground(new Color(240, 248, 255));
 		getContentPane().setLayout(null);
-		
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		lbl_login = new JLabel("Your login:");
 		lbl_login.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lbl_login.setBounds(183, 27, 82, 23);
@@ -49,6 +51,7 @@ public class LoginWindow extends JFrame{
 		getContentPane().add(text_password);
 		
 		btn_login = new JButton("Login");
+		btn_login.setHorizontalAlignment(SwingConstants.LEFT);
 		btn_login.setFont(new Font("Microsoft New Tai Lue", Font.ITALIC, 14));
 		btn_login.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\right-arrow.png"));
 		btn_login.setBorder(BorderFactory.createEmptyBorder());
@@ -56,21 +59,23 @@ public class LoginWindow extends JFrame{
 		btn_login.setContentAreaFilled(false);
 		
 		
-		btn_login.setBounds(284, 127, 94, 41);
+		btn_login.setBounds(296, 127, 82, 41);
 		getContentPane().add(btn_login);
 		
 		btn_register = new JButton("Register");
+		btn_register.setHorizontalAlignment(SwingConstants.LEFT);
 		btn_register.setFont(new Font("Microsoft New Tai Lue", Font.ITALIC, 14));
 		btn_register.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\tasks (1).png"));
-		btn_register.setBounds(169, 127, 109, 41);
+		btn_register.setBounds(183, 127, 109, 41);
 		btn_register.setBorder(BorderFactory.createEmptyBorder());
 		btn_register.setContentAreaFilled(false);
 		getContentPane().add(btn_register);
 		
 		btn_close = new JButton("Exit");
-		btn_close.setFont(new Font("Microsoft Tai Le", Font.ITALIC, 14));
+		btn_close.setHorizontalAlignment(SwingConstants.LEFT);
+		btn_close.setFont(new Font("Microsoft New Tai Lue", Font.ITALIC, 14));
 		btn_close.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463380659_sound-13.png"));
-		btn_close.setBounds(0, 158, 89, 41);
+		btn_close.setBounds(10, 158, 89, 41);
 		btn_close.setBorder(BorderFactory.createEmptyBorder());
 		btn_close.setContentAreaFilled(false);
 		getContentPane().add(btn_close);

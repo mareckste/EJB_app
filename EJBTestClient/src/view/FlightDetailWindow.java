@@ -4,6 +4,7 @@ package view;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 
@@ -11,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
+import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class FlightDetailWindow extends JFrame {
@@ -24,21 +26,22 @@ public class FlightDetailWindow extends JFrame {
 	
 	
 	public FlightDetailWindow() {
+		getContentPane().setBackground(new Color(240, 248, 255));
 		getContentPane().setLayout(null);
-		
-		lbl_from = new JLabel("New label");
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		lbl_from = new JLabel("From (City, Airport):");
 		lbl_from.setBounds(29, 23, 46, 14);
 		getContentPane().add(lbl_from);
 		
-		lbl_to = new JLabel("New label");
+		lbl_to = new JLabel("To (City, Airport):");
 		lbl_to.setBounds(29, 70, 46, 14);
 		getContentPane().add(lbl_to);
 		
-		lbl_flightNO = new JLabel("New label");
+		lbl_flightNO = new JLabel("Flight number:");
 		lbl_flightNO.setBounds(29, 119, 46, 14);
 		getContentPane().add(lbl_flightNO);
 		
-		lbl_date = new JLabel("New label");
+		lbl_date = new JLabel("Date of departure:");
 		lbl_date.setBounds(29, 170, 46, 14);
 		getContentPane().add(lbl_date);
 		
@@ -77,16 +80,16 @@ public class FlightDetailWindow extends JFrame {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
-		lbl_partners = new JLabel("New label");
+		lbl_partners = new JLabel("You can fly with:");
 		lbl_partners.setBounds(288, 23, 46, 14);
 		getContentPane().add(lbl_partners);
 	
-		btn_showPartner = new JButton("New button");
-		btn_showPartner.setBounds(506, 218, 89, 23);
+		btn_showPartner = new JButton("Show detail:");
+		btn_showPartner.setBounds(472, 218, 123, 23);
 		getContentPane().add(btn_showPartner);
 		
-		btn_close = new JButton("New button");
-		btn_close.setBounds(29, 218, 89, 23);
+		btn_close = new JButton("Close");
+		btn_close.setBounds(29, 218, 111, 23);
 		getContentPane().add(btn_close);
 	}
 	

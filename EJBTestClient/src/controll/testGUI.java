@@ -4,9 +4,11 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.swing.UIManager;
+import javax.swing.WindowConstants;
 
 import view.FlightDetailWindow;
 import view.LoginWindow;
+import view.RegisterWindow;
 import view.UserDetailWindow;
 
 public class testGUI {
@@ -19,10 +21,11 @@ public class testGUI {
 			e.printStackTrace();
 		}
 		
-		UserDetailWindow l = new UserDetailWindow();
+		RegisterWindow l = new RegisterWindow();
 		ResourceBundle rb = ResourceBundle.getBundle("Location", new Locale("en"));
-		l.setLanguage(rb);
+		//l.setLanguage(rb);
 		l.setVisible(true);
+		
 	}
 
 }

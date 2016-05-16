@@ -6,12 +6,19 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.Color;
+import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
+
+import com.sun.prism.Image;
 
 @SuppressWarnings("serial")
 public class RegisterWindow extends JFrame{
@@ -31,6 +38,8 @@ public class RegisterWindow extends JFrame{
 		getContentPane().setBackground(new Color(240, 248, 255));
 		setTitle("Register");
 		getContentPane().setLayout(null);
+		
+		setIconImage(new javax.swing.ImageIcon("etc\\img\\plane (1).png").getImage());
 		
 		lbl_name = new JLabel("Name:");
 		lbl_name.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 12));
@@ -83,13 +92,21 @@ public class RegisterWindow extends JFrame{
 		getContentPane().add(text_socialMedia);
 		
 		btn_next = new JButton("Confirm");
-		btn_next.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 14));
-		btn_next.setBounds(276, 213, 114, 40);
+		btn_next.setHorizontalAlignment(SwingConstants.LEFT);
+		btn_next.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463424816_check.png"));
+		btn_next.setFont(new Font("Microsoft New Tai Lue", Font.ITALIC, 14));
+		btn_next.setBounds(278, 206, 112, 58);
+		btn_next.setBorder(BorderFactory.createEmptyBorder());
+		btn_next.setContentAreaFilled(false);
 		getContentPane().add(btn_next);
 		
 		btn_cancel = new JButton("Cancel");
-		btn_cancel.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 14));
-		btn_cancel.setBounds(20, 213, 114, 40);
+		btn_cancel.setHorizontalAlignment(SwingConstants.LEFT);
+		btn_cancel.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463425324_Cancel.png"));
+		btn_cancel.setFont(new Font("Microsoft New Tai Lue", Font.ITALIC, 14));
+		btn_cancel.setBounds(20, 207, 139, 57);
+		btn_cancel.setBorder(BorderFactory.createEmptyBorder());
+		btn_cancel.setContentAreaFilled(false);
 		getContentPane().add(btn_cancel);
 		
 		label_1 = new JLabel("");
@@ -103,9 +120,11 @@ public class RegisterWindow extends JFrame{
 		getContentPane().add(label);
 		
 		lblRegistration = new JLabel("Contact and social media:");
-		lblRegistration.setFont(new Font("Microsoft JhengHei UI", Font.BOLD | Font.ITALIC, 13));
+		lblRegistration.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 13));
 		lblRegistration.setBounds(158, 122, 181, 14);
 		getContentPane().add(lblRegistration);
+		
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 	
 	public String getTextName() {
