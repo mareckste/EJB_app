@@ -15,7 +15,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
-import dao.UserDAO;
 import entity.Flight;
 import entity.User;
 import remote.MyTransactionFacadeBeanRemote;
@@ -40,11 +39,7 @@ public class MyTransactionFacadeBean implements MyTransactionFacadeBeanRemote {
 	/*
 	 * Metoda prida noveho pouzivatela do DB.
 	 */
-	public boolean addUser(User u) {
-		UserDAO ud = new UserDAO();
-		if (ud.isAvailableLogin(em, u.getLogin_name()) == false) return false;
-		
-		
+	public void addUser(User u) {
 		UserTransaction ut = context.getUserTransaction();
 		
 		try {
@@ -53,17 +48,14 @@ public class MyTransactionFacadeBean implements MyTransactionFacadeBeanRemote {
 				em.persist(u);
 			
 			ut.commit();
-			return true;
 		} catch(Exception e) {
 			e.printStackTrace();
 			try {
 				ut.rollback();
-				return false;
 			} catch(Exception ex) {
 				e.printStackTrace();
 			}
 		}
-		return false;
 	}
 	
 	

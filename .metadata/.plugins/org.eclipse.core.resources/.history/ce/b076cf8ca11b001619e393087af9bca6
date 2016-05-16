@@ -33,15 +33,4 @@ public class UserDAO {
 			}
 		return null;
 	}
-	
-	public boolean isAvailableLogin(EntityManager em, String login) {
-		TypedQuery<User> q = em.createNamedQuery("User.checkLoginAvailable", User.class);
-		q.setParameter("in_login", login);
-		
-		List<User> users = q.getResultList();
-		
-		if (users.size() > 0) return false;
-		return true;
-		
- 	}
 }

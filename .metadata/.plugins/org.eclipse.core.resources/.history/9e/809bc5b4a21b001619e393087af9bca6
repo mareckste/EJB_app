@@ -13,6 +13,7 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.Predicate.BooleanOperator;
 import javax.transaction.UserTransaction;
 
 import dao.UserDAO;
