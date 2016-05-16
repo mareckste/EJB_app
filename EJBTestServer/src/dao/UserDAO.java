@@ -6,8 +6,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import entity.Flight;
 import entity.User;
+import entity.UserFlight;
 
 public class UserDAO {
 	
@@ -17,7 +17,7 @@ public class UserDAO {
 	}
 	
 	public User isRegistered(EntityManager em, String login, String pass) {
-	/*	ArrayList<Flight> tmp=null;
+	    ArrayList<UserFlight> tmp=null;
 		
 		TypedQuery<User> q = em.createNamedQuery("User.checkLogin", User.class);
 		q.setParameter("in_login", login);
@@ -27,18 +27,10 @@ public class UserDAO {
 		
 		if (users.size() > 0) {
 			User u = users.get(0);
-			tmp = new ArrayList<Flight>();
-			
-			System.out.println("num of flights on server side: " + u.getFlights().size());
-			for (Flight f : u.getFlights()) {
-				f.setUsers(null);
-				tmp.add(f);
-			}
-				u.setFlights(tmp);
+			u.setFlights(tmp);
 				em.detach(u);
 				return u;
 			}
-		*/
 		return null;
 	}
 }

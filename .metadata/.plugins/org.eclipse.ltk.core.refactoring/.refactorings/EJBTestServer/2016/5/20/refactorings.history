@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;p2&apos; in &apos;facade.MyTransactionFacadeBean.addRec(...)&apos; to &apos;p2&apos;&#x0D;&#x0A;- Original project: &apos;EJBTestServer&apos;&#x0D;&#x0A;- Original element: &apos;facade.MyTransactionFacadeBean.addRec(int, Flight).ps&apos;&#x0D;&#x0A;- Renamed element: &apos;p2&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;p2&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;facade{MyTransactionFacadeBean.java[MyTransactionFacadeBean~addRec~I~QFlight;@ps!1678!1727!1696!1697!QPreparedStatement;!0!false" name="p2" references="true" stamp="1463426139486" version="1.0"/>
+</session>
