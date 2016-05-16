@@ -87,7 +87,7 @@ public class LoginWindow extends JFrame{
 		
 		JLabel lblNewLabel_1 = new JLabel("Meet & Fly");
 		lblNewLabel_1.setBackground(SystemColor.inactiveCaptionBorder);
-		lblNewLabel_1.setFont(new Font("Agency FB", Font.ITALIC, 23));
+		lblNewLabel_1.setFont(new Font("Agency FB", Font.BOLD | Font.ITALIC, 23));
 		lblNewLabel_1.setBounds(81, 54, 89, 62);
 		getContentPane().add(lblNewLabel_1);
 	}

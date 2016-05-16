@@ -96,17 +96,15 @@ public class FlightDetailWindow extends JFrame {
 		lbl_partners.setBounds(349, 33, 159, 14);
 		getContentPane().add(lbl_partners);
 	
-		btn_showPartner = new JButton("Show detail");
-		btn_showPartner.setFont(new Font("Microsoft Tai Le", Font.ITALIC, 14));
+		btn_showPartner = new JButton("Show detail:");
 		btn_showPartner.setHorizontalAlignment(SwingConstants.LEFT);
 		btn_showPartner.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463423120_takeoff.png"));
 		btn_showPartner.setBorder(BorderFactory.createEmptyBorder());
 		btn_showPartner.setContentAreaFilled(false);
-		btn_showPartner.setBounds(520, 228, 151, 54);
+		btn_showPartner.setBounds(490, 228, 166, 54);
 		getContentPane().add(btn_showPartner);
 		
 		btn_close = new JButton("Close");
-		btn_close.setFont(new Font("Microsoft Tai Le", Font.ITALIC, 14));
 		btn_close.setHorizontalAlignment(SwingConstants.LEFT);
 		btn_close.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463425324_Cancel.png"));
 		btn_close.setBounds(29, 218, 111, 64);
