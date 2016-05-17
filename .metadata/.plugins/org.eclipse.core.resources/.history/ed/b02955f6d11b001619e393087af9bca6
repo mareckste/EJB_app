@@ -2,7 +2,6 @@ package controll;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -10,7 +9,6 @@ import javax.naming.NamingException;
 import javax.swing.JOptionPane;
 
 import entity.User;
-import entity.UserFlight;
 import remote.MyFacadeBeanRemote;
 import remote.MyTransactionFacadeBeanRemote;
 import view.AddFlightWindow;
@@ -157,29 +155,10 @@ public class Controller {
 			if (user == null) JOptionPane.showMessageDialog(null, "Zle prihlasovacie udaje");
 			else {
 				JOptionPane.showMessageDialog(null, "Prihlasenie prebehelo uspesne" + user.getName());
-				loggedID = user.getId();
-				showMenu();
-			}
-			
-		} catch (NamingException e1) {
-			e1.printStackTrace();
-		}
-	}
-	
-	public void showMenu() {
-		loginWindow.dispose();
-		menuWindow = new MenuWindow();
-		menuWindow.setListeners(new AddFlightListener(), new ShowFlightListener(), new LogOffListener());
-		menuWindow.setVisible(true);
-		
-		
-		try {
-			ctx = new InitialContext();
-			rm = (MyFacadeBeanRemote)ctx.lookup(remote);
-			List<UserFlight> ul = rm.getMyFlights(loggedID, 1);
-			
-			for (UserFlight curr : ul) {
-				System.out.println(curr.getFlight().getAirportFrom());
+				loginWindow.dispose();
+				menuWindow = new MenuWindow();
+				menuWindow.setListeners(new AddFlightListener(), new ShowFlightListener(), new LogOffListener());
+				menuWindow.setVisible(true);
 			}
 			
 		} catch (NamingException e1) {

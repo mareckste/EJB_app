@@ -178,8 +178,10 @@ public class Controller {
 			rm = (MyFacadeBeanRemote)ctx.lookup(remote);
 			List<UserFlight> ul = rm.getMyFlights(loggedID, 1);
 			
-			for (UserFlight curr : ul) {
-				System.out.println(curr.getFlight().getAirportFrom());
+			if (user == null) JOptionPane.showMessageDialog(null, "Zle prihlasovacie udaje");
+			else {
+				JOptionPane.showMessageDialog(null, "Prihlasenie prebehelo uspesne" + user.getName());
+				showMenu();
 			}
 			
 		} catch (NamingException e1) {

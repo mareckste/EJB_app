@@ -58,9 +58,9 @@ public class ClientTest {
 //		remote2.addFlight(uf,f,u);
 //		remote2.addRec(31, f);
 		
-//		List<UserFlight> ul = remote.getMyFlights();
-//		for (UserFlight uf : ul) {
-//			System.out.println(uf.getUser().getId() + " " + uf.getFlight().getId());
-//		}
+		List<UserFlight> ul = remote.getMyFlights();
+		for (UserFlight uf : ul) {
+			System.out.println(uf.getUser().getId() + " " + uf.getFlight().getId());
+		}
 	}
 }
