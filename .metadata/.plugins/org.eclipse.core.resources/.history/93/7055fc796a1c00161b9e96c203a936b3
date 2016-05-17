@@ -43,7 +43,9 @@ public class Controller {
 	private MyTransactionFacadeBeanRemote rmT;
 
 	public Controller() {
-		showLogin();
+		loginWindow = new LoginWindow();
+		loginWindow.setListeners(new LoginListener(), new RegisterListener(), new CloseListener());
+		loginWindow.setVisible(true);
 	}
 
 	/*
@@ -104,10 +106,10 @@ public class Controller {
 				if (rm.isAvailableLogin(regForm.get(5)) == false) 
 					JOptionPane.showMessageDialog(null, "Zvoleny login uz existuje");
 				else {
+					
+					
+					
 					rmT.addUser(createUser(regForm));
-					JOptionPane.showMessageDialog(null, "Boli ste uspesne zaregistrovani, mozete sa prihlasit");
-					registerWindow.dispose();
-					showLogin();
 				}
 				
 				
@@ -229,12 +231,6 @@ public class Controller {
 		} catch (NamingException e1) {
 			e1.printStackTrace();
 		}
-	}
-	
-	public void showLogin() {
-		loginWindow = new LoginWindow();
-		loginWindow.setListeners(new LoginListener(), new RegisterListener(), new CloseListener());
-		loginWindow.setVisible(true);
 	}
 	
 	public void showMenu() {

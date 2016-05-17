@@ -43,7 +43,9 @@ public class Controller {
 	private MyTransactionFacadeBeanRemote rmT;
 
 	public Controller() {
-		showLogin();
+		loginWindow = new LoginWindow();
+		loginWindow.setListeners(new LoginListener(), new RegisterListener(), new CloseListener());
+		loginWindow.setVisible(true);
 	}
 
 	/*
@@ -107,7 +109,8 @@ public class Controller {
 					rmT.addUser(createUser(regForm));
 					JOptionPane.showMessageDialog(null, "Boli ste uspesne zaregistrovani, mozete sa prihlasit");
 					registerWindow.dispose();
-					showLogin();
+					loginWindow = new LoginWindow();
+					loginWindow.setListeners(new LoginListener(), register, close);
 				}
 				
 				
