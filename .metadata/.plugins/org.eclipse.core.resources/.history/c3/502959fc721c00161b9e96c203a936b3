@@ -28,10 +28,7 @@ public class FlightDAO {
 		
 		try {
 			 f = q.getSingleResult();
-			 if (f != null ) { 
-				 f.setUsers(new ArrayList<UserFlight>()); 
-				 em.detach(f);
-				 }
+			 if (f != null ) f.setUsers(new ArrayList<UserFlight>());
 			  
 		}catch (Exception e) {
 			return null;

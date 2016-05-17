@@ -209,18 +209,7 @@ public class Controller {
 					rm = (MyFacadeBeanRemote)ctx.lookup(remote);
 					rmT = (MyTransactionFacadeBeanRemote)ctx.lookup(remoteTrans);
 					
-					
-					Flight f = rm.isFlight(form.get(3), form.get(0), form.get(1), form.get(2));
-					if (f != null) {
-						rmT.addFlight(loggedID, f, addFlightWindow.getTextMessageMoti());
-					}
-					else {
-						f = createFlight(form);
-						rmT.addFlight(loggedID, f, addFlightWindow.getTextMessageMoti());
-					}
-					JOptionPane.showMessageDialog(null, "Let bol pridany");
-					addFlightWindow.dispose();
-					showMenu();
+					Flight f = rmT.
 				} catch (NamingException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -396,16 +385,5 @@ public class Controller {
 		u.setFacebook(list.get(6));
 		
 		return u;
-	}
-	
-	private Flight createFlight(List<String> list) {
-		Flight f = new Flight();
-		
-		f.setAirportFrom(list.get(0));
-		f.setAirportTo(list.get(1));
-		f.setFlightNumber(list.get(2));
-		f.setDate(list.get(3));
-		
-		return f;
 	}
 }

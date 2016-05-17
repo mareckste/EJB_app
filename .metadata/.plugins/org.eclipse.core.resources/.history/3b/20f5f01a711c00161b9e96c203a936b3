@@ -218,9 +218,6 @@ public class Controller {
 						f = createFlight(form);
 						rmT.addFlight(loggedID, f, addFlightWindow.getTextMessageMoti());
 					}
-					JOptionPane.showMessageDialog(null, "Let bol pridany");
-					addFlightWindow.dispose();
-					showMenu();
 				} catch (NamingException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

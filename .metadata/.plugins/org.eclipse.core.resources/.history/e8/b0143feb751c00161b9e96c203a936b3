@@ -128,9 +128,9 @@ public class MyTransactionFacadeBean implements MyTransactionFacadeBeanRemote {
 		}
 
 		try {
-			if (p2!=null) p2.close();
-			if (p1 != null) p1.close();
-			if (select != null) select.close();
+			p2.close();
+			p1.close();
+			select.close();
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();

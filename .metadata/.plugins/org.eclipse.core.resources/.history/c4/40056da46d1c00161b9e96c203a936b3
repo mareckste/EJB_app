@@ -85,38 +85,38 @@ public class Controller {
 		public void actionPerformed(ActionEvent e) {
 			List<String> regForm = new ArrayList<>();
 			
-			regForm.add(registerWindow.getTextName()); //0
-			regForm.add(registerWindow.getTextSurname()); //1
-			regForm.add(registerWindow.getTextBirth()); //2
-			regForm.add(registerWindow.getTextPhone()); //3
-			regForm.add(registerWindow.getTextLogin()); //4 
-			regForm.add(registerWindow.getTextPassword()); //5
-			regForm.add(registerWindow.getTextSocial()); //6
-
-			if (isEmtpyField(regForm) == true) {
-				JOptionPane.showMessageDialog(null, "Musite vyplnit vsetky udaje");
-			}
-			else {
-				try {
-					ctx = new InitialContext();
-					rmT = (MyTransactionFacadeBeanRemote)ctx.lookup(remoteTrans);
-					rm = (MyFacadeBeanRemote)ctx.lookup(remote);
-					if (rm.isAvailableLogin(regForm.get(5)) == false) 
-						JOptionPane.showMessageDialog(null, "Zvoleny login uz existuje");
-					else {
-						rmT.addUser(createUser(regForm));
-						JOptionPane.showMessageDialog(null, "Boli ste uspesne zaregistrovani, mozete sa prihlasit");
-						registerWindow.dispose();
-						showLogin();
-					}
-
-
-
-				} catch (NamingException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+		regForm.add(registerWindow.getTextName()); //0
+		regForm.add(registerWindow.getTextSurname()); //1
+		regForm.add(registerWindow.getTextBirth()); //2
+		regForm.add(registerWindow.getTextPhone()); //3
+		regForm.add(registerWindow.getTextLogin()); //4 
+		regForm.add(registerWindow.getTextPassword()); //5
+		regForm.add(registerWindow.getTextSocial()); //6
+		
+		if (isEmtpyField(regForm) == true) {
+			JOptionPane.showMessageDialog(null, "Musite vyplnit vsetky udaje");
+		}
+		else {
+			try {
+				ctx = new InitialContext();
+				rmT = (MyTransactionFacadeBeanRemote)ctx.lookup(remoteTrans);
+				rm = (MyFacadeBeanRemote)ctx.lookup(remote);
+				if (rm.isAvailableLogin(regForm.get(5)) == false) 
+					JOptionPane.showMessageDialog(null, "Zvoleny login uz existuje");
+				else {
+					rmT.addUser(createUser(regForm));
+					JOptionPane.showMessageDialog(null, "Boli ste uspesne zaregistrovani, mozete sa prihlasit");
+					registerWindow.dispose();
+					showLogin();
 				}
+				
+				
+				
+			} catch (NamingException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
+		}
 		
 		}
 		
@@ -184,8 +184,6 @@ public class Controller {
 			menuWindow.dispose();
 			addFlightWindow = new AddFlightWindow();
 			addFlightWindow.setListeners(new ConfirmFlightListener(), new CloseFormListener());
-			addFlightWindow.setVisible(true);
-			windowFlag = 1;
 		}
 		
 	}
@@ -195,38 +193,7 @@ public class Controller {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			List<String> form = new ArrayList<>();
 			
-			form.add(addFlightWindow.getTextFrom());
-			form.add(addFlightWindow.getTextTo());
-			form.add(addFlightWindow.getTextFlightNO());
-			form.add(addFlightWindow.getTextDate());
-			
-			if (isEmtpyField(form) == true) JOptionPane.showMessageDialog(null, "Musite vyplnit vsetky kolonky");
-			else {
-				try {
-					ctx = new InitialContext();
-					rm = (MyFacadeBeanRemote)ctx.lookup(remote);
-					rmT = (MyTransactionFacadeBeanRemote)ctx.lookup(remoteTrans);
-					
-					
-					Flight f = rm.isFlight(form.get(3), form.get(0), form.get(1), form.get(2));
-					if (f != null) {
-						rmT.addFlight(loggedID, f, addFlightWindow.getTextMessageMoti());
-					}
-					else {
-						f = createFlight(form);
-						rmT.addFlight(loggedID, f, addFlightWindow.getTextMessageMoti());
-					}
-					JOptionPane.showMessageDialog(null, "Let bol pridany");
-					addFlightWindow.dispose();
-					showMenu();
-				} catch (NamingException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-			}
 		}
 		
 	}
@@ -373,7 +340,6 @@ public class Controller {
 			flightWindow.dispose(); flightWindow = null;
 	    if (userDetailWindow != null ) { userDetailWindow.dispose(); userDetailWindow = null;}
 	    if (loginWindow != null ) { loginWindow.dispose(); loginWindow = null;}
-	    if (addFlightWindow != null) { addFlightWindow.dispose(); addFlightWindow = null; }
 		
 	}
 	
@@ -396,16 +362,5 @@ public class Controller {
 		u.setFacebook(list.get(6));
 		
 		return u;
-	}
-	
-	private Flight createFlight(List<String> list) {
-		Flight f = new Flight();
-		
-		f.setAirportFrom(list.get(0));
-		f.setAirportTo(list.get(1));
-		f.setFlightNumber(list.get(2));
-		f.setDate(list.get(3));
-		
-		return f;
 	}
 }
