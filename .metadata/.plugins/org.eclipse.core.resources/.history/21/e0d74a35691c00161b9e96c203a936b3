@@ -94,7 +94,7 @@ public class Controller {
 		regForm.add(registerWindow.getTextPhone()); //3
 		regForm.add(registerWindow.getTextLogin()); //4 
 		regForm.add(registerWindow.getTextPassword()); //5
-		regForm.add(registerWindow.getTextSocial()); //6
+		
 		
 		if (isEmtpyField(regForm) == true) {
 			JOptionPane.showMessageDialog(null, "Musite vyplnit vsetky udaje");
@@ -104,14 +104,8 @@ public class Controller {
 				ctx = new InitialContext();
 				rmT = (MyTransactionFacadeBeanRemote)ctx.lookup(remoteTrans);
 				rm = (MyFacadeBeanRemote)ctx.lookup(remote);
-				if (rm.isAvailableLogin(regForm.get(5)) == false) 
-					JOptionPane.showMessageDialog(null, "Zvoleny login uz existuje");
-				else {
-					
-					
-					
-					rmT.addUser(createUser(regForm));
-				}
+				if (rm.isAvailableLogin(regForm.get(5)) == true) System.out.println("je k disp");
+				else System.out.println("NOPE");
 				
 				
 				
@@ -336,19 +330,5 @@ public class Controller {
 			if (CurrS.equals("")) return true;
 		}
 		return false;
-	}
-	
-	private User createUser(List<String> list) {
-		User u = new User();
-		
-		u.setName(list.get(0));
-		u.setSurname(list.get(1));
-		u.setBirthDate(list.get(2));
-		u.setPhone(list.get(3));
-		u.setLogin_name(list.get(4));
-		u.setLogin_pass(list.get(5));
-		u.setFacebook(list.get(6));
-		
-		return u;
 	}
 }

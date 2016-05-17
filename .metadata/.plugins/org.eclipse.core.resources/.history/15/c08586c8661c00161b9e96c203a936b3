@@ -30,8 +30,8 @@ public class RegisterWindow extends JFrame{
 	private JLabel label;
 	private JLabel lbl_contact_and_social;
 	private JLabel label_1;
-	private JTextField text_password;
-	private JTextField text_login;
+	private JTextField textField;
+	private JTextField textField_1;
 	
 	public RegisterWindow() {
 		getContentPane().setBackground(new Color(240, 248, 255));
@@ -129,15 +129,15 @@ public class RegisterWindow extends JFrame{
 		lblYourLogin.setBounds(20, 260, 77, 14);
 		getContentPane().add(lblYourLogin);
 		
-		text_password = new JTextField();
-		text_password.setColumns(10);
-		text_password.setBounds(20, 277, 128, 20);
-		getContentPane().add(text_password);
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(20, 277, 128, 20);
+		getContentPane().add(textField);
 		
-		text_login = new JTextField();
-		text_login.setColumns(10);
-		text_login.setBounds(20, 234, 128, 20);
-		getContentPane().add(text_login);
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(20, 234, 128, 20);
+		getContentPane().add(textField_1);
 		
 		JLabel lblYourPassword = new JLabel("Your password:");
 		lblYourPassword.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 12));
@@ -161,14 +161,6 @@ public class RegisterWindow extends JFrame{
 	
 	public String getTextSocial() {
 		return text_socialMedia.getText();
-	}
-	
-	public String getTextLogin() {
-		return text_login.getText();
-	}
-	
-	public String getTextPassword() {
-		return text_password.getText();
 	}
 	
 	public String getTextBirth() {

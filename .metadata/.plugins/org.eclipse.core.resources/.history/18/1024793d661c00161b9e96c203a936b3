@@ -14,5 +14,4 @@ public interface MyFacadeBeanRemote {
 	public User isRegistered(String login, String pw);
 	public Flight isFlight(String date, String from, String to, String fnum);
 	public List<UserFlight> getMyFlights(int id, int flag);
-	public boolean isAvailableLogin(String login);
 }

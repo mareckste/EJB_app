@@ -110,7 +110,7 @@ public class Controller {
 					
 					
 					
-					rmT.addUser(createUser(regForm));
+					rmT.addUser(u)
 				}
 				
 				

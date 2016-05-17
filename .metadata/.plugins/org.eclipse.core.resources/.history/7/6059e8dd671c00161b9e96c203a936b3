@@ -22,7 +22,7 @@ import javax.persistence.Table;
 			
 		@NamedQuery(name = "User.checkLogin",
 				query = "select u from User u where u.login_name=:in_login and u.login_pass=:in_pass"),
-		@NamedQuery(name = "User.checkLoginAvailable",
+		@NamedQuery(name = "User.checkAvailableLogin",
 		query = "select u from User u where u.login_name=:in_login")}
 		)
 

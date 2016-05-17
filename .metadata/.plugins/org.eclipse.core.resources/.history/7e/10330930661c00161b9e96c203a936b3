@@ -70,10 +70,5 @@ public class MyFacadeBean implements MyFacadeBeanRemote {
     	FlightDAO fdao = new FlightDAO();
     	return fdao.isFlight(em, date, from, to, fnum);
     }
-    
-    public boolean isAvailableLogin(String login) {
-    	UserDAO ud = new UserDAO();
-    	return ud.isAvailableLogin(em, login);
-    }
 
 }
