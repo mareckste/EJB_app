@@ -84,19 +84,7 @@ public class Controller {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			int selected = flightWindow.getSelectedRow();
-			
-			if (myPartners.size() > 0 && selected > -1) {
-				windowFlag = 2;
-				String message = myPartners.get(selected).getMessage();
-				User u = myPartners.get(selected).getUser();
-				userDetailWindow = new UserDetailWindow();
-				userDetailWindow.setTextFields(u.getName(), u.getSurname(), u.getBirthDate(), u.getPhone()
-						, u.getFacebook(), message);
-				userDetailWindow.setListeners(new CloseFormListener());
-				userDetailWindow.setVisible(true);
-			}
-			else { JOptionPane.showMessageDialog(null, "Chyba pri volbe partnera");}
+
 		}
 	}
 
@@ -108,7 +96,33 @@ public class Controller {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			showFlight();
+			int selected = menuWindow.getSelectedRow();
+			
+			if (selected != -1) {
+				try {
+					ctx = new InitialContext();
+					rm = (MyFacadeBeanRemote)ctx.lookup(remote);
+					myPartners = sortLoggedID(rm.getMyFlights(ul.get(selected).getFlight().getId(), 2), loggedID);
+					flightWindow = new FlightDetailWindow();
+					windowFlag = 1;
+					flightWindow.setListeners(new CloseFormListener(), new UserDetailListener());
+					flightWindow.setTable(getModelUsers(myPartners));
+					
+					
+					Flight f = myPartners.get(0).getFlight();
+					flightWindow.setFields(f.getDate(), f.getAirportFrom(), f.getAirportTo(), f.getFlightNumber());
+					
+					
+					
+					flightWindow.setVisible(true);
+					menuWindow.dispose();
+					
+				} catch (NamingException e1) {
+					e1.printStackTrace();
+				}
+				
+				
+			}
 		}
 
 	}
@@ -159,7 +173,7 @@ public class Controller {
 		public void actionPerformed(ActionEvent e) {
 			switch (windowFlag) {
 			case 1: showMenu(); break;
-			case 2: userDetailWindow.dispose(); windowFlag = 1; break;
+			case 2: showMenu(); break;
 			}
 		//	menuWindow.setVisible(true);
 		}
@@ -201,36 +215,6 @@ public class Controller {
 			e1.printStackTrace();
 		}
 	}
-	
-	public void showFlight() {
-		int selected = menuWindow.getSelectedRow();
-		
-		if (selected != -1) {
-			try {
-				ctx = new InitialContext();
-				rm = (MyFacadeBeanRemote)ctx.lookup(remote);
-				myPartners = sortLoggedID(rm.getMyFlights(ul.get(selected).getFlight().getId(), 2), loggedID);
-				flightWindow = new FlightDetailWindow();
-				windowFlag = 1;
-				flightWindow.setListeners(new CloseFormListener(), new UserDetailListener());
-				flightWindow.setTable(getModelUsers(myPartners));
-				
-				Flight f = ul.get(selected).getFlight();
-				flightWindow.setFields(f.getDate(), f.getAirportFrom(), f.getAirportTo(), f.getFlightNumber());
-				
-				
-				
-				flightWindow.setVisible(true);
-				menuWindow.dispose();
-				
-			} catch (NamingException e1) {
-				e1.printStackTrace();
-			}
-			
-			
-		}
-	}
-	
 	
 	public DefaultTableModel getModelFlights(List<UserFlight> uf) {
 		String []columns = {"ätart", "Cieæ", "»Ìslo letu", "D·tum letu"};

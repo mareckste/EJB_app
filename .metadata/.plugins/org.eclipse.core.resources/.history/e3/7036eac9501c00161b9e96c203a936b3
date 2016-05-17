@@ -84,19 +84,7 @@ public class Controller {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			int selected = flightWindow.getSelectedRow();
-			
-			if (myPartners.size() > 0 && selected > -1) {
-				windowFlag = 2;
-				String message = myPartners.get(selected).getMessage();
-				User u = myPartners.get(selected).getUser();
-				userDetailWindow = new UserDetailWindow();
-				userDetailWindow.setTextFields(u.getName(), u.getSurname(), u.getBirthDate(), u.getPhone()
-						, u.getFacebook(), message);
-				userDetailWindow.setListeners(new CloseFormListener());
-				userDetailWindow.setVisible(true);
-			}
-			else { JOptionPane.showMessageDialog(null, "Chyba pri volbe partnera");}
+
 		}
 	}
 
@@ -159,7 +147,7 @@ public class Controller {
 		public void actionPerformed(ActionEvent e) {
 			switch (windowFlag) {
 			case 1: showMenu(); break;
-			case 2: userDetailWindow.dispose(); windowFlag = 1; break;
+			case 2: showMenu(); break;
 			}
 		//	menuWindow.setVisible(true);
 		}

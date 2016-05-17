@@ -90,7 +90,7 @@ public class Controller {
 				windowFlag = 2;
 				String message = myPartners.get(selected).getMessage();
 				User u = myPartners.get(selected).getUser();
-				userDetailWindow = new UserDetailWindow();
+				
 				userDetailWindow.setTextFields(u.getName(), u.getSurname(), u.getBirthDate(), u.getPhone()
 						, u.getFacebook(), message);
 				userDetailWindow.setListeners(new CloseFormListener());
@@ -159,7 +159,7 @@ public class Controller {
 		public void actionPerformed(ActionEvent e) {
 			switch (windowFlag) {
 			case 1: showMenu(); break;
-			case 2: userDetailWindow.dispose(); windowFlag = 1; break;
+			case 2: userDetailWindow.dispose(); break;
 			}
 		//	menuWindow.setVisible(true);
 		}

@@ -159,7 +159,7 @@ public class Controller {
 		public void actionPerformed(ActionEvent e) {
 			switch (windowFlag) {
 			case 1: showMenu(); break;
-			case 2: userDetailWindow.dispose(); windowFlag = 1; break;
+			case 2: userDetailWindow.dispose(); windowFlag = 1 break;
 			}
 		//	menuWindow.setVisible(true);
 		}

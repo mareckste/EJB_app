@@ -153,8 +153,4 @@ public class FlightDetailWindow extends JFrame {
 	public void setTable(DefaultTableModel tm) {
 		table.setModel(tm);
 	}
-	
-	public int getSelectedRow() {
-		return table.getSelectedRow();
-	}
 }

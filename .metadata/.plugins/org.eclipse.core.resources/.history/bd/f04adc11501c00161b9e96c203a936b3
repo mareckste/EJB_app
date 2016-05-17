@@ -31,7 +31,6 @@ public class UserDetailWindow extends JFrame {
 	private JLabel label_1;
 	public UserDetailWindow() {
 		setTitle("User detail");
-		setSize(491, 338);
 		getContentPane().setBackground(new Color(240, 248, 255));
 		getContentPane().setLayout(null);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
