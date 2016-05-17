@@ -36,7 +36,6 @@ public class RegisterWindow extends JFrame{
 	public RegisterWindow() {
 		getContentPane().setBackground(new Color(240, 248, 255));
 		setTitle("Register");
-		setSize(418, 359);
 		getContentPane().setLayout(null);
 		
 		setIconImage(new javax.swing.ImageIcon("etc\\img\\plane (1).png").getImage());

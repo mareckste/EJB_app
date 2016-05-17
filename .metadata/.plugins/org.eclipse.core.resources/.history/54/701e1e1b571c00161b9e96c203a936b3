@@ -72,16 +72,12 @@ public class Controller {
 		public void actionPerformed(ActionEvent e) {
 			loginWindow.dispose();
 			registerWindow = new RegisterWindow();
-			registerWindow.setListeners(new ConfirmRegistrationListener(), new LogOffListener());
-			registerWindow.setVisible(true);
-			windowFlag = 1;
+			registerWindow.setListeners(new ConfirmRegistrationListener(), new CloseFormListener());
 		}
 
 	}
 	
-	/*
-	 * Po potvrdeni zadanych dat skusim nahrat pouzivatela do DB
-	 */
+	
 	class ConfirmRegistrationListener implements ActionListener {
 
 		@Override

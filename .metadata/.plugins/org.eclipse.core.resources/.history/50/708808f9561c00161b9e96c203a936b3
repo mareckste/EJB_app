@@ -70,25 +70,10 @@ public class Controller {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			loginWindow.dispose();
-			registerWindow = new RegisterWindow();
-			registerWindow.setListeners(new ConfirmRegistrationListener(), new LogOffListener());
-			registerWindow.setVisible(true);
-			windowFlag = 1;
+			// TODO Auto-generated method stub
+
 		}
 
-	}
-	
-	/*
-	 * Po potvrdeni zadanych dat skusim nahrat pouzivatela do DB
-	 */
-	class ConfirmRegistrationListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-		}
-		
 	}
 
 	/*
@@ -136,8 +121,7 @@ public class Controller {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (menuWindow != null) menuWindow.dispose();
-			if (registerWindow != null) registerWindow.dispose();
+			menuWindow.dispose();
 			loginWindow = new LoginWindow();
 			loginWindow.setListeners(new LoginListener(), new RegisterListener(), new CloseListener());
 			loginWindow.setVisible(true);

@@ -33,7 +33,7 @@ public class AddFlightWindow extends JFrame{
 		setTitle("New flight");
 		getContentPane().setBackground(new Color(240, 248, 255));
 		getContentPane().setLayout(null);
-		setIconImage(new javax.swing.ImageIcon("etc\\img\\plane (1).png").getImage());
+		
 		lbl_from = new JLabel("From (City, Airport):");
 		lbl_from.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 12));
 		lbl_from.setBounds(23, 47, 145, 14);

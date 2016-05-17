@@ -32,7 +32,6 @@ public class UserDetailWindow extends JFrame {
 	public UserDetailWindow() {
 		setTitle("User detail");
 		setSize(491, 338);
-		setIconImage(new javax.swing.ImageIcon("etc\\img\\plane (1).png").getImage());
 		getContentPane().setBackground(new Color(240, 248, 255));
 		getContentPane().setLayout(null);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -101,8 +100,6 @@ public class UserDetailWindow extends JFrame {
 		getContentPane().add(scrollPane);
 		
 		text_motivation = new JTextArea();
-		text_motivation.setEditable(false);
-		text_motivation.setFont(new Font("Microsoft YaHei UI", Font.BOLD | Font.ITALIC, 12));
 		scrollPane.setViewportView(text_motivation);
 		
 		btn_close = new JButton("Close");

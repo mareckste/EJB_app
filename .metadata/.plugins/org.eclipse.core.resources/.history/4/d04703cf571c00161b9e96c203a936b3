@@ -72,7 +72,7 @@ public class Controller {
 		public void actionPerformed(ActionEvent e) {
 			loginWindow.dispose();
 			registerWindow = new RegisterWindow();
-			registerWindow.setListeners(new ConfirmRegistrationListener(), new LogOffListener());
+			registerWindow.setListeners(new ConfirmRegistrationListener(), new CloseFormListener());
 			registerWindow.setVisible(true);
 			windowFlag = 1;
 		}

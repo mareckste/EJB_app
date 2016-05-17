@@ -42,7 +42,7 @@ public class FlightDetailWindow extends JFrame {
 		lbl_from.setFont(new Font("Microsoft New Tai Lue", Font.PLAIN, 12));
 		lbl_from.setBounds(29, 23, 123, 14);
 		getContentPane().add(lbl_from);
-		setIconImage(new javax.swing.ImageIcon("etc\\img\\plane (1).png").getImage());
+		
 		lbl_to = new JLabel("To (City, Airport):");
 		lbl_to.setFont(new Font("Microsoft New Tai Lue", Font.PLAIN, 12));
 		lbl_to.setBounds(29, 70, 111, 14);

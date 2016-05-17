@@ -23,13 +23,9 @@ public class LoginWindow extends JFrame{
 	private JLabel lbl_login, lbl_password;
 	private JButton btn_login, btn_register;
 	private JButton btn_close;
-
-	
 	public LoginWindow() {
 		setTitle("Meet and Fly version 1.0.1");
 		setSize(412, 248);
-		
-		setIconImage(new javax.swing.ImageIcon("etc\\img\\plane (1).png").getImage());
 		getContentPane().setBackground(new Color(240, 248, 255));
 		getContentPane().setLayout(null);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
