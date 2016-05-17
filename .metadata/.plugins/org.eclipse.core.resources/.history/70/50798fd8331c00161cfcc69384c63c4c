@@ -1,0 +1,251 @@
+package controll;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+import entity.User;
+import entity.UserFlight;
+import remote.MyFacadeBeanRemote;
+import remote.MyTransactionFacadeBeanRemote;
+import view.AddFlightWindow;
+import view.FlightDetailWindow;
+import view.LoginWindow;
+import view.MenuWindow;
+import view.RegisterWindow;
+import view.UserDetailWindow;
+
+public class Controller {
+	private static final String remote = "ejb:EJBTestEAR/EJBTestServer//MyFacadeBean!remote.MyFacadeBeanRemote";
+	private static final String remoteTrans = "ejb:EJBTestEAR/EJBTestServer//MyTransactionFacadeBean!remote.MyTransactionFacadeBeanRemote";
+	
+	private int windowFlag;
+	private LoginWindow loginWindow;
+	private MenuWindow menuWindow;
+	private FlightDetailWindow flightWindow;
+	private AddFlightWindow addFlightWindow;
+	private UserDetailWindow userDetailWindow;
+	private RegisterWindow registerWindow;
+	private int loggedID;
+	private User user;
+	private List<UserFlight> ul;
+	private List<UserFlight> myPartners;
+	private Context ctx;
+	private MyFacadeBeanRemote rm;
+	private MyTransactionFacadeBeanRemote rmT;
+
+	public Controller() {
+		loginWindow = new LoginWindow();
+		loginWindow.setListeners(new LoginListener(), new RegisterListener(), new CloseListener());
+		loginWindow.setVisible(true);
+	}
+
+	/*
+	 * Ked kliknem prihlasit, skontroluje, ci je meno a heslo v databaze a vrati
+	 * pouzivatela.
+	 */
+	class LoginListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			checkLogin();
+		}
+
+	}
+
+	/*
+	 * Otvorim registracny formular, nahram pouzivatela, testujem unikatnost
+	 * mena a hesla.
+	 */
+	class RegisterListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+	}
+
+	/*
+	 * K letu mam pouzivatelov, otvori sa detail okno pre pouzivatel a zobrazim
+	 * jeho udaje.
+	 */
+	class UserDetailListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+
+		}
+	}
+
+	/*
+	 * Po vybere jedneho z mojich letov, zobrazim detail okno kde nacucam
+	 * pouzivatelov, ktori takisto tymto letom letia a info o lete.
+	 */
+	class ShowFlightListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			int selected = menuWindow.getSelectedRow();
+			System.out.println("boom");
+			if (selected != -1) {
+				
+				try {
+					ctx = new InitialContext();
+					rm = (MyFacadeBeanRemote)ctx.lookup(remote);
+					myPartners = sortLoggedID(rm.getMyFlights(ul.get(selected).getFlight().getId(), 2), loggedID);
+					flightWindow = new FlightDetailWindow();
+					windowFlag = 1;
+					flightWindow.setListeners(new CloseFormListener(), new UserDetailListener());
+					flightWindow.setTable(getModelUsers(myPartners));
+					
+					
+				} catch (NamingException e1) {
+					e1.printStackTrace();
+				}
+				
+				
+			}
+		}
+
+	}
+
+	/*
+	 * po stlaceni tohto tlacidla v menu letov sa uzivatel odhlasi, zostane
+	 * bezat zasa login pass okno.
+	 */
+	class LogOffListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			menuWindow.dispose();
+			loginWindow = new LoginWindow();
+			loginWindow.setListeners(new LoginListener(), new RegisterListener(), new CloseListener());
+			loginWindow.setVisible(true);
+		}
+
+	}
+	
+	
+	class AddFlightListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	class CloseListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			loginWindow.dispose();
+		}
+		
+	}
+	
+	class CloseFormListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			switch (windowFlag) {
+			case 1: showMenu(flightWindow); break;
+			case 2: addFlightWindow.dispose(); break;
+			}
+			menuWindow.setVisible(true);
+		}
+		
+	}
+	
+	public void checkLogin() {
+		try {
+			ctx = new InitialContext();
+			rm = (MyFacadeBeanRemote)ctx.lookup(remote);
+			user = rm.isRegistered(loginWindow.getLogin(), loginWindow.getPW());
+			
+			if (user == null) JOptionPane.showMessageDialog(null, "Zle prihlasovacie udaje");
+			else {
+				JOptionPane.showMessageDialog(null, "Prihlasenie prebehelo uspesne" + user.getName());
+				loggedID = user.getId();
+				showMenu(loginWindow);
+			}
+			
+		} catch (NamingException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	public void showMenu(JFrame w) {
+		try {
+			ctx = new InitialContext();
+			rm = (MyFacadeBeanRemote)ctx.lookup(remote);
+			ul = rm.getMyFlights(loggedID, 1);
+			
+			w.dispose();
+			menuWindow = new MenuWindow();
+			menuWindow.setListeners(new AddFlightListener(), new ShowFlightListener(), new LogOffListener());
+			menuWindow.setTable(getModelFlights(ul));
+			menuWindow.setVisible(true);
+			
+			
+		} catch (NamingException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	public DefaultTableModel getModelFlights(List<UserFlight> uf) {
+		String []columns = {"ätart", "Cieæ", "»Ìslo letu", "D·tum letu"};
+		DefaultTableModel tm = new DefaultTableModel(null, columns);
+		
+		for (UserFlight currUF: uf) {
+			ArrayList<String> tmp = new ArrayList<>();
+			tmp.add(currUF.getFlight().getAirportFrom());
+			tmp.add(currUF.getFlight().getAirportTo());
+			tmp.add(currUF.getFlight().getFlightNumber());
+			tmp.add(currUF.getFlight().getDate());
+			tm.addRow(tmp.toArray());
+		}
+		
+		
+		return tm;
+	}
+	
+	public DefaultTableModel getModelUsers(List<UserFlight> uf) {
+		String []columns = {"Meno", "Priezvisko"};
+		DefaultTableModel tm = new DefaultTableModel(null, columns);
+		
+		for (UserFlight currUF: uf) {
+			ArrayList<String> tmp = new ArrayList<>();
+			tmp.add(currUF.getUser().getName());
+			tmp.add(currUF.getUser().getSurname());
+			tm.addRow(tmp.toArray());
+		}
+		return tm;
+	}
+	
+	public List<UserFlight> sortLoggedID(List<UserFlight> uf, int loggedID) {
+		List <UserFlight> tmp = new ArrayList<>();
+		
+		for (UserFlight curr : uf) {
+			if (curr.getUser().getId() != loggedID) {
+				tmp.add(curr);
+			}
+		}
+		return tmp;
+	}
+}

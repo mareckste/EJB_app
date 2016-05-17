@@ -23,7 +23,7 @@ public class MenuWindow extends JFrame {
 	private JLabel lbl_myflights;
 	private JTable table;
 	public MenuWindow() {
-		setSize(510,301);
+		setSize(661,301);
 		getContentPane().setBackground(new Color(240, 248, 255));
 		getContentPane().setLayout(null);
 		
@@ -33,7 +33,7 @@ public class MenuWindow extends JFrame {
 		getContentPane().add(lbl_myflights);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(212, 47, 271, 144);
+		scrollPane.setBounds(212, 47, 405, 144);
 		getContentPane().add(scrollPane);
 		
 		table = new JTable();
@@ -42,7 +42,7 @@ public class MenuWindow extends JFrame {
 		btn_showFlight = new JButton("Show flight detail");
 		btn_showFlight.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463423120_takeoff.png"));
 		btn_showFlight.setFont(new Font("Microsoft Tai Le", Font.ITALIC, 14));
-		btn_showFlight.setBounds(278, 202, 205, 49);
+		btn_showFlight.setBounds(412, 202, 205, 49);
 		btn_showFlight.setBorder(BorderFactory.createEmptyBorder());
 		btn_showFlight.setContentAreaFilled(false);
 		getContentPane().add(btn_showFlight);
@@ -87,6 +87,6 @@ public class MenuWindow extends JFrame {
 	public void setListeners(ActionListener addFlight, ActionListener showFlight, ActionListener logoff) {
 		btn_add_flight.addActionListener(addFlight);
 		btn_logoff.addActionListener(logoff);
-		btn_add_flight.addActionListener(addFlight);
+		btn_showFlight.addActionListener(showFlight);
 	}
 }

@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 
@@ -33,6 +34,7 @@ public class FlightDetailWindow extends JFrame {
 	
 	
 	public FlightDetailWindow() {
+		setSize(696,333);
 		getContentPane().setBackground(new Color(240, 248, 255));
 		getContentPane().setLayout(null);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -92,8 +94,8 @@ public class FlightDetailWindow extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		lbl_partners = new JLabel("You can fly with:");
-		lbl_partners.setFont(new Font("Microsoft New Tai Lue", Font.BOLD, 14));
-		lbl_partners.setBounds(349, 33, 159, 14);
+		lbl_partners.setFont(new Font("Microsoft YaHei UI", Font.BOLD | Font.ITALIC, 14));
+		lbl_partners.setBounds(351, 23, 159, 25);
 		getContentPane().add(lbl_partners);
 	
 		btn_showPartner = new JButton("Show detail");
@@ -146,5 +148,9 @@ public class FlightDetailWindow extends JFrame {
 		text_flightNO.setText(flightNO);
 		text_from.setText(from);
 		text_to.setText(to);
+	}
+	
+	public void setTable(DefaultTableModel tm) {
+		table.setModel(tm);
 	}
 }

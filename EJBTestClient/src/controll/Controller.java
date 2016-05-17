@@ -2,13 +2,17 @@ package controll;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
+import entity.Flight;
 import entity.User;
 import entity.UserFlight;
 import remote.MyFacadeBeanRemote;
@@ -33,6 +37,8 @@ public class Controller {
 	private RegisterWindow registerWindow;
 	private int loggedID;
 	private User user;
+	private List<UserFlight> ul;
+	private List<UserFlight> myPartners;
 	private Context ctx;
 	private MyFacadeBeanRemote rm;
 	private MyTransactionFacadeBeanRemote rmT;
@@ -90,7 +96,33 @@ public class Controller {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-
+			int selected = menuWindow.getSelectedRow();
+			
+			if (selected != -1) {
+				try {
+					ctx = new InitialContext();
+					rm = (MyFacadeBeanRemote)ctx.lookup(remote);
+					myPartners = sortLoggedID(rm.getMyFlights(ul.get(selected).getFlight().getId(), 2), loggedID);
+					flightWindow = new FlightDetailWindow();
+					windowFlag = 1;
+					flightWindow.setListeners(new CloseFormListener(), new UserDetailListener());
+					flightWindow.setTable(getModelUsers(myPartners));
+					
+					
+					Flight f = myPartners.get(0).getFlight();
+					flightWindow.setFields(f.getDate(), f.getAirportFrom(), f.getAirportTo(), f.getFlightNumber());
+					
+					
+					
+					flightWindow.setVisible(true);
+					menuWindow.dispose();
+					
+				} catch (NamingException e1) {
+					e1.printStackTrace();
+				}
+				
+				
+			}
 		}
 
 	}
@@ -140,10 +172,10 @@ public class Controller {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			switch (windowFlag) {
-			case 1: flightWindow.dispose(); break;
-			case 2: addFlightWindow.dispose(); break;
+			case 1: showMenu(); break;
+			case 2: showMenu(); break;
 			}
-			menuWindow.setVisible(true);
+		//	menuWindow.setVisible(true);
 		}
 		
 	}
@@ -153,7 +185,7 @@ public class Controller {
 			ctx = new InitialContext();
 			rm = (MyFacadeBeanRemote)ctx.lookup(remote);
 			user = rm.isRegistered(loginWindow.getLogin(), loginWindow.getPW());
-			
+			ctx.close();
 			if (user == null) JOptionPane.showMessageDialog(null, "Zle prihlasovacie udaje");
 			else {
 				JOptionPane.showMessageDialog(null, "Prihlasenie prebehelo uspesne" + user.getName());
@@ -167,25 +199,69 @@ public class Controller {
 	}
 	
 	public void showMenu() {
-		loginWindow.dispose();
-		menuWindow = new MenuWindow();
-		menuWindow.setListeners(new AddFlightListener(), new ShowFlightListener(), new LogOffListener());
-		menuWindow.setVisible(true);
-		
-		
 		try {
 			ctx = new InitialContext();
 			rm = (MyFacadeBeanRemote)ctx.lookup(remote);
-			List<UserFlight> ul = rm.getMyFlights(loggedID, 1);
+			ul = rm.getMyFlights(loggedID, 1);
 			
-			for (UserFlight curr : ul) {
-				System.out.println(curr.getFlight().getAirportFrom());
-			}
+			disposeCheck();
+			menuWindow = new MenuWindow();
+			menuWindow.setListeners(new AddFlightListener(), new ShowFlightListener(), new LogOffListener());
+			menuWindow.setTable(getModelFlights(ul));
+			menuWindow.setVisible(true);
+			ctx.close();
 			
 		} catch (NamingException e1) {
 			e1.printStackTrace();
 		}
 	}
-
 	
+	public DefaultTableModel getModelFlights(List<UserFlight> uf) {
+		String []columns = {"ätart", "Cieæ", "»Ìslo letu", "D·tum letu"};
+		DefaultTableModel tm = new DefaultTableModel(null, columns);
+		
+		for (UserFlight currUF: uf) {
+			ArrayList<String> tmp = new ArrayList<>();
+			tmp.add(currUF.getFlight().getAirportFrom());
+			tmp.add(currUF.getFlight().getAirportTo());
+			tmp.add(currUF.getFlight().getFlightNumber());
+			tmp.add(currUF.getFlight().getDate());
+			tm.addRow(tmp.toArray());
+		}
+		
+		
+		return tm;
+	}
+	
+	public DefaultTableModel getModelUsers(List<UserFlight> uf) {
+		String []columns = {"Meno", "Priezvisko"};
+		DefaultTableModel tm = new DefaultTableModel(null, columns);
+		
+		for (UserFlight currUF: uf) {
+			ArrayList<String> tmp = new ArrayList<>();
+			tmp.add(currUF.getUser().getName());
+			tmp.add(currUF.getUser().getSurname());
+			tm.addRow(tmp.toArray());
+		}
+		return tm;
+	}
+	
+	public List<UserFlight> sortLoggedID(List<UserFlight> uf, int loggedID) {
+		List <UserFlight> tmp = new ArrayList<>();
+		
+		for (UserFlight curr : uf) {
+			if (curr.getUser().getId() != loggedID) {
+				tmp.add(curr);
+			}
+		}
+		return tmp;
+	}
+	
+	public void disposeCheck() {
+		if (flightWindow != null) 
+			flightWindow.dispose(); flightWindow = null;
+	    if (userDetailWindow != null ) { userDetailWindow.dispose(); userDetailWindow = null;}
+	    if (loginWindow != null ) { loginWindow.dispose(); loginWindow = null;}
+		
+	}
 }
