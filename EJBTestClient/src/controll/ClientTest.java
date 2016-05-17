@@ -19,7 +19,7 @@ public class ClientTest {
 	public static void main(String[] args) throws Exception {
 		Context ctx = new InitialContext();
 		MyFacadeBeanRemote remote =  (MyFacadeBeanRemote)ctx.lookup("ejb:EJBTestEAR/EJBTestServer//MyFacadeBean!remote.MyFacadeBeanRemote");
-		System.out.println(remote.add(5, 6));
+	
 		
 		
 		MyTransactionFacadeBeanRemote remote2 = (MyTransactionFacadeBeanRemote)
@@ -58,7 +58,7 @@ public class ClientTest {
 //		remote2.addFlight(uf,f,u);
 //		remote2.addRec(31, f);
 		
-		List<UserFlight> ul = remote.getAllUserFlight();
+		List<UserFlight> ul = remote.getMyFlights();
 		for (UserFlight uf : ul) {
 			System.out.println(uf.getUser().getId() + " " + uf.getFlight().getId());
 		}

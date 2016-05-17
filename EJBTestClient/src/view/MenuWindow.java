@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.event.ActionListener;
 import java.awt.Color;
 
 @SuppressWarnings("serial")
@@ -22,6 +23,7 @@ public class MenuWindow extends JFrame {
 	private JLabel lbl_myflights;
 	private JTable table;
 	public MenuWindow() {
+		setSize(510,301);
 		getContentPane().setBackground(new Color(240, 248, 255));
 		getContentPane().setLayout(null);
 		
@@ -80,5 +82,11 @@ public class MenuWindow extends JFrame {
 	
 	public int getSelectedRow() {
 		return table.getSelectedRow();
+	}
+	
+	public void setListeners(ActionListener addFlight, ActionListener showFlight, ActionListener logoff) {
+		btn_add_flight.addActionListener(addFlight);
+		btn_logoff.addActionListener(logoff);
+		btn_add_flight.addActionListener(addFlight);
 	}
 }

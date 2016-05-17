@@ -3,6 +3,14 @@ package controll;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.swing.JOptionPane;
+
+import entity.User;
+import remote.MyFacadeBeanRemote;
+import remote.MyTransactionFacadeBeanRemote;
 import view.AddFlightWindow;
 import view.FlightDetailWindow;
 import view.LoginWindow;
@@ -11,15 +19,26 @@ import view.RegisterWindow;
 import view.UserDetailWindow;
 
 public class Controller {
+	private static final String remote = "ejb:EJBTestEAR/EJBTestServer//MyFacadeBean!remote.MyFacadeBeanRemote";
+	private static final String remoteTrans = "ejb:EJBTestEAR/EJBTestServer//MyTransactionFacadeBean!remote.MyTransactionFacadeBeanRemote";
+	
+	private int windowFlag;
 	private LoginWindow loginWindow;
 	private MenuWindow menuWindow;
 	private FlightDetailWindow flightWindow;
 	private AddFlightWindow addFlightWindow;
 	private UserDetailWindow userDetailWindow;
 	private RegisterWindow registerWindow;
+	private int loggedID;
+	private User user;
+	private Context ctx;
+	private MyFacadeBeanRemote rm;
+	private MyTransactionFacadeBeanRemote rmT;
 
 	public Controller() {
-
+		loginWindow = new LoginWindow();
+		loginWindow.setListeners(new LoginListener(), new RegisterListener(), new CloseListener());
+		loginWindow.setVisible(true);
 	}
 
 	/*
@@ -30,7 +49,23 @@ public class Controller {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-
+			try {
+				ctx = new InitialContext();
+				rm = (MyFacadeBeanRemote)ctx.lookup(remote);
+				user = rm.isRegistered(loginWindow.getLogin(), loginWindow.getPW());
+				
+				if (user == null) JOptionPane.showMessageDialog(null, "Zle prihlasovacie udaje");
+				else {
+					JOptionPane.showMessageDialog(null, "Prihlasenie prebehelo uspesne" + user.getName());
+					loginWindow.dispose();
+					menuWindow = new MenuWindow();
+					menuWindow.setListeners(new AddFlightListener(), new ShowFlightListener(), new LogOffListener());
+					menuWindow.setVisible(true);
+				}
+				
+			} catch (NamingException e1) {
+				e1.printStackTrace();
+			}
 		}
 
 	}
@@ -82,8 +117,50 @@ public class Controller {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-
+			menuWindow.dispose();
+			loginWindow = new LoginWindow();
+			loginWindow.setListeners(new LoginListener(), new RegisterListener(), new CloseListener());
+			loginWindow.setVisible(true);
 		}
 
 	}
+	
+	
+	class AddFlightListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	class CloseListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			loginWindow.dispose();
+		}
+		
+	}
+	
+	class CloseFormListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			switch (windowFlag) {
+			case 1: flightWindow.dispose(); break;
+			case 2: addFlightWindow.dispose(); break;
+			}
+			menuWindow.setVisible(true);
+		}
+		
+	}
+
+	
 }

@@ -13,7 +13,7 @@ import dao.UserFlightDAO;
 import entity.Flight;
 import entity.User;
 import entity.UserFlight;
-import executive.EJB2Bean;
+import executive.EJBMyExecutiveBean;
 import remote.MyFacadeBeanRemote;
 
 /**
@@ -22,13 +22,11 @@ import remote.MyFacadeBeanRemote;
 @Stateless
 public class MyFacadeBean implements MyFacadeBeanRemote {
 	@EJB
-	private EJB2Bean bean2; 
+	private EJBMyExecutiveBean bean2; 
 	@PersistenceContext
 	private EntityManager em;
 	
-    public String add(int i1, int i2) {
-    	return bean2.getStr(i1 + i2);
-    }
+
     
     public List<User> getAllUsers() {
     	UserDAO user = new UserDAO();
@@ -42,7 +40,7 @@ public class MyFacadeBean implements MyFacadeBeanRemote {
     	return users;
     }
     
-    public List<UserFlight> getAllUserFlight() {
+    public List<UserFlight> getMyFlights() {
     	UserFlightDAO user = new UserFlightDAO();
     	List<UserFlight> users = user.getAllUserF(em);
     	

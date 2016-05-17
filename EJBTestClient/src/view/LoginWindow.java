@@ -90,6 +90,7 @@ public class LoginWindow extends JFrame{
 		lblNewLabel_1.setFont(new Font("Agency FB", Font.ITALIC, 23));
 		lblNewLabel_1.setBounds(81, 54, 89, 62);
 		getContentPane().add(lblNewLabel_1);
+		
 	}
 	
 	public void setLanguage(ResourceBundle rb) {
@@ -105,5 +106,13 @@ public class LoginWindow extends JFrame{
 		btn_login.addActionListener(login);
 		btn_register.addActionListener(register);
 		btn_close.addActionListener(close);
+	}
+	
+	public String getLogin() {
+		return text_login.getText();
+	}
+	
+	public String getPW() {
+		return String.valueOf(text_password.getPassword());
 	}
 }
