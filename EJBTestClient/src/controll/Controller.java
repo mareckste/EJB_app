@@ -18,6 +18,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+import org.apache.log4j.Logger;
+
 import entity.Flight;
 import entity.User;
 import entity.UserFlight;
@@ -35,6 +37,7 @@ import view.WeatherWindow;
 public class Controller {
 	private static final String remote = "ejb:EJBTestEAR/EJBTestServer//MyFacadeBean!remote.MyFacadeBeanRemote";
 	private static final String remoteTrans = "ejb:EJBTestEAR/EJBTestServer//MyTransactionFacadeBean!remote.MyTransactionFacadeBeanRemote";
+	private static final Logger log = Logger.getLogger(Controller.class);
 	
 	private int windowFlag;
 	private LoginWindow loginWindow;
@@ -62,10 +65,12 @@ public class Controller {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (Locale.ENGLISH == rb.getLocale()) {
+				log.info("Clicked on slovak icon");
 				rb = ResourceBundle.getBundle("Location", new Locale("sk"));
 				loginWindow.setLanguage(rb);
 			}
 			else {
+				log.info("Clicked on english icon");
 				rb = ResourceBundle.getBundle("Location", new Locale("en"));
 				loginWindow.setLanguage(rb);
 			}
@@ -81,6 +86,7 @@ public class Controller {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			log.info("Clicked on login button");
 			checkLogin();
 		}
 
@@ -94,6 +100,7 @@ public class Controller {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			log.info("Opening register window.");
 			loginWindow.dispose();
 			registerWindow = new RegisterWindow();
 			registerWindow.setListeners(new ConfirmRegistrationListener(), new LogOffListener());
@@ -112,7 +119,7 @@ public class Controller {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			List<String> regForm = new ArrayList<>();
-			
+			log.info("Confirming registration");
 			regForm.add(registerWindow.getTextName()); //0
 			regForm.add(registerWindow.getTextSurname()); //1
 			regForm.add(registerWindow.getTextBirth()); //2
@@ -122,6 +129,7 @@ public class Controller {
 			regForm.add(registerWindow.getTextSocial()); //6
 
 			if (isEmtpyField(regForm) == true) {
+				log.info("There is empty field");
 				JOptionPane.showMessageDialog(null, rb.getString("msg_fill"));
 			}
 			else {
@@ -129,9 +137,12 @@ public class Controller {
 					ctx = new InitialContext();
 					rmT = (MyTransactionFacadeBeanRemote)ctx.lookup(remoteTrans);
 					rm = (MyFacadeBeanRemote)ctx.lookup(remote);
-					if (rm.isAvailableLogin(regForm.get(5)) == false) 
+					if (rm.isAvailableLogin(regForm.get(5)) == false)  {
+						log.info("Inserted login that already exists");
 						JOptionPane.showMessageDialog(null, "msg_login_exist");
+					}
 					else {
+						log.info("Adding new user");
 						rmT.addUser(createUser(regForm));
 						JOptionPane.showMessageDialog(null, rb.getString("msg_login_succ"));
 						registerWindow.dispose();
@@ -142,7 +153,7 @@ public class Controller {
 
 				} catch (NamingException e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					log.error(e1,e1);
 				}
 			}
 		
@@ -159,8 +170,9 @@ public class Controller {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			int selected = flightWindow.getSelectedRow();
-			
+			log.debug("Selected row: " + selected);
 			if (myPartners.size() > 0 && selected > -1) {
+				log.info("Opening user detail window");
 				windowFlag = 2;
 				String message = myPartners.get(selected).getMessage();
 				User u = myPartners.get(selected).getUser();
@@ -171,7 +183,10 @@ public class Controller {
 				userDetailWindow.setLanguage(rb);
 				userDetailWindow.setVisible(true);
 			}
-			else { JOptionPane.showMessageDialog(null, rb.getString("msg_partner"));}
+			else {
+				log.info("Not opening window"); log.debug("Size: " + myPartners.size());
+				JOptionPane.showMessageDialog(null, rb.getString("msg_partner"));
+			}
 		}
 	}
 
@@ -183,6 +198,7 @@ public class Controller {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			log.info("Clicked on flight detail");
 			showFlight();
 		}
 
@@ -196,8 +212,10 @@ public class Controller {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (menuWindow != null) menuWindow.dispose();
-			if (registerWindow != null) registerWindow.dispose();
+			if (menuWindow != null) { log.info("Logging of from menu");menuWindow.dispose();}
+			if (registerWindow != null) { log.info("Logging off from register window");registerWindow.dispose();}
+			
+			log.info("Opening login window");
 			loginWindow = new LoginWindow();
 			loginWindow.setListeners(new LoginListener(), new RegisterListener(), new CloseListener(), new LangListener());
 			loginWindow.setVisible(true);
@@ -211,7 +229,9 @@ public class Controller {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			log.info("Closing menu window:");
 			menuWindow.dispose();
+			log.info("Opening add flight window");
 			addFlightWindow = new AddFlightWindow();
 			addFlightWindow.setListeners(new ConfirmFlightListener(), new CloseFormListener());
 			addFlightWindow.setVisible(true);
@@ -227,25 +247,27 @@ public class Controller {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			List<String> form = new ArrayList<>();
-			
+			log.info("Pressed confirm flight button");
 			form.add(addFlightWindow.getTextFrom());
 			form.add(addFlightWindow.getTextTo());
 			form.add(addFlightWindow.getTextFlightNO());
 			form.add(addFlightWindow.getTextDate());
 			
-			if (isEmtpyField(form) == true) JOptionPane.showMessageDialog(null, rb.getString("msg_fill"));
+			if (isEmtpyField(form) == true) {log.info("Empty field in form"); JOptionPane.showMessageDialog(null, rb.getString("msg_fill")); }
 			else {
 				try {
 					ctx = new InitialContext();
 					rm = (MyFacadeBeanRemote)ctx.lookup(remote);
 					rmT = (MyTransactionFacadeBeanRemote)ctx.lookup(remoteTrans);
 					
-					
+					log.info("Adding flight");
 					Flight f = rm.isFlight(form.get(3), form.get(0), form.get(1), form.get(2));
 					if (f != null) {
+						log.info("Flight exist");
 						rmT.addFlight(loggedID, f, addFlightWindow.getTextMessageMoti());
 					}
 					else {
+						log.info("Flight does not exist");
 						f = createFlight(form);
 						rmT.addFlight(loggedID, f, addFlightWindow.getTextMessageMoti());
 					}
@@ -253,8 +275,7 @@ public class Controller {
 					addFlightWindow.dispose();
 					showMenu();
 				} catch (NamingException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					log.error(e1, e1);
 				}
 				
 			}
@@ -266,10 +287,12 @@ public class Controller {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			log.info("Opening weather window");
 			weatherWindow = new WeatherWindow();
 			weatherWindow.setListeners(new SearchWeatherListener(), new CloseFormListener());
 			weatherWindow.setLanguage(rb);
 			weatherWindow.setVisible(true);
+			log.info("Closing menu");
 			menuWindow.dispose();
 			windowFlag = 1;
 		}
@@ -281,10 +304,12 @@ public class Controller {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
+				log.info("Searching weather");
 				ctx = new InitialContext();
 				rm = (MyFacadeBeanRemote)ctx.lookup(remote);
 				
 				Weather w = rm.getWeather(weatherWindow.getCity());
+				log.debug("Seeking forecast for location: " + weatherWindow.getCity());
 				weatherWindow.setWeather(w.getTemperature() + " ∞C", w.getCountry() + ", " + w.getCity(), w.getConditionText());
 				 URL url = new URL(w.getImageUrl());
 				 BufferedImage image = ImageIO.read(url);
@@ -293,7 +318,7 @@ public class Controller {
 				
 			} catch (NamingException | IOException e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				log.error(e1,e1);
 			}
 		}
 		
@@ -303,6 +328,7 @@ public class Controller {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			log.info("Closing login window");
 			loginWindow.dispose();
 		}
 		
@@ -314,7 +340,7 @@ public class Controller {
 		public void actionPerformed(ActionEvent e) {
 			switch (windowFlag) {
 			case 1: showMenu(); break;
-			case 2: userDetailWindow.dispose(); windowFlag = 1; break;
+			case 2: log.info("Closing user detail window"); userDetailWindow.dispose(); windowFlag = 1; break;
 			}
 		//	menuWindow.setVisible(true);
 		}
@@ -323,6 +349,7 @@ public class Controller {
 	
 	public void checkLogin() {
 		try {
+			log.info("Checking login");
 			ctx = new InitialContext();
 			rm = (MyFacadeBeanRemote)ctx.lookup(remote);
 			user = rm.isRegistered(loginWindow.getLogin(), loginWindow.getPW());
@@ -335,11 +362,12 @@ public class Controller {
 			}
 			
 		} catch (NamingException e1) {
-			e1.printStackTrace();
+			log.error(e1, e1);
 		}
 	}
 	
 	public void showLogin() {
+		log.info("Opening login window");
 		loginWindow = new LoginWindow();
 		loginWindow.setListeners(new LoginListener(), new RegisterListener(), new CloseListener(), new LangListener());
 		loginWindow.setVisible(true);
@@ -348,6 +376,7 @@ public class Controller {
 	
 	public void showMenu() {
 		try {
+			log.info("Opening menu window");
 			ctx = new InitialContext();
 			rm = (MyFacadeBeanRemote)ctx.lookup(remote);
 			ul = rm.getMyFlights(loggedID, 1);
@@ -361,7 +390,7 @@ public class Controller {
 			ctx.close();
 			
 		} catch (NamingException e1) {
-			e1.printStackTrace();
+			log.error(e1,e1);
 		}
 	}
 	
@@ -388,7 +417,7 @@ public class Controller {
 				menuWindow.dispose();
 				
 			} catch (NamingException e1) {
-				e1.printStackTrace();
+				log.error(e1,e1);
 			}
 			
 			
@@ -397,7 +426,7 @@ public class Controller {
 	
 	
 	public DefaultTableModel getModelFlights(List<UserFlight> uf) {
-		String []columns = {"ätart", "Cieæ", "»Ìslo letu", "D·tum letu"};
+		String []columns = {rb.getString("lbl_from"),rb.getString("lbl_to") , rb.getString("lbl_flightNO"), rb.getString("lbl_date")};
 		DefaultTableModel tm = new DefaultTableModel(null, columns);
 		
 		for (UserFlight currUF: uf) {
@@ -478,4 +507,5 @@ public class Controller {
 		
 		return f;
 	}
+	
 }

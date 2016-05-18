@@ -8,6 +8,8 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
@@ -15,6 +17,8 @@ import javax.swing.ImageIcon;
 import java.awt.SystemColor;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+
+import org.apache.log4j.Logger;
 
 @SuppressWarnings("serial")
 public class LoginWindow extends JFrame{
@@ -24,12 +28,18 @@ public class LoginWindow extends JFrame{
 	private JButton btn_login, btn_register;
 	private JButton btn_close;
 	private JButton btn_lang;
-
+	private static final Logger log = Logger.getLogger(LoginWindow.class);
 	
 	public LoginWindow() {
 		setTitle("Meet and Fly version 1.0.1");
-		setSize(450, 248);
-		
+		Properties p = new Properties();
+		try {
+			p.load(controll.Properties.getProperties());
+		} catch (IOException e) {
+			log.error(e,e);
+		}
+		setSize(Integer.valueOf(p.getProperty("login_w")), Integer.valueOf(p.getProperty("login_h")));
+		setLocationRelativeTo(null);
 		setIconImage(new javax.swing.ImageIcon("etc\\img\\plane (1).png").getImage());
 		getContentPane().setBackground(new Color(240, 248, 255));
 		getContentPane().setLayout(null);

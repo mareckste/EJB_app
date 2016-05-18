@@ -1,2 +1,16 @@
 1463536987534	Rename local variable 'lblYourLogin'
 1463537049840	Rename local variable 'lblYourPassword'
+1463573333665	Move 'log4j.properties' to 'properties'
+1463573346309	Move 'Location_sk.properties' to 'properties'
+1463573361162	Move 'Location_en.properties' to 'properties'
+1463574844304	Delete element
+1463576304465	Delete element
+1463576796879	Delete element
+1463577644898	Delete element
+1463579062719	Delete element
+1463579443833	Delete element
+1463579452670	Delete element
+1463579456607	Delete element
+1463579462220	Delete element
+1463579467161	Delete element
+1463580115958	Rename resource 'Config.properties'

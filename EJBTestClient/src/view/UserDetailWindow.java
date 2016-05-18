@@ -4,10 +4,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
+
+import org.apache.log4j.Logger;
+
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
@@ -29,9 +34,20 @@ public class UserDetailWindow extends JFrame {
 	private JLabel lbl_motivate;
 	private JLabel label;
 	private JLabel label_1;
+	private static final Logger log = Logger.getLogger(UserDetailWindow.class);
+
 	public UserDetailWindow() {
-		setTitle("User detail");
-		setSize(491, 338);
+		
+		
+		Properties p = new Properties();
+		try {
+			p.load(controll.Properties.getProperties());
+		} catch (IOException e) {
+			log.error(e,e);
+		}
+		setSize(Integer.valueOf(p.getProperty("user_w")), Integer.valueOf(p.getProperty("user_h")));
+		
+		setLocationRelativeTo(null);
 		setIconImage(new javax.swing.ImageIcon("etc\\img\\plane (1).png").getImage());
 		getContentPane().setBackground(new Color(240, 248, 255));
 		getContentPane().setLayout(null);
@@ -133,6 +149,7 @@ public class UserDetailWindow extends JFrame {
 		lbl_motivate.setText(rb.getString("lbl_motivate"));
 		
 		btn_close.setText(rb.getString("btn_close"));
+		this.setTitle(rb.getString("ttl_userDetail"));
 	}
 	
 	public void setListeners(ActionListener close) {

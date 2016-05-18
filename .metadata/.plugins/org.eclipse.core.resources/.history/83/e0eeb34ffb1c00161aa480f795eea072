@@ -1,0 +1,490 @@
+package controll;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import javax.imageio.ImageIO;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+import org.apache.log4j.Logger;
+
+import entity.Flight;
+import entity.User;
+import entity.UserFlight;
+import entity.Weather;
+import remote.MyFacadeBeanRemote;
+import remote.MyTransactionFacadeBeanRemote;
+import view.AddFlightWindow;
+import view.FlightDetailWindow;
+import view.LoginWindow;
+import view.MenuWindow;
+import view.RegisterWindow;
+import view.UserDetailWindow;
+import view.WeatherWindow;
+
+public class Controller {
+	private static final String remote = "ejb:EJBTestEAR/EJBTestServer//MyFacadeBean!remote.MyFacadeBeanRemote";
+	private static final String remoteTrans = "ejb:EJBTestEAR/EJBTestServer//MyTransactionFacadeBean!remote.MyTransactionFacadeBeanRemote";
+	private static final Logger log = Logger.getLogger(ClientTest.class);
+	
+	private int windowFlag;
+	private LoginWindow loginWindow;
+	private MenuWindow menuWindow;
+	private FlightDetailWindow flightWindow;
+	private AddFlightWindow addFlightWindow;
+	private UserDetailWindow userDetailWindow;
+	private RegisterWindow registerWindow;
+	private WeatherWindow weatherWindow;
+	private int loggedID;
+	private User user;
+	private List<UserFlight> ul;
+	private List<UserFlight> myPartners;
+	private Context ctx;
+	private MyFacadeBeanRemote rm;
+	private MyTransactionFacadeBeanRemote rmT;
+	private ResourceBundle rb = ResourceBundle.getBundle("Location", Locale.getDefault());
+
+	public Controller() {
+		showLogin();
+	}
+	
+	class LangListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (Locale.ENGLISH == rb.getLocale()) {
+				log.debug("Clicked on slovak icon");
+				rb = ResourceBundle.getBundle("Location", new Locale("sk"));
+				loginWindow.setLanguage(rb);
+			}
+			else {
+				log.debug("Clicked on english icon");
+				rb = ResourceBundle.getBundle("Location", new Locale("en"));
+				loginWindow.setLanguage(rb);
+			}
+		}
+		
+	}
+
+	/*
+	 * Ked kliknem prihlasit, skontroluje, ci je meno a heslo v databaze a vrati
+	 * pouzivatela.
+	 */
+	class LoginListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			log.debug("Clicked on login button");
+			checkLogin();
+		}
+
+	}
+
+	/*
+	 * Otvorim registracny formular, nahram pouzivatela, testujem unikatnost
+	 * mena a hesla.
+	 */
+	class RegisterListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			loginWindow.dispose();
+			registerWindow = new RegisterWindow();
+			registerWindow.setListeners(new ConfirmRegistrationListener(), new LogOffListener());
+			registerWindow.setVisible(true);
+			registerWindow.setLanguage(rb);
+			windowFlag = 1;
+		}
+
+	}
+	
+	/*
+	 * Po potvrdeni zadanych dat skusim nahrat pouzivatela do DB
+	 */
+	class ConfirmRegistrationListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			List<String> regForm = new ArrayList<>();
+			
+			regForm.add(registerWindow.getTextName()); //0
+			regForm.add(registerWindow.getTextSurname()); //1
+			regForm.add(registerWindow.getTextBirth()); //2
+			regForm.add(registerWindow.getTextPhone()); //3
+			regForm.add(registerWindow.getTextLogin()); //4 
+			regForm.add(registerWindow.getTextPassword()); //5
+			regForm.add(registerWindow.getTextSocial()); //6
+
+			if (isEmtpyField(regForm) == true) {
+				JOptionPane.showMessageDialog(null, rb.getString("msg_fill"));
+			}
+			else {
+				try {
+					ctx = new InitialContext();
+					rmT = (MyTransactionFacadeBeanRemote)ctx.lookup(remoteTrans);
+					rm = (MyFacadeBeanRemote)ctx.lookup(remote);
+					if (rm.isAvailableLogin(regForm.get(5)) == false) 
+						JOptionPane.showMessageDialog(null, "msg_login_exist");
+					else {
+						rmT.addUser(createUser(regForm));
+						JOptionPane.showMessageDialog(null, rb.getString("msg_login_succ"));
+						registerWindow.dispose();
+						showLogin();
+					}
+
+
+
+				} catch (NamingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		
+		}
+		
+	}
+
+	/*
+	 * K letu mam pouzivatelov, otvori sa detail okno pre pouzivatel a zobrazim
+	 * jeho udaje.
+	 */
+	class UserDetailListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			int selected = flightWindow.getSelectedRow();
+			
+			if (myPartners.size() > 0 && selected > -1) {
+				windowFlag = 2;
+				String message = myPartners.get(selected).getMessage();
+				User u = myPartners.get(selected).getUser();
+				userDetailWindow = new UserDetailWindow();
+				userDetailWindow.setTextFields(u.getName(), u.getSurname(), u.getBirthDate(), u.getPhone()
+						, u.getFacebook(), message);
+				userDetailWindow.setListeners(new CloseFormListener());
+				userDetailWindow.setLanguage(rb);
+				userDetailWindow.setVisible(true);
+			}
+			else { JOptionPane.showMessageDialog(null, rb.getString("msg_partner"));}
+		}
+	}
+
+	/*
+	 * Po vybere jedneho z mojich letov, zobrazim detail okno kde nacucam
+	 * pouzivatelov, ktori takisto tymto letom letia a info o lete.
+	 */
+	class ShowFlightListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			showFlight();
+		}
+
+	}
+
+	/*
+	 * po stlaceni tohto tlacidla v menu letov sa uzivatel odhlasi, zostane
+	 * bezat zasa login pass okno.
+	 */
+	class LogOffListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (menuWindow != null) menuWindow.dispose();
+			if (registerWindow != null) registerWindow.dispose();
+			loginWindow = new LoginWindow();
+			loginWindow.setListeners(new LoginListener(), new RegisterListener(), new CloseListener(), new LangListener());
+			loginWindow.setVisible(true);
+			loginWindow.setLanguage(rb);
+		}
+
+	}
+	
+	
+	class AddFlightListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			menuWindow.dispose();
+			addFlightWindow = new AddFlightWindow();
+			addFlightWindow.setListeners(new ConfirmFlightListener(), new CloseFormListener());
+			addFlightWindow.setVisible(true);
+			addFlightWindow.setLanguage(rb);
+			windowFlag = 1;
+		}
+		
+	}
+	
+	
+	class ConfirmFlightListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			List<String> form = new ArrayList<>();
+			
+			form.add(addFlightWindow.getTextFrom());
+			form.add(addFlightWindow.getTextTo());
+			form.add(addFlightWindow.getTextFlightNO());
+			form.add(addFlightWindow.getTextDate());
+			
+			if (isEmtpyField(form) == true) JOptionPane.showMessageDialog(null, rb.getString("msg_fill"));
+			else {
+				try {
+					ctx = new InitialContext();
+					rm = (MyFacadeBeanRemote)ctx.lookup(remote);
+					rmT = (MyTransactionFacadeBeanRemote)ctx.lookup(remoteTrans);
+					
+					
+					Flight f = rm.isFlight(form.get(3), form.get(0), form.get(1), form.get(2));
+					if (f != null) {
+						rmT.addFlight(loggedID, f, addFlightWindow.getTextMessageMoti());
+					}
+					else {
+						f = createFlight(form);
+						rmT.addFlight(loggedID, f, addFlightWindow.getTextMessageMoti());
+					}
+					JOptionPane.showMessageDialog(null, rb.getString("msg_flight_add"));
+					addFlightWindow.dispose();
+					showMenu();
+				} catch (NamingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		}
+		
+	}
+	
+	class WeatherListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			weatherWindow = new WeatherWindow();
+			weatherWindow.setListeners(new SearchWeatherListener(), new CloseFormListener());
+			weatherWindow.setLanguage(rb);
+			weatherWindow.setVisible(true);
+			menuWindow.dispose();
+			windowFlag = 1;
+		}
+		
+	}
+	
+	class SearchWeatherListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			try {
+				ctx = new InitialContext();
+				rm = (MyFacadeBeanRemote)ctx.lookup(remote);
+				
+				Weather w = rm.getWeather(weatherWindow.getCity());
+				weatherWindow.setWeather(w.getTemperature() + " °C", w.getCountry() + ", " + w.getCity(), w.getConditionText());
+				 URL url = new URL(w.getImageUrl());
+				 BufferedImage image = ImageIO.read(url);
+				 weatherWindow.setIcon(new ImageIcon(image));
+				 
+				
+			} catch (NamingException | IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		
+	}
+	
+	class CloseListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			loginWindow.dispose();
+		}
+		
+	}
+	
+	class CloseFormListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			switch (windowFlag) {
+			case 1: showMenu(); break;
+			case 2: userDetailWindow.dispose(); windowFlag = 1; break;
+			}
+		//	menuWindow.setVisible(true);
+		}
+		
+	}
+	
+	public void checkLogin() {
+		try {
+			log.info("Checking login");
+			ctx = new InitialContext();
+			rm = (MyFacadeBeanRemote)ctx.lookup(remote);
+			user = rm.isRegistered(loginWindow.getLogin(), loginWindow.getPW());
+			ctx.close();
+			if (user == null) JOptionPane.showMessageDialog(null, rb.getString("msg_login_false"));
+			else {
+				JOptionPane.showMessageDialog(null, rb.getString("msg_login_ok"));
+				loggedID = user.getId();
+				showMenu();
+			}
+			
+		} catch (NamingException e1) {
+			log.error(e1, e1);
+		}
+	}
+	
+	public void showLogin() {
+		log.info("Opening login window");
+		loginWindow = new LoginWindow();
+		loginWindow.setListeners(new LoginListener(), new RegisterListener(), new CloseListener(), new LangListener());
+		loginWindow.setVisible(true);
+		loginWindow.setLanguage(rb);
+	}
+	
+	public void showMenu() {
+		try {
+			log.info("Opening menu window");
+			ctx = new InitialContext();
+			rm = (MyFacadeBeanRemote)ctx.lookup(remote);
+			ul = rm.getMyFlights(loggedID, 1);
+			
+			disposeCheck();
+			menuWindow = new MenuWindow();
+			menuWindow.setListeners(new AddFlightListener(), new ShowFlightListener(), new LogOffListener(), new WeatherListener());
+			menuWindow.setTable(getModelFlights(ul));
+			menuWindow.setLanguage(rb);
+			menuWindow.setVisible(true);
+			ctx.close();
+			
+		} catch (NamingException e1) {
+			log.error(e1,e1);
+		}
+	}
+	
+	public void showFlight() {
+		int selected = menuWindow.getSelectedRow();
+		
+		if (selected != -1) {
+			try {
+				ctx = new InitialContext();
+				rm = (MyFacadeBeanRemote)ctx.lookup(remote);
+				myPartners = sortLoggedID(rm.getMyFlights(ul.get(selected).getFlight().getId(), 2), loggedID);
+				flightWindow = new FlightDetailWindow();
+				windowFlag = 1;
+				flightWindow.setListeners(new CloseFormListener(), new UserDetailListener());
+				flightWindow.setTable(getModelUsers(myPartners));
+				flightWindow.setLanguage(rb);
+				
+				Flight f = ul.get(selected).getFlight();
+				flightWindow.setFields(f.getDate(), f.getAirportFrom(), f.getAirportTo(), f.getFlightNumber());
+				
+				
+				
+				flightWindow.setVisible(true);
+				menuWindow.dispose();
+				
+			} catch (NamingException e1) {
+				log.error(e1,e1);
+			}
+			
+			
+		}
+	}
+	
+	
+	public DefaultTableModel getModelFlights(List<UserFlight> uf) {
+		String []columns = {rb.getString("lbl_from"),rb.getString("lbl_to") , rb.getString("lbl_flightNO"), rb.getString("lbl_date")};
+		DefaultTableModel tm = new DefaultTableModel(null, columns);
+		
+		for (UserFlight currUF: uf) {
+			ArrayList<String> tmp = new ArrayList<>();
+			tmp.add(currUF.getFlight().getAirportFrom());
+			tmp.add(currUF.getFlight().getAirportTo());
+			tmp.add(currUF.getFlight().getFlightNumber());
+			tmp.add(currUF.getFlight().getDate());
+			tm.addRow(tmp.toArray());
+		}
+		
+		
+		return tm;
+	}
+	
+	public DefaultTableModel getModelUsers(List<UserFlight> uf) {
+		String []columns = {"Meno", "Priezvisko"};
+		DefaultTableModel tm = new DefaultTableModel(null, columns);
+		
+		for (UserFlight currUF: uf) {
+			ArrayList<String> tmp = new ArrayList<>();
+			tmp.add(currUF.getUser().getName());
+			tmp.add(currUF.getUser().getSurname());
+			tm.addRow(tmp.toArray());
+		}
+		return tm;
+	}
+	
+	public List<UserFlight> sortLoggedID(List<UserFlight> uf, int loggedID) {
+		List <UserFlight> tmp = new ArrayList<>();
+		
+		for (UserFlight curr : uf) {
+			if (curr.getUser().getId() != loggedID) {
+				tmp.add(curr);
+			}
+		}
+		return tmp;
+	}
+	
+	public void disposeCheck() {
+		if (flightWindow != null) 
+			flightWindow.dispose(); flightWindow = null;
+	    if (userDetailWindow != null ) { userDetailWindow.dispose(); userDetailWindow = null;}
+	    if (loginWindow != null ) { loginWindow.dispose(); loginWindow = null;}
+	    if (addFlightWindow != null) { addFlightWindow.dispose(); addFlightWindow = null; }
+	    if(weatherWindow != null) { weatherWindow.dispose(); weatherWindow = null;}
+		
+	}
+	
+	private boolean isEmtpyField(List<String> list) {
+		for (String CurrS : list) {
+			if (CurrS.equals("")) return true;
+		}
+		return false;
+	}
+	
+	private User createUser(List<String> list) {
+		User u = new User();
+		
+		u.setName(list.get(0));
+		u.setSurname(list.get(1));
+		u.setBirthDate(list.get(2));
+		u.setPhone(list.get(3));
+		u.setLogin_name(list.get(4));
+		u.setLogin_pass(list.get(5));
+		u.setFacebook(list.get(6));
+		
+		return u;
+	}
+	
+	private Flight createFlight(List<String> list) {
+		Flight f = new Flight();
+		
+		f.setAirportFrom(list.get(0));
+		f.setAirportTo(list.get(1));
+		f.setFlightNumber(list.get(2));
+		f.setDate(list.get(3));
+		
+		return f;
+	}
+}

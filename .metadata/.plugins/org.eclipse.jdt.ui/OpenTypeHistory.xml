@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
-<typeInfo handle="=EJBTestAPI/src&lt;remote{MyFacadeBeanRemote.java[MyFacadeBeanRemote" modifiers="513" timestamp="1463447764970"/>
-<typeInfo handle="=EJBTestServer/src&lt;facade{MyFacadeBean.java[MyFacadeBean" modifiers="1" timestamp="1463447764180"/>
+<typeInfo handle="=EJBTestAPI/src&lt;remote{MyFacadeBeanRemote.java[MyFacadeBeanRemote" modifiers="513" timestamp="1463526838634"/>
+<typeInfo handle="=EJBTestServer/src&lt;facade{MyFacadeBean.java[MyFacadeBean" modifiers="1" timestamp="1463526804400"/>
 </typeInfoHistroy>

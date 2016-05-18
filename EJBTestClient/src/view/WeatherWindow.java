@@ -6,6 +6,8 @@ import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
@@ -14,6 +16,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
+import org.apache.log4j.Logger;
+
 @SuppressWarnings("serial")
 public class WeatherWindow extends JFrame{
 	private JTextField text_city;
@@ -21,11 +25,22 @@ public class WeatherWindow extends JFrame{
 	private JLabel lbl_location, lbl_temp, lbl_weather_icon, lbl_condition;
 	private JLabel lbl_weather_city;
 	private JButton btn_close;
+	private static final Logger log = Logger.getLogger(WeatherWindow.class);
+
 	public WeatherWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setBackground(new Color(240, 248, 255));
 		getContentPane().setLayout(null);
-		setSize(461,359);
+		
+		Properties p = new Properties();
+		try {
+			p.load(controll.Properties.getProperties());
+		} catch (IOException e) {
+			log.error(e,e);
+		}
+		setSize(Integer.valueOf(p.getProperty("weather_w")), Integer.valueOf(p.getProperty("weather_h")));
+		
+		setLocationRelativeTo(null);
 		setIconImage(new javax.swing.ImageIcon("etc\\img\\plane (1).png").getImage());
 		JLabel lblcity = new JLabel("");
 		lblcity.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463424949_location.png"));
@@ -120,5 +135,6 @@ public class WeatherWindow extends JFrame{
 		btn_close.setText(rb.getString("btn_close"));
 		btn_search.setText(rb.getString("btn_search"));
 		lbl_weather_city.setText(rb.getString("lbl_weather_city"));
+		this.setTitle(rb.getString("ttl_weather"));
 	}
 }

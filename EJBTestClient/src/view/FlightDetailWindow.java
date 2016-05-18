@@ -6,10 +6,15 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
+
+import org.apache.log4j.Logger;
+
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
@@ -31,10 +36,20 @@ public class FlightDetailWindow extends JFrame {
 	private JButton btn_close, btn_showPartner;
 	private JLabel label;
 	private JLabel label_1;
-	
+	private static final Logger log = Logger.getLogger(FlightDetailWindow.class);
+
 	
 	public FlightDetailWindow() {
-		setSize(696,333);
+		
+		Properties p = new Properties();
+		try {
+			p.load(controll.Properties.getProperties());
+		} catch (IOException e) {
+			log.error(e,e);
+		}
+		setSize(Integer.valueOf(p.getProperty("flight_w")), Integer.valueOf(p.getProperty("flight_h")));
+		
+		setLocationRelativeTo(null);
 		getContentPane().setBackground(new Color(240, 248, 255));
 		getContentPane().setLayout(null);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -136,6 +151,7 @@ public class FlightDetailWindow extends JFrame {
 		
 		btn_close.setText(rb.getString("btn_cancel"));
 		btn_showPartner.setText(rb.getString("btn_showPartner"));
+		this.setTitle(rb.getString("ttl_flightDetail"));
 	}
 	
 	public void setListeners(ActionListener close, ActionListener showPartner) {

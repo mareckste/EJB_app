@@ -1,0 +1,14 @@
+package controll;
+
+import org.apache.log4j.Logger;
+
+public class ClientTest {
+	
+	private static final Logger log = Logger.getLogger(ClientTest.class);
+	
+	public static void main(String[] args) throws Exception {
+		log.debug("Text message");
+		
+		
+	}
+}

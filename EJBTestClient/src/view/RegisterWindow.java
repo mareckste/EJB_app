@@ -6,6 +6,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
@@ -15,6 +17,8 @@ import java.awt.Font;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+
+import org.apache.log4j.Logger;
 
 
 @SuppressWarnings("serial")
@@ -33,11 +37,20 @@ public class RegisterWindow extends JFrame{
 	private JTextField text_password;
 	private JTextField text_login;
 	private JLabel lbl_login, lbl_pass;
-	
+	private static final Logger log = Logger.getLogger(RegisterWindow.class);
 	public RegisterWindow() {
 		getContentPane().setBackground(new Color(240, 248, 255));
-		setTitle("Register");
-		setSize(463, 359);
+		
+		
+		Properties p = new Properties();
+		try {
+			p.load(controll.Properties.getProperties());
+		} catch (IOException e) {
+			log.error(e,e);
+		}
+		setSize(Integer.valueOf(p.getProperty("reg_w")), Integer.valueOf(p.getProperty("reg_h")));
+		
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
 		
 		setIconImage(new javax.swing.ImageIcon("etc\\img\\plane (1).png").getImage());
@@ -188,6 +201,7 @@ public class RegisterWindow extends JFrame{
 		btn_cancel.setText(rb.getString("btn_cancel"));
 		btn_next.setText(rb.getString("btn_next"));
 		lbl_contact_and_social.setText(rb.getString("lbl_contact_and_social"));
+		this.setTitle(rb.getString("ttl_register"));
 	}
 	
 	public void setListeners(ActionListener next, ActionListener cancel) {

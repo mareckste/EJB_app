@@ -7,6 +7,8 @@ import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
@@ -16,6 +18,8 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import org.apache.log4j.Logger;
 
 @SuppressWarnings("serial")
 public class AddFlightWindow extends JFrame{
@@ -28,10 +32,20 @@ public class AddFlightWindow extends JFrame{
 	private JTextArea text_motivate;
 	private JLabel label;
 	private JLabel lbl_add_flight;
-	
+
+	private static final Logger log = Logger.getLogger(AddFlightWindow.class);
 	public AddFlightWindow() {
 		setTitle("New flight");
-		setSize(499, 342);
+		
+		Properties p = new Properties();
+		try {
+			p.load(controll.Properties.getProperties());
+		} catch (IOException e) {
+			log.error(e,e);
+		}
+		setSize(Integer.valueOf(p.getProperty("add_w")), Integer.valueOf(p.getProperty("add_h")));
+		
+		setLocationRelativeTo(null);
 		getContentPane().setBackground(new Color(240, 248, 255));
 		getContentPane().setLayout(null);
 		setIconImage(new javax.swing.ImageIcon("etc\\img\\plane (1).png").getImage());
@@ -156,5 +170,6 @@ public class AddFlightWindow extends JFrame{
 		
 		btn_cancel.setText(rb.getString("btn_cancel"));
 		btn_add.setText(rb.getString("btn_add"));
+		this.setTitle(rb.getString("ttl_addflight"));
 	}
 }

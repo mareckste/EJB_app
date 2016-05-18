@@ -5,8 +5,12 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
+
+import org.apache.log4j.Logger;
+
 import javax.swing.JScrollPane;
 
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
@@ -14,6 +18,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 
@@ -23,8 +28,19 @@ public class MenuWindow extends JFrame {
 	private JButton btn_showFlight, btn_logoff, btn_add_flight, btn_weather;
 	private JLabel lbl_myflights;
 	private JTable table;
+	private static final Logger log = Logger.getLogger(MenuWindow.class);
 	public MenuWindow() {
-		setSize(661,301);
+		
+		Properties p = new Properties();
+		try {
+			p.load(controll.Properties.getProperties());
+		} catch (IOException e) {
+			log.error(e,e);
+		}
+		setSize(Integer.valueOf(p.getProperty("menu_w")), Integer.valueOf(p.getProperty("menu_h")));
+		
+		setTitle("MENU");
+		setLocationRelativeTo(null);
 		setIconImage(new javax.swing.ImageIcon("etc\\img\\plane (1).png").getImage());
 		getContentPane().setBackground(new Color(240, 248, 255));
 		getContentPane().setLayout(null);

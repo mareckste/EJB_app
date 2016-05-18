@@ -11,12 +11,12 @@ import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
 
-import org.json.JSONException;
+
+
 import org.json.JSONObject;
 
-import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Default;
+
 
 import entity.UserFlight;
 import entity.Weather;
