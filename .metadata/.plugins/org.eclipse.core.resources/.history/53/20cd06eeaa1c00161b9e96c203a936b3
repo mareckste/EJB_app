@@ -51,7 +51,7 @@ public class Controller {
 	private Context ctx;
 	private MyFacadeBeanRemote rm;
 	private MyTransactionFacadeBeanRemote rmT;
-	private ResourceBundle rb = ResourceBundle.getBundle("Location", Locale.getDefault());
+	private ResourceBundle rb = ResourceBundle.getBundle("Location", /*Locale.getDefault()*/ Locale.ENGLISH);
 
 	public Controller() {
 		showLogin();
@@ -61,14 +61,7 @@ public class Controller {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (Locale.ENGLISH == rb.getLocale()) {
-				rb = ResourceBundle.getBundle("Location", new Locale("sk"));
-				loginWindow.setLanguage(rb);
-			}
-			else {
-				rb = ResourceBundle.getBundle("Location", new Locale("en"));
-				loginWindow.setLanguage(rb);
-			}
+			
 		}
 		
 	}
@@ -199,7 +192,7 @@ public class Controller {
 			if (menuWindow != null) menuWindow.dispose();
 			if (registerWindow != null) registerWindow.dispose();
 			loginWindow = new LoginWindow();
-			loginWindow.setListeners(new LoginListener(), new RegisterListener(), new CloseListener(), new LangListener());
+			loginWindow.setListeners(new LoginListener(), new RegisterListener(), new CloseListener());
 			loginWindow.setVisible(true);
 			loginWindow.setLanguage(rb);
 		}
@@ -341,7 +334,7 @@ public class Controller {
 	
 	public void showLogin() {
 		loginWindow = new LoginWindow();
-		loginWindow.setListeners(new LoginListener(), new RegisterListener(), new CloseListener(), new LangListener());
+		loginWindow.setListeners(new LoginListener(), new RegisterListener(), new CloseListener());
 		loginWindow.setVisible(true);
 		loginWindow.setLanguage(rb);
 	}

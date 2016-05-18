@@ -98,7 +98,7 @@ public class LoginWindow extends JFrame{
 		
 		btn_lang = new JButton("");
 		btn_lang.setHorizontalAlignment(SwingConstants.LEFT);
-		btn_lang.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463552364_Slovakia.png"));
+		btn_lang.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463552389_United Kingdom(Great Britain).png"));
 		btn_lang.setBounds(388, 11, 25, 23);
 		btn_lang.setBorder(BorderFactory.createEmptyBorder());
 		btn_lang.setContentAreaFilled(false);
@@ -116,11 +116,10 @@ public class LoginWindow extends JFrame{
 		btn_lang.setIcon(new ImageIcon(rb.getString("btn_lang")));
 	}
 	
-	public void setListeners(ActionListener login, ActionListener register, ActionListener close, ActionListener lang) {
+	public void setListeners(ActionListener login, ActionListener register, ActionListener close) {
 		btn_login.addActionListener(login);
 		btn_register.addActionListener(register);
 		btn_close.addActionListener(close);
-		btn_lang.addActionListener(lang);
 	}
 	
 	public String getLogin() {
