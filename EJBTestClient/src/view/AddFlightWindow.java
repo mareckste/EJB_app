@@ -31,6 +31,7 @@ public class AddFlightWindow extends JFrame{
 	
 	public AddFlightWindow() {
 		setTitle("New flight");
+		setSize(499, 342);
 		getContentPane().setBackground(new Color(240, 248, 255));
 		getContentPane().setLayout(null);
 		setIconImage(new javax.swing.ImageIcon("etc\\img\\plane (1).png").getImage());

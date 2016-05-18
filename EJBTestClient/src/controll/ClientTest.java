@@ -11,6 +11,7 @@ import com.sun.org.apache.bcel.internal.generic.GETFIELD;
 import entity.Flight;
 import entity.User;
 import entity.UserFlight;
+import entity.Weather;
 import remote.MyFacadeBeanRemote;
 import remote.MyTransactionFacadeBeanRemote;
 import view.AddFlightWindow;
@@ -62,5 +63,7 @@ public class ClientTest {
 //		for (UserFlight uf : ul) {
 //			System.out.println(uf.getUser().getId() + " " + uf.getFlight().getId());
 //		}
+		Weather w = remote.getWeather("Hladovka");
+		System.out.println(w.getCountry() + " " + w.getCity() + " " + w.getTemperature() + " " + w.getConditionText());
 	}
 }

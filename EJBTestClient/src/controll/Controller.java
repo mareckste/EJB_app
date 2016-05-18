@@ -2,18 +2,24 @@ package controll;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import entity.Flight;
 import entity.User;
 import entity.UserFlight;
+import entity.Weather;
 import remote.MyFacadeBeanRemote;
 import remote.MyTransactionFacadeBeanRemote;
 import view.AddFlightWindow;
@@ -22,6 +28,7 @@ import view.LoginWindow;
 import view.MenuWindow;
 import view.RegisterWindow;
 import view.UserDetailWindow;
+import view.WeatherWindow;
 
 public class Controller {
 	private static final String remote = "ejb:EJBTestEAR/EJBTestServer//MyFacadeBean!remote.MyFacadeBeanRemote";
@@ -34,6 +41,7 @@ public class Controller {
 	private AddFlightWindow addFlightWindow;
 	private UserDetailWindow userDetailWindow;
 	private RegisterWindow registerWindow;
+	private WeatherWindow weatherWindow;
 	private int loggedID;
 	private User user;
 	private List<UserFlight> ul;
@@ -231,7 +239,41 @@ public class Controller {
 		
 	}
 	
+	class WeatherListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			weatherWindow = new WeatherWindow();
+			weatherWindow.setListeners(new SearchWeatherListener(), new CloseFormListener());
+			weatherWindow.setVisible(true);
+			menuWindow.dispose();
+			windowFlag = 1;
+		}
+		
+	}
 	
+	class SearchWeatherListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			try {
+				ctx = new InitialContext();
+				rm = (MyFacadeBeanRemote)ctx.lookup(remote);
+				
+				Weather w = rm.getWeather(weatherWindow.getCity());
+				weatherWindow.setWeather(w.getTemperature() + " °C", w.getCountry() + ", " + w.getCity(), w.getConditionText());
+				 URL url = new URL(w.getImageUrl());
+				 BufferedImage image = ImageIO.read(url);
+				 weatherWindow.setIcon(new ImageIcon(image));
+				 
+				
+			} catch (NamingException | IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		
+	}
 	
 	class CloseListener implements ActionListener {
 
@@ -287,7 +329,7 @@ public class Controller {
 			
 			disposeCheck();
 			menuWindow = new MenuWindow();
-			menuWindow.setListeners(new AddFlightListener(), new ShowFlightListener(), new LogOffListener());
+			menuWindow.setListeners(new AddFlightListener(), new ShowFlightListener(), new LogOffListener(), new WeatherListener());
 			menuWindow.setTable(getModelFlights(ul));
 			menuWindow.setVisible(true);
 			ctx.close();
@@ -374,6 +416,7 @@ public class Controller {
 	    if (userDetailWindow != null ) { userDetailWindow.dispose(); userDetailWindow = null;}
 	    if (loginWindow != null ) { loginWindow.dispose(); loginWindow = null;}
 	    if (addFlightWindow != null) { addFlightWindow.dispose(); addFlightWindow = null; }
+	    if(weatherWindow != null) { weatherWindow.dispose(); weatherWindow = null;}
 		
 	}
 	

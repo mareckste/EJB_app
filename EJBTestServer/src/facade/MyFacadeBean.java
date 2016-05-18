@@ -13,6 +13,7 @@ import dao.UserFlightDAO;
 import entity.Flight;
 import entity.User;
 import entity.UserFlight;
+import entity.Weather;
 import executive.EJBMyExecutiveBean;
 import remote.MyFacadeBeanRemote;
 
@@ -74,6 +75,10 @@ public class MyFacadeBean implements MyFacadeBeanRemote {
     public boolean isAvailableLogin(String login) {
     	UserDAO ud = new UserDAO();
     	return ud.isAvailableLogin(em, login);
+    }
+    
+    public Weather getWeather(String cityName) {
+    	return bean2.getWeather(cityName);
     }
 
 }

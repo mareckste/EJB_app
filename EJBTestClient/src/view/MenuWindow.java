@@ -15,11 +15,12 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.Color;
+import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class MenuWindow extends JFrame {
 	
-	private JButton btn_showFlight, btn_logoff, btn_add_flight;
+	private JButton btn_showFlight, btn_logoff, btn_add_flight, btn_weather;
 	private JLabel lbl_myflights;
 	private JTable table;
 	public MenuWindow() {
@@ -68,6 +69,15 @@ public class MenuWindow extends JFrame {
 		btn_add_flight.setBorder(BorderFactory.createEmptyBorder());
 		btn_add_flight.setContentAreaFilled(false);
 		getContentPane().add(btn_add_flight);
+		
+		btn_weather = new JButton("See a weather");
+		btn_weather.setFont(new Font("Microsoft Tai Le", Font.ITALIC, 14));
+		btn_weather.setHorizontalAlignment(SwingConstants.LEFT);
+		btn_weather.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463523980_Weather.png"));
+		btn_weather.setBounds(211, 202, 180, 49);
+		btn_weather.setBorder(BorderFactory.createEmptyBorder());
+		btn_weather.setContentAreaFilled(false);
+		getContentPane().add(btn_weather);
 	}
 	
 	public void setLanguage(ResourceBundle rb) {
@@ -85,9 +95,10 @@ public class MenuWindow extends JFrame {
 		return table.getSelectedRow();
 	}
 	
-	public void setListeners(ActionListener addFlight, ActionListener showFlight, ActionListener logoff) {
+	public void setListeners(ActionListener addFlight, ActionListener showFlight, ActionListener logoff, ActionListener weather) {
 		btn_add_flight.addActionListener(addFlight);
 		btn_logoff.addActionListener(logoff);
 		btn_showFlight.addActionListener(showFlight);
+		btn_weather.addActionListener(weather);
 	}
 }
