@@ -32,11 +32,11 @@ btn_lang=C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463552389_United 
 lbl_contact_and_social = Kontakt a soci\u00e1lne m\u00e9dia
 btn_add = Pridaj
 
-msg_login_ok = Prihl\u00e1senie prebehlo \u00faspe\u0161ne
-msg_login_false = Zl\u00e9 prihlasovacie \u00fadaje
-msg_flight_add = Let bol pridan\u00fd
-msg_fill = Mus\u00edte vyplni\u0165 v\u0161tky kol\u00f3nky
+msg_login_ok = Prihlásenie prebehlo úspe\u0161ne
+msg_login_false = Zlé prihlasovacie údaje
+msg_flight_add = Let bol pridaný
+msg_fill = Musíte vyplni\u0165 v\u0161tky kolónky
 msg_partner = Chyba pri vo\u013Ebe partnera
-msg_login_succ = Boli ste \u00faspe\u0161ne zaregistrovan\u00fd
-msg_login_exist = Zvolen\u00fd login u\u017E existuje
+msg_login_succ = Boli ste úspe\u0161ne zaregistrovaný
+msg_login_exist = Zvolený login u\u017E existuje
 

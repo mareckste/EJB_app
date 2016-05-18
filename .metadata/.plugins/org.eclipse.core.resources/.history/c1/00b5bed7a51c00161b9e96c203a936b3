@@ -72,7 +72,7 @@ public class WeatherWindow extends JFrame{
 		text_city.setColumns(10);
 		
 		btn_search = new JButton("Search weather");
-		btn_search.setFont(new Font("Microsoft PhagsPa", Font.ITALIC, 14));
+		btn_search.setFont(new Font("Microsoft Tai Le", Font.ITALIC, 14));
 		btn_search.setHorizontalAlignment(SwingConstants.LEFT);
 		btn_search.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\right-arrow.png"));
 		btn_search.setBorder(BorderFactory.createEmptyBorder());
@@ -82,12 +82,12 @@ public class WeatherWindow extends JFrame{
 		
 		lbl_weather_city = new JLabel("Insert city name:");
 		lbl_weather_city.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 13));
-		lbl_weather_city.setBounds(27, 250, 146, 14);
+		lbl_weather_city.setBounds(27, 250, 104, 14);
 		getContentPane().add(lbl_weather_city);
 		
 		btn_close = new JButton("Close");
 		btn_close.setHorizontalAlignment(SwingConstants.LEFT);
-		btn_close.setFont(new Font("Microsoft PhagsPa", Font.ITALIC, 14));
+		btn_close.setFont(new Font("Microsoft Tai Le", Font.ITALIC, 14));
 		btn_close.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463425331_Cancel.png"));
 		btn_close.setBounds(332, 262, 101, 46);
 		btn_close.setBorder(BorderFactory.createEmptyBorder());

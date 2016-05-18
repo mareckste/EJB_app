@@ -51,7 +51,7 @@ public class Controller {
 	private Context ctx;
 	private MyFacadeBeanRemote rm;
 	private MyTransactionFacadeBeanRemote rmT;
-	private ResourceBundle rb = ResourceBundle.getBundle("Location", /*Locale.getDefault()*/ Locale.ENGLISH);
+	private ResourceBundle rb = ResourceBundle.getBundle("Location", Locale.getDefault());
 
 	public Controller() {
 		showLogin();
@@ -106,7 +106,7 @@ public class Controller {
 			regForm.add(registerWindow.getTextSocial()); //6
 
 			if (isEmtpyField(regForm) == true) {
-				JOptionPane.showMessageDialog(null, rb.getString("msg_fill"));
+				JOptionPane.showMessageDialog(null, "Musite vyplnit vsetky udaje");
 			}
 			else {
 				try {
@@ -114,10 +114,10 @@ public class Controller {
 					rmT = (MyTransactionFacadeBeanRemote)ctx.lookup(remoteTrans);
 					rm = (MyFacadeBeanRemote)ctx.lookup(remote);
 					if (rm.isAvailableLogin(regForm.get(5)) == false) 
-						JOptionPane.showMessageDialog(null, "msg_login_exist");
+						JOptionPane.showMessageDialog(null, "Zvoleny login uz existuje");
 					else {
 						rmT.addUser(createUser(regForm));
-						JOptionPane.showMessageDialog(null, rb.getString("msg_login_succ"));
+						JOptionPane.showMessageDialog(null, "Boli ste uspesne zaregistrovani, mozete sa prihlasit");
 						registerWindow.dispose();
 						showLogin();
 					}
@@ -155,7 +155,7 @@ public class Controller {
 				userDetailWindow.setLanguage(rb);
 				userDetailWindow.setVisible(true);
 			}
-			else { JOptionPane.showMessageDialog(null, rb.getString("msg_partner"));}
+			else { JOptionPane.showMessageDialog(null, "Chyba pri volbe partnera");}
 		}
 	}
 
@@ -217,7 +217,7 @@ public class Controller {
 			form.add(addFlightWindow.getTextFlightNO());
 			form.add(addFlightWindow.getTextDate());
 			
-			if (isEmtpyField(form) == true) JOptionPane.showMessageDialog(null, rb.getString("msg_fill"));
+			if (isEmtpyField(form) == true) JOptionPane.showMessageDialog(null, "Musite vyplnit vsetky kolonky");
 			else {
 				try {
 					ctx = new InitialContext();
@@ -233,7 +233,7 @@ public class Controller {
 						f = createFlight(form);
 						rmT.addFlight(loggedID, f, addFlightWindow.getTextMessageMoti());
 					}
-					JOptionPane.showMessageDialog(null, rb.getString("msg_flight_add"));
+					JOptionPane.showMessageDialog(null, "Let bol pridany");
 					addFlightWindow.dispose();
 					showMenu();
 				} catch (NamingException e1) {
@@ -252,7 +252,6 @@ public class Controller {
 		public void actionPerformed(ActionEvent e) {
 			weatherWindow = new WeatherWindow();
 			weatherWindow.setListeners(new SearchWeatherListener(), new CloseFormListener());
-			weatherWindow.setLanguage(rb);
 			weatherWindow.setVisible(true);
 			menuWindow.dispose();
 			windowFlag = 1;
@@ -311,9 +310,9 @@ public class Controller {
 			rm = (MyFacadeBeanRemote)ctx.lookup(remote);
 			user = rm.isRegistered(loginWindow.getLogin(), loginWindow.getPW());
 			ctx.close();
-			if (user == null) JOptionPane.showMessageDialog(null, rb.getString("msg_login_false"));
+			if (user == null) JOptionPane.showMessageDialog(null, "Zle prihlasovacie udaje");
 			else {
-				JOptionPane.showMessageDialog(null, rb.getString("msg_login_ok"));
+				JOptionPane.showMessageDialog(null, "Prihlasenie prebehelo uspesne" + user.getName());
 				loggedID = user.getId();
 				showMenu();
 			}

@@ -30,11 +30,3 @@ btn_lang = Contact and social media
 btn_search = Search
 btn_next = Register
 btn_add = Add flight
-
-msg_login_ok = Logged in succesfully
-msg_login_false = Incorrect login or password
-msg_flight_add = Flight was added
-msg_fill = You have to fill all areas
-msg_partner = Your choice is incorrect
-msg_login_succ = You have been succesfully registered
-msg_login_exist = The login already exists

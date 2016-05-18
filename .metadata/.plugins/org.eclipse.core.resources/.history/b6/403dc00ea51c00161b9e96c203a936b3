@@ -13,7 +13,7 @@ lbl_partners = Potencion\u00e1lni spolucestuj\u00faci:
 lbl_myflights = Moje lety
 lbl_socialMedia = Facebook:
 lbl_contact_and_social = ***
-lbl_weather_city = Zadaj n\u00e1zov mesta:
+lbl_weather_city = ***
 
 btn_login = Prihl\u00e1s
 btn_register = Zaregistruj
@@ -23,6 +23,7 @@ btn_close = Zavri
 btn_showPartner = Zobraz detail
 btn_showFlight = Detail letu
 btn_logoff = Odhl\u00e1senie
+btn_add_flight = Pridať let
 btn_search = H\u013Eadaj
 btn_weather =
 btn_next = Registruj
@@ -31,12 +32,4 @@ btn_weather = Zobraz po\u010Dasie
 btn_lang=C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463552389_United Kingdom(Great Britain).png
 lbl_contact_and_social = Kontakt a soci\u00e1lne m\u00e9dia
 btn_add = Pridaj
-
-msg_login_ok = Prihl\u00e1senie prebehlo \u00faspe\u0161ne
-msg_login_false = Zl\u00e9 prihlasovacie \u00fadaje
-msg_flight_add = Let bol pridan\u00fd
-msg_fill = Mus\u00edte vyplni\u0165 v\u0161tky kol\u00f3nky
-msg_partner = Chyba pri vo\u013Ebe partnera
-msg_login_succ = Boli ste \u00faspe\u0161ne zaregistrovan\u00fd
-msg_login_exist = Zvolen\u00fd login u\u017E existuje
 

@@ -9,11 +9,11 @@ lbl_to = Destination Airport:
 lbl_date = Date of flight:
 lbl_flightNO = Flight number:
 lbl_motivate = Additional note:
-lbl_partners = People you may fly with:
+lbl_partners = People travelling the same way:
 lbl_myflights = My flights
 lbl_socialMedia = Facebook:
 lbl_contact_and_social = Contact and social media:
-lbl_weather_city = Search weather:
+lbl_weather_city = Search weather for speciffic city:
 
 
 btn_login = Login
@@ -21,7 +21,7 @@ btn_register = Register
 btn_continue = Continue
 btn_cancel = Cancel
 btn_close = Close
-btn_showPartner = Show detail
+btn_showPartner = Show partner's details
 btn_showFlight = Show flight info
 btn_logoff = Log off
 btn_add_flight = Add new trip
@@ -30,11 +30,3 @@ btn_lang = Contact and social media
 btn_search = Search
 btn_next = Register
 btn_add = Add flight
-
-msg_login_ok = Logged in succesfully
-msg_login_false = Incorrect login or password
-msg_flight_add = Flight was added
-msg_fill = You have to fill all areas
-msg_partner = Your choice is incorrect
-msg_login_succ = You have been succesfully registered
-msg_login_exist = The login already exists
