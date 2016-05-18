@@ -43,14 +43,14 @@ public class MenuWindow extends JFrame {
 		
 		btn_showFlight = new JButton("Show flight detail");
 		btn_showFlight.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463423120_takeoff.png"));
-		btn_showFlight.setFont(new Font("Microsoft Tai Le", Font.ITALIC, 14));
+		btn_showFlight.setFont(new Font("Microsoft PhagsPa", Font.ITALIC, 14));
 		btn_showFlight.setBounds(412, 202, 205, 49);
 		btn_showFlight.setBorder(BorderFactory.createEmptyBorder());
 		btn_showFlight.setContentAreaFilled(false);
 		getContentPane().add(btn_showFlight);
 		
 		btn_logoff = new JButton("Log out");
-		btn_logoff.setFont(new Font("Microsoft Tai Le", Font.ITALIC, 14));
+		btn_logoff.setFont(new Font("Microsoft PhagsPa", Font.ITALIC, 14));
 		btn_logoff.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463422654_free-29.png"));
 		btn_logoff.setBounds(10, 202, 149, 49);
 		btn_logoff.setBorder(BorderFactory.createEmptyBorder());
@@ -63,15 +63,16 @@ public class MenuWindow extends JFrame {
 		getContentPane().add(label_1);
 		
 		btn_add_flight = new JButton("Add new trip");
-		btn_add_flight.setFont(new Font("Microsoft Tai Le", Font.ITALIC, 14));
+		btn_add_flight.setHorizontalAlignment(SwingConstants.LEFT);
+		btn_add_flight.setFont(new Font("Microsoft PhagsPa", Font.ITALIC, 14));
 		btn_add_flight.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463432542_Paper-Plane.png"));
-		btn_add_flight.setBounds(10, 118, 192, 73);
+		btn_add_flight.setBounds(31, 117, 149, 73);
 		btn_add_flight.setBorder(BorderFactory.createEmptyBorder());
 		btn_add_flight.setContentAreaFilled(false);
 		getContentPane().add(btn_add_flight);
 		
-		btn_weather = new JButton("See a weather");
-		btn_weather.setFont(new Font("Microsoft Tai Le", Font.ITALIC, 14));
+		btn_weather = new JButton("Po\u010Dasie");
+		btn_weather.setFont(new Font("Microsoft PhagsPa", Font.ITALIC, 14));
 		btn_weather.setHorizontalAlignment(SwingConstants.LEFT);
 		btn_weather.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463523980_Weather.png"));
 		btn_weather.setBounds(211, 202, 180, 49);
@@ -85,6 +86,8 @@ public class MenuWindow extends JFrame {
 		
 		btn_logoff.setText(rb.getString("btn_logoff"));
 		btn_showFlight.setText(rb.getString("btn_showFlight"));
+		btn_weather.setText(rb.getString("btn_weather"));
+		btn_add_flight.setText(rb.getString("btn_add_flight"));
 	}
 	
 	public void setTable(DefaultTableModel tm) {

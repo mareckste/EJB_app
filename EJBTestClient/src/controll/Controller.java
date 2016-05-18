@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
 import javax.naming.Context;
@@ -49,6 +51,7 @@ public class Controller {
 	private Context ctx;
 	private MyFacadeBeanRemote rm;
 	private MyTransactionFacadeBeanRemote rmT;
+	private ResourceBundle rb = ResourceBundle.getBundle("Location", Locale.getDefault());
 
 	public Controller() {
 		showLogin();
@@ -79,6 +82,7 @@ public class Controller {
 			registerWindow = new RegisterWindow();
 			registerWindow.setListeners(new ConfirmRegistrationListener(), new LogOffListener());
 			registerWindow.setVisible(true);
+			registerWindow.setLanguage(rb);
 			windowFlag = 1;
 		}
 
@@ -148,6 +152,7 @@ public class Controller {
 				userDetailWindow.setTextFields(u.getName(), u.getSurname(), u.getBirthDate(), u.getPhone()
 						, u.getFacebook(), message);
 				userDetailWindow.setListeners(new CloseFormListener());
+				userDetailWindow.setLanguage(rb);
 				userDetailWindow.setVisible(true);
 			}
 			else { JOptionPane.showMessageDialog(null, "Chyba pri volbe partnera");}
@@ -180,6 +185,7 @@ public class Controller {
 			loginWindow = new LoginWindow();
 			loginWindow.setListeners(new LoginListener(), new RegisterListener(), new CloseListener());
 			loginWindow.setVisible(true);
+			loginWindow.setLanguage(rb);
 		}
 
 	}
@@ -193,6 +199,7 @@ public class Controller {
 			addFlightWindow = new AddFlightWindow();
 			addFlightWindow.setListeners(new ConfirmFlightListener(), new CloseFormListener());
 			addFlightWindow.setVisible(true);
+			addFlightWindow.setLanguage(rb);
 			windowFlag = 1;
 		}
 		
@@ -319,6 +326,7 @@ public class Controller {
 		loginWindow = new LoginWindow();
 		loginWindow.setListeners(new LoginListener(), new RegisterListener(), new CloseListener());
 		loginWindow.setVisible(true);
+		loginWindow.setLanguage(rb);
 	}
 	
 	public void showMenu() {
@@ -331,6 +339,7 @@ public class Controller {
 			menuWindow = new MenuWindow();
 			menuWindow.setListeners(new AddFlightListener(), new ShowFlightListener(), new LogOffListener(), new WeatherListener());
 			menuWindow.setTable(getModelFlights(ul));
+			menuWindow.setLanguage(rb);
 			menuWindow.setVisible(true);
 			ctx.close();
 			
@@ -351,6 +360,7 @@ public class Controller {
 				windowFlag = 1;
 				flightWindow.setListeners(new CloseFormListener(), new UserDetailListener());
 				flightWindow.setTable(getModelUsers(myPartners));
+				flightWindow.setLanguage(rb);
 				
 				Flight f = ul.get(selected).getFlight();
 				flightWindow.setFields(f.getDate(), f.getAirportFrom(), f.getAirportTo(), f.getFlightNumber());

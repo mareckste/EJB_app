@@ -23,11 +23,12 @@ public class LoginWindow extends JFrame{
 	private JLabel lbl_login, lbl_password;
 	private JButton btn_login, btn_register;
 	private JButton btn_close;
+	private JButton btn_lang;
 
 	
 	public LoginWindow() {
 		setTitle("Meet and Fly version 1.0.1");
-		setSize(412, 248);
+		setSize(450, 248);
 		
 		setIconImage(new javax.swing.ImageIcon("etc\\img\\plane (1).png").getImage());
 		getContentPane().setBackground(new Color(240, 248, 255));
@@ -35,23 +36,23 @@ public class LoginWindow extends JFrame{
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		lbl_login = new JLabel("Your login:");
 		lbl_login.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lbl_login.setBounds(183, 27, 82, 23);
+		lbl_login.setBounds(183, 26, 128, 23);
 		getContentPane().add(lbl_login);
 		
 		lbl_password = new JLabel("Your password:");
 		lbl_password.setToolTipText("");
 		lbl_password.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lbl_password.setBounds(183, 78, 89, 14);
+		lbl_password.setBounds(183, 78, 128, 14);
 		getContentPane().add(lbl_password);
 		
 		text_login = new JTextField();
 		text_login.setBackground(Color.WHITE);
-		text_login.setBounds(183, 47, 195, 20);
+		text_login.setBounds(183, 47, 230, 20);
 		getContentPane().add(text_login);
 		text_login.setColumns(10);
 		
 		text_password = new JPasswordField();
-		text_password.setBounds(183, 94, 195, 22);
+		text_password.setBounds(183, 94, 230, 22);
 		getContentPane().add(text_password);
 		
 		btn_login = new JButton("Login");
@@ -63,14 +64,14 @@ public class LoginWindow extends JFrame{
 		btn_login.setContentAreaFilled(false);
 		
 		
-		btn_login.setBounds(296, 127, 82, 41);
+		btn_login.setBounds(331, 127, 82, 41);
 		getContentPane().add(btn_login);
 		
 		btn_register = new JButton("Register");
 		btn_register.setHorizontalAlignment(SwingConstants.LEFT);
 		btn_register.setFont(new Font("Microsoft New Tai Lue", Font.ITALIC, 14));
 		btn_register.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\tasks (1).png"));
-		btn_register.setBounds(183, 127, 109, 41);
+		btn_register.setBounds(183, 127, 128, 41);
 		btn_register.setBorder(BorderFactory.createEmptyBorder());
 		btn_register.setContentAreaFilled(false);
 		getContentPane().add(btn_register);
@@ -95,6 +96,14 @@ public class LoginWindow extends JFrame{
 		lblNewLabel_1.setBounds(81, 54, 89, 62);
 		getContentPane().add(lblNewLabel_1);
 		
+		btn_lang = new JButton("");
+		btn_lang.setHorizontalAlignment(SwingConstants.LEFT);
+		btn_lang.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463552389_United Kingdom(Great Britain).png"));
+		btn_lang.setBounds(388, 11, 25, 23);
+		btn_lang.setBorder(BorderFactory.createEmptyBorder());
+		btn_lang.setContentAreaFilled(false);
+		getContentPane().add(btn_lang);
+		
 	}
 	
 	public void setLanguage(ResourceBundle rb) {
@@ -104,6 +113,7 @@ public class LoginWindow extends JFrame{
 		btn_close.setText(rb.getString("btn_close"));
 		btn_login.setText(rb.getString("btn_login"));
 		btn_register.setText(rb.getString("btn_register"));
+		btn_lang.setIcon(new ImageIcon(rb.getString("btn_lang")));
 	}
 	
 	public void setListeners(ActionListener login, ActionListener register, ActionListener close) {
@@ -119,4 +129,5 @@ public class LoginWindow extends JFrame{
 	public String getPW() {
 		return String.valueOf(text_password.getPassword());
 	}
+	
 }

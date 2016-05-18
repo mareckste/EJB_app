@@ -23,11 +23,11 @@ public class AddFlightWindow extends JFrame{
 	private JTextField text_to;
 	private JTextField text_flightNO;
 	private JTextField text_date;
-	private JButton btn_next, btn_cancel;
+	private JButton btn_add, btn_cancel;
 	private JLabel lbl_from, lbl_to, lbl_flightNO, lbl_date, lbl_motivate;
 	private JTextArea text_motivate;
 	private JLabel label;
-	private JLabel lbl_addFlight;
+	private JLabel lbl_add_flight;
 	
 	public AddFlightWindow() {
 		setTitle("New flight");
@@ -36,22 +36,22 @@ public class AddFlightWindow extends JFrame{
 		getContentPane().setLayout(null);
 		setIconImage(new javax.swing.ImageIcon("etc\\img\\plane (1).png").getImage());
 		lbl_from = new JLabel("From (City, Airport):");
-		lbl_from.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 12));
+		lbl_from.setFont(new Font("Microsoft PhagsPa", Font.ITALIC, 13));
 		lbl_from.setBounds(23, 47, 145, 14);
 		getContentPane().add(lbl_from);
 		
 		lbl_to = new JLabel("To (City, Airport):");
-		lbl_to.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 12));
+		lbl_to.setFont(new Font("Microsoft PhagsPa", Font.ITALIC, 13));
 		lbl_to.setBounds(251, 47, 145, 14);
 		getContentPane().add(lbl_to);
 		
 		lbl_flightNO = new JLabel("Flight number:");
-		lbl_flightNO.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 12));
+		lbl_flightNO.setFont(new Font("Microsoft PhagsPa", Font.ITALIC, 13));
 		lbl_flightNO.setBounds(23, 104, 145, 14);
 		getContentPane().add(lbl_flightNO);
 		
 		lbl_date = new JLabel("Date of flight:");
-		lbl_date.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 12));
+		lbl_date.setFont(new Font("Microsoft PhagsPa", Font.ITALIC, 13));
 		lbl_date.setBounds(251, 105, 145, 14);
 		getContentPane().add(lbl_date);
 		
@@ -85,19 +85,19 @@ public class AddFlightWindow extends JFrame{
 		getContentPane().add(text_date);
 		
 		lbl_motivate = new JLabel("Partner requirements:");
-		lbl_motivate.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 12));
+		lbl_motivate.setFont(new Font("Microsoft PhagsPa", Font.ITALIC, 13));
 		lbl_motivate.setBounds(23, 164, 145, 14);
 		getContentPane().add(lbl_motivate);
 		
-		btn_next = new JButton("Add flight");
-		btn_next.setHorizontalAlignment(SwingConstants.LEFT);
-		btn_next.setFont(new Font("Microsoft New Tai Lue", Font.ITALIC, 14));
-		btn_next.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463424816_check.png"));
-		btn_next.setBounds(338, 234, 120, 58);
-		btn_next.setBorder(BorderFactory.createEmptyBorder());
-		btn_next.setContentAreaFilled(false);
+		btn_add = new JButton("Add flight");
+		btn_add.setHorizontalAlignment(SwingConstants.LEFT);
+		btn_add.setFont(new Font("Microsoft New Tai Lue", Font.ITALIC, 14));
+		btn_add.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463424816_check.png"));
+		btn_add.setBounds(338, 234, 120, 58);
+		btn_add.setBorder(BorderFactory.createEmptyBorder());
+		btn_add.setContentAreaFilled(false);
 		
-		getContentPane().add(btn_next);
+		getContentPane().add(btn_add);
 		
 		btn_cancel = new JButton("Cancel");
 		btn_cancel.setHorizontalAlignment(SwingConstants.LEFT);
@@ -114,10 +114,10 @@ public class AddFlightWindow extends JFrame{
 		label.setBounds(155, 11, 146, 36);
 		getContentPane().add(label);
 		
-		lbl_addFlight = new JLabel("Add new trip:");
-		lbl_addFlight.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 13));
-		lbl_addFlight.setBounds(23, 22, 145, 14);
-		getContentPane().add(lbl_addFlight);
+		lbl_add_flight = new JLabel("Add new trip:");
+		lbl_add_flight.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 15));
+		lbl_add_flight.setBounds(23, 22, 145, 14);
+		getContentPane().add(lbl_add_flight);
 	}
 	
 	public String getTextFrom() {
@@ -142,7 +142,7 @@ public class AddFlightWindow extends JFrame{
 	
 	public void setListeners(ActionListener next, ActionListener cancel) {
 		btn_cancel.addActionListener(cancel);
-		btn_next.addActionListener(next);
+		btn_add.addActionListener(next);
 	}
 	
 	
@@ -152,8 +152,9 @@ public class AddFlightWindow extends JFrame{
 		lbl_to.setText(rb.getString("lbl_to"));
 		lbl_motivate.setText(rb.getString("lbl_motivate"));
 		lbl_flightNO.setText(rb.getString("lbl_flightNO"));
+		lbl_add_flight.setText(rb.getString("btn_add_flight"));
 		
 		btn_cancel.setText(rb.getString("btn_cancel"));
-		btn_next.setText(rb.getString("btn_next"));
+		btn_add.setText(rb.getString("btn_add"));
 	}
 }

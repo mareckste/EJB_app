@@ -95,7 +95,7 @@ public class FlightDetailWindow extends JFrame {
 		
 		lbl_partners = new JLabel("You can fly with:");
 		lbl_partners.setFont(new Font("Microsoft YaHei UI", Font.BOLD | Font.ITALIC, 14));
-		lbl_partners.setBounds(351, 23, 159, 25);
+		lbl_partners.setBounds(351, 23, 253, 25);
 		getContentPane().add(lbl_partners);
 	
 		btn_showPartner = new JButton("Show detail");

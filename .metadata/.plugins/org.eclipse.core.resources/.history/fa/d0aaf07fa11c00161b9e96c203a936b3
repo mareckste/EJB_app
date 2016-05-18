@@ -1,0 +1,35 @@
+lbl_login = Prihlasovacie meno:
+lbl_password = Prihlasovacie heslo:
+lbl_name = Meno:
+lbl_surname = Priezvisko:
+lbl_birth = D\u00e1tum narodenia:
+lbl_phone = Mobil:
+lbl_from = Letisko z:
+lbl_to = Letisko do:
+lbl_date = D\u00e1tum:
+lbl_flightNO = \u010c\u00edslo letu:
+lbl_motivate = Pozn\u00e1mka:
+lbl_partners = Potencion\u00e1lni spolucestuj\u00faci:
+lbl_myflights = Moje lety
+lbl_socialMedia = Facebook:
+lbl_contact_and_social = ***
+lbl_weather_city = ***
+
+btn_login = Prihl\u00e1s
+btn_register = Zaregistruj
+btn_continue = Pokra\u010dova\u0165
+btn_cancel = Zru\u0161
+btn_close = Zavri
+btn_showPartner = Zobrazi\u0165 detail osoby
+btn_showFlight = Detail letu
+btn_logoff = Odhl\u00e1senie
+btn_add_flight = Pridať let
+btn_search =
+btn_weather =
+btn_next = Registruj
+btn_add_flight = Pridaj let
+btn_weather = Zobraz po\u010Dasie
+btn_lang=C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463552389_United Kingdom(Great Britain).png
+lbl_contact_and_social = Kontakt a soci\u00e1lne m\u00e9dia
+btn_add = Pridaj
+

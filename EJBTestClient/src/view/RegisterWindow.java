@@ -32,11 +32,12 @@ public class RegisterWindow extends JFrame{
 	private JLabel label_1;
 	private JTextField text_password;
 	private JTextField text_login;
+	private JLabel lbl_login, lbl_pass;
 	
 	public RegisterWindow() {
 		getContentPane().setBackground(new Color(240, 248, 255));
 		setTitle("Register");
-		setSize(418, 359);
+		setSize(463, 359);
 		getContentPane().setLayout(null);
 		
 		setIconImage(new javax.swing.ImageIcon("etc\\img\\plane (1).png").getImage());
@@ -53,7 +54,7 @@ public class RegisterWindow extends JFrame{
 		
 		lbl_birth = new JLabel("Date of birth:");
 		lbl_birth.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 12));
-		lbl_birth.setBounds(158, 89, 77, 14);
+		lbl_birth.setBounds(158, 89, 119, 14);
 		getContentPane().add(lbl_birth);
 		
 		lbl_phone = new JLabel("Phone:");
@@ -67,35 +68,35 @@ public class RegisterWindow extends JFrame{
 		getContentPane().add(lbl_socialMedia);
 		
 		text_name = new JTextField();
-		text_name.setBounds(251, 21, 139, 20);
+		text_name.setBounds(287, 22, 139, 20);
 		getContentPane().add(text_name);
 		text_name.setColumns(10);
 		
 		text_surname = new JTextField();
 		text_surname.setColumns(10);
-		text_surname.setBounds(251, 52, 139, 20);
+		text_surname.setBounds(287, 56, 139, 20);
 		getContentPane().add(text_surname);
 		
 		text_birth = new JTextField();
 		text_birth.setColumns(10);
-		text_birth.setBounds(251, 83, 139, 20);
+		text_birth.setBounds(287, 87, 139, 20);
 		getContentPane().add(text_birth);
 		
 		text_phone = new JTextField();
 		text_phone.setColumns(10);
-		text_phone.setBounds(251, 144, 139, 20);
+		text_phone.setBounds(287, 145, 139, 20);
 		getContentPane().add(text_phone);
 		
 		text_socialMedia = new JTextField();
 		text_socialMedia.setColumns(10);
-		text_socialMedia.setBounds(251, 175, 139, 20);
+		text_socialMedia.setBounds(287, 176, 139, 20);
 		getContentPane().add(text_socialMedia);
 		
 		btn_next = new JButton("Confirm");
 		btn_next.setHorizontalAlignment(SwingConstants.LEFT);
 		btn_next.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463424816_check.png"));
 		btn_next.setFont(new Font("Microsoft New Tai Lue", Font.ITALIC, 14));
-		btn_next.setBounds(271, 196, 119, 58);
+		btn_next.setBounds(307, 196, 119, 58);
 		btn_next.setBorder(BorderFactory.createEmptyBorder());
 		btn_next.setContentAreaFilled(false);
 		getContentPane().add(btn_next);
@@ -104,7 +105,7 @@ public class RegisterWindow extends JFrame{
 		btn_cancel.setHorizontalAlignment(SwingConstants.LEFT);
 		btn_cancel.setIcon(new ImageIcon("C:\\Users\\MareCK\\ws_vava\\EJBTestClient\\etc\\img\\1463425324_Cancel.png"));
 		btn_cancel.setFont(new Font("Microsoft New Tai Lue", Font.ITALIC, 14));
-		btn_cancel.setBounds(271, 259, 119, 57);
+		btn_cancel.setBounds(307, 259, 119, 57);
 		btn_cancel.setBorder(BorderFactory.createEmptyBorder());
 		btn_cancel.setContentAreaFilled(false);
 		getContentPane().add(btn_cancel);
@@ -124,10 +125,10 @@ public class RegisterWindow extends JFrame{
 		lbl_contact_and_social.setBounds(158, 122, 181, 14);
 		getContentPane().add(lbl_contact_and_social);
 		
-		JLabel lblYourLogin = new JLabel("Your login:");
-		lblYourLogin.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 12));
-		lblYourLogin.setBounds(20, 260, 77, 14);
-		getContentPane().add(lblYourLogin);
+		lbl_login = new JLabel("Your login:");
+		lbl_login.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 12));
+		lbl_login.setBounds(20, 260, 112, 14);
+		getContentPane().add(lbl_login);
 		
 		text_password = new JTextField();
 		text_password.setColumns(10);
@@ -139,10 +140,10 @@ public class RegisterWindow extends JFrame{
 		text_login.setBounds(20, 234, 128, 20);
 		getContentPane().add(text_login);
 		
-		JLabel lblYourPassword = new JLabel("Your password:");
-		lblYourPassword.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 12));
-		lblYourPassword.setBounds(20, 217, 112, 14);
-		getContentPane().add(lblYourPassword);
+		lbl_pass = new JLabel("Your password:");
+		lbl_pass.setFont(new Font("Microsoft JhengHei", Font.PLAIN, 12));
+		lbl_pass.setBounds(20, 217, 112, 14);
+		getContentPane().add(lbl_pass);
 		
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
@@ -181,9 +182,12 @@ public class RegisterWindow extends JFrame{
 		lbl_phone.setText(rb.getString("lbl_phone"));
 		lbl_socialMedia.setText(rb.getString("lbl_socialMedia"));
 		lbl_surname.setText(rb.getString("lbl_surname"));
+		lbl_login.setText(rb.getString("lbl_login"));
+		lbl_pass.setText(rb.getString("lbl_password"));
 		
 		btn_cancel.setText(rb.getString("btn_cancel"));
 		btn_next.setText(rb.getString("btn_next"));
+		lbl_contact_and_social.setText(rb.getString("lbl_contact_and_social"));
 	}
 	
 	public void setListeners(ActionListener next, ActionListener cancel) {
